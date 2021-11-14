@@ -4,7 +4,7 @@ import RepeatOutlinedIcon from '@mui/icons-material/RepeatOutlined';
 import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
 import { Avatar, IconButton, Typography } from '@mui/material';
 import * as React from 'react';
-import { TweetHeader, TweetIcons, TweetsWrapper } from '../styled/Home.styled';
+import { TweetHeader, TweetIcons, TweetsWrapper } from '../Pages/Home/Home.styled';
 
 export interface TweetProps {
   text: string;

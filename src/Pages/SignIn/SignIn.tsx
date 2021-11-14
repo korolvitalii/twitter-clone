@@ -5,7 +5,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, FormControl, FormGroup, TextField, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
-import ModalBlock from '../components/ModalBlock';
+import ModalBlock from '../../components/ModalBlock';
 
 export const SignInUseStyles = makeStyles((theme) => ({
   wrapper: {

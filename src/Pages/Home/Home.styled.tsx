@@ -6,13 +6,17 @@ export const SearchTextField = styled(TextField)({
   '& label.Mui-focused': {
     color: 'rgb(29, 161, 242)',
   },
+  '& MuiFormLabel-root': {
+    marginLeft: 50,
+  },
   '& .MuiOutlinedInput-root': {
+    '& svg path': {
+      fill: 'black',
+      marginRight: 50,
+    },
     '& fieldset': {
       borderRadius: '25px',
       // backgroundColor: '#E6ECF0',
-    },
-    '& svg path': {
-      fill: 'red',
     },
     '& .MuiInput-underline:after': {
       borderBottomColor: '#E6ECF0',
@@ -95,36 +99,19 @@ export const SideMenuButtonTweet = styled(Button)({
   // width: '180px',
 });
 
-export const AddForm = styled('div')({
-  padding: 10,
+export const AccessibleListWrapper = styled('div')({
+  marginTop: 20,
 });
 
-export const AddFormBody = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  width: '100%',
+export const AccessibleListHeader = styled(Paper)({
+  height: 50,
+  backgroundColor: '#E6ECF0',
 });
 
-export const AddFormTextarea = styled(TextareaAutosize)({
-  width: '100%',
-  border: 0,
-  marginLeft: 5,
-  fontSize: 20,
-  outlne: 'none',
-  fontFamily: 'inherit',
-  resize: 'none',
-});
-
-export const AddFormFooter = styled('div')({});
-
-export const AddFormBottom = styled('div')({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  marginTop: 10,
-});
-
-export const AddFormRight = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
+export const AccessibleListItem = styled(Paper)({
+  height: 70,
+  backgroundColor: '#E6ECF0',
+  '&:hover': {
+    backgroundColor: '#bfcfd9',
+  },
 });
