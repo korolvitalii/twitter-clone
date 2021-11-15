@@ -9,7 +9,7 @@ import { TweetHeader, TweetIcons, TweetsWrapper } from '../Pages/Home/Home.style
 export interface TweetProps {
   text: string;
   user: {
-    username: string;
+    userName: string;
     fullname: string;
     avatarUrl: string;
   };
@@ -22,7 +22,7 @@ const Tweet: React.FC<TweetProps> = ({ text, user }: TweetProps): React.ReactEle
         <Avatar alt='User Avatar' src={user.avatarUrl} sx={{ marginRight: 1 }} />
 
         <Typography component='span' variant='body1' sx={{ marginRight: 1 }}>
-          {user.username}
+          {user.userName}
         </Typography>
         <Typography component='span' variant='subtitle2'>
           {user.fullname}

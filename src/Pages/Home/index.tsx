@@ -2,9 +2,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Container, InputAdornment, Paper, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AddTweetForm from '../../components/AddTweetForm';
 import SideMenu from '../../components/SideMenu';
 import Tweet from '../../components/Tweet';
+import { setTweets } from '../../store.ts/ducks/tweets/actionCreators';
+import { getTweets } from '../../store.ts/ducks/tweets/selectors';
 import {
   AccessibleListHeader,
   AccessibleListItem,
@@ -17,6 +20,12 @@ import {
 export interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props): React.ReactElement => {
+  const dispatch = useDispatch();
+  const items = useSelector(getTweets);
+  React.useEffect(() => {
+    dispatch(setTweets(items));
+  }, [dispatch]);
+
   return (
     <Container maxWidth='lg' sx={{ marginTop: 3 }}>
       <Grid container spacing={3}>
@@ -30,19 +39,9 @@ const Home: React.FC<HomeProps> = (props): React.ReactElement => {
             <Typography variant='h6'>Home</Typography>
             <AddTweetForm />
           </Paper>
-          {new Array(20).fill(
-            <Tweet
-              user={{
-                username: 'Vitalii',
-                fullname: 'vitaliivitalii',
-                avatarUrl:
-                  'https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png',
-              }}
-              text={
-                'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. Aliquam erat volutpat. Nunc auctor. Mauris pretium quam et urna. Fusce nibh. Duis risus. Curabitur sagittis hendrerit'
-              }
-            />,
-          )}
+          {items.map((item) => (
+            <Tweet user={item.user} text={item.text} />
+          ))}
         </Grid>
         <Grid item xs={3}>
           <SearchSideWrapper>

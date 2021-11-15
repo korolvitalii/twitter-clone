@@ -5,12 +5,16 @@ import './index.css';
 import theme from './theme';
 import { ThemeProvider } from '@mui/system';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store.ts/store';
 
 ReactDOM.render(
   <Router>
     <ThemeProvider theme={theme}>
       <React.StrictMode>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </React.StrictMode>
     </ThemeProvider>
   </Router>,
