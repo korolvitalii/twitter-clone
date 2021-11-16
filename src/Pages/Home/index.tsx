@@ -1,29 +1,28 @@
 import SearchIcon from '@mui/icons-material/Search';
-import { Container, InputAdornment, Paper, Typography } from '@mui/material';
+import { Box, Container, InputAdornment, Paper, Typography } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddTweetForm from '../../components/AddTweetForm';
 import SideMenu from '../../components/SideMenu';
+import Tags from '../../components/Tags';
 import Tweet from '../../components/Tweet';
-import { setTweets } from '../../store.ts/ducks/tweets/actionCreators';
-import { getTweets } from '../../store.ts/ducks/tweets/selectors';
-import {
-  AccessibleListHeader,
-  AccessibleListItem,
-  AccessibleListWrapper,
-  SearchSideWrapper,
-  SearchTextField,
-  TwitterIconComponent,
-} from './Home.styled';
+import { fetchTags } from '../../store/ducks/tags/actionCreators';
+import { selectTagsItems } from '../../store/ducks/tags/selectors';
+import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
+import { selectIsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors';
+import { SearchSideWrapper, SearchTextField, TwitterIconComponent } from './Home.styled';
 
 export interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props): React.ReactElement => {
   const dispatch = useDispatch();
-  const items = useSelector(getTweets);
+  const tweets = useSelector(selectTweetsItems);
+  const isLoading = useSelector(selectIsLoading);
   React.useEffect(() => {
-    dispatch(setTweets(items));
+    dispatch(fetchTweets());
+    dispatch(fetchTags());
   }, [dispatch]);
 
   return (
@@ -39,9 +38,13 @@ const Home: React.FC<HomeProps> = (props): React.ReactElement => {
             <Typography variant='h6'>Home</Typography>
             <AddTweetForm />
           </Paper>
-          {items.map((item) => (
-            <Tweet user={item.user} text={item.text} />
-          ))}
+          {isLoading ? (
+            <Box sx={{ textAlign: 'center', marginTop: 1 }}>
+              <CircularProgress />
+            </Box>
+          ) : (
+            tweets.map((tweet) => <Tweet key={tweet._id} user={tweet.user} text={tweet.text} />)
+          )}
         </Grid>
         <Grid item xs={3}>
           <SearchSideWrapper>
@@ -56,34 +59,7 @@ const Home: React.FC<HomeProps> = (props): React.ReactElement => {
               }}
             />
           </SearchSideWrapper>
-          <AccessibleListWrapper>
-            <AccessibleListHeader>
-              <Typography variant='h6'>Trends for you</Typography>
-            </AccessibleListHeader>
-            <AccessibleListItem>
-              <Typography variant='subtitle1'>Lorem ipsum dolor sit amet,</Typography>
-            </AccessibleListItem>
-            <AccessibleListItem>
-              <Typography variant='subtitle1'>Lorem ipsum dolor sit amet,</Typography>
-            </AccessibleListItem>
-            <AccessibleListItem>
-              <Typography variant='subtitle1'>Lorem ipsum dolor sit amet,</Typography>
-            </AccessibleListItem>
-            <AccessibleListItem>
-              <Typography variant='subtitle1'>Lorem ipsum dolor sit amet,</Typography>
-            </AccessibleListItem>
-          </AccessibleListWrapper>
-          <AccessibleListWrapper>
-            <AccessibleListHeader>
-              <Typography variant='h6'>Trends for you</Typography>
-            </AccessibleListHeader>
-            <AccessibleListItem>
-              <Typography variant='subtitle1'>Lorem ipsum dolor sit amet,</Typography>
-            </AccessibleListItem>
-            <AccessibleListItem>
-              <Typography variant='subtitle1'>Lorem ipsum dolor sit amet,</Typography>
-            </AccessibleListItem>
-          </AccessibleListWrapper>
+          <Tags />
         </Grid>
       </Grid>
     </Container>

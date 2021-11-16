@@ -1,5 +1,5 @@
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { Button, Paper, TextareaAutosize, TextField, Typography } from '@mui/material';
+import { Button, Paper, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/styles';
 
 export const SearchTextField = styled(TextField)({
@@ -94,24 +94,6 @@ export const TweetIcons = styled('div')({
   marginLeft: 25,
   marginRight: 25,
 });
-
 export const SideMenuButtonTweet = styled(Button)({
   // width: '180px',
-});
-
-export const AccessibleListWrapper = styled('div')({
-  marginTop: 20,
-});
-
-export const AccessibleListHeader = styled(Paper)({
-  height: 50,
-  backgroundColor: '#E6ECF0',
-});
-
-export const AccessibleListItem = styled(Paper)({
-  height: 70,
-  backgroundColor: '#E6ECF0',
-  '&:hover': {
-    backgroundColor: '#bfcfd9',
-  },
 });

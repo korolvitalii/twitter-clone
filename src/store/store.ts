@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from './ducks/tweets/saga';
+import rootSaga from './saga';
 import { rootReducer } from './rootReducer';
 
 declare global {

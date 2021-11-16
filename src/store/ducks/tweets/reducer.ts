@@ -14,6 +14,10 @@ export const tweetsReducer = produce((draft: Draft<TweetsState>, actions: Tweets
       draft.loadingState = LoadingState.LOADED;
       break;
     }
+    case TweetsActionsType.FETCH_TWEETS: {
+      draft.loadingState = LoadingState.LOADING;
+      break;
+    }
     case TweetsActionsType.SET_LOADING_STATE: {
       draft.loadingState = actions.payload;
       break;
