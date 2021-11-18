@@ -9,14 +9,14 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 
 ReactDOM.render(
-  <Router>
-    <ThemeProvider theme={theme}>
-      <React.StrictMode>
+  <ThemeProvider theme={theme}>
+    <React.StrictMode>
+      <Router>
         <Provider store={store}>
           <App />
         </Provider>
-      </React.StrictMode>
-    </ThemeProvider>
-  </Router>,
+      </Router>
+    </React.StrictMode>
+  </ThemeProvider>,
   document.getElementById('root'),
 );

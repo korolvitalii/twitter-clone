@@ -75,6 +75,13 @@ export const SideMenuItemLabel = styled(Typography)({
 export const TweetsWrapper = styled(Paper)({
   borderTop: '0',
   borderBottom: '0',
+  '&:hover': {
+    backgroundColor: '#bfcfd9',
+  },
+  '& a': {
+    color: 'inherit',
+    textDecoration: 'none',
+  },
 });
 
 export const SearchSideWrapper = styled('div')({

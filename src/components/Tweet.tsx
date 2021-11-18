@@ -4,9 +4,11 @@ import RepeatOutlinedIcon from '@mui/icons-material/RepeatOutlined';
 import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
 import { Avatar, IconButton, Typography } from '@mui/material';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { TweetHeader, TweetIcons, TweetsWrapper } from '../Pages/Home/Home.styled';
 
 export interface TweetProps {
+  _id: string;
   text: string;
   user: {
     userName: string;
@@ -15,37 +17,38 @@ export interface TweetProps {
   };
 }
 
-const Tweet: React.FC<TweetProps> = ({ text, user }: TweetProps): React.ReactElement => {
+const Tweet: React.FC<TweetProps> = ({ _id, text, user }: TweetProps): React.ReactElement => {
   return (
     <TweetsWrapper variant='outlined'>
-      <TweetHeader>
-        <Avatar alt='User Avatar' src={user.avatarUrl} sx={{ marginRight: 1 }} />
-
-        <Typography component='span' variant='body1' sx={{ marginRight: 1 }}>
-          {user.userName}
+      <Link to={`/home/tweets/${_id}`}>
+        <TweetHeader>
+          <Avatar alt='User Avatar' src={user.avatarUrl} sx={{ marginRight: 1 }} />
+          <Typography component='span' variant='body1' sx={{ marginRight: 1 }}>
+            {user.userName}
+          </Typography>
+          <Typography component='span' variant='subtitle2'>
+            {user.fullname}
+          </Typography>
+          <Typography component='span'>· 11 мин</Typography>
+        </TweetHeader>
+        <Typography variant='body2' sx={{ margin: '10px' }}>
+          {text}
         </Typography>
-        <Typography component='span' variant='subtitle2'>
-          {user.fullname}
-        </Typography>
-        <Typography component='span'>· 11 мин</Typography>
-      </TweetHeader>
-      <Typography variant='body2' sx={{ margin: '10px' }}>
-        {text}
-      </Typography>
-      <TweetIcons>
-        <IconButton>
-          <ChatBubbleOutlineOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <RepeatOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <FavoriteBorderOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <ReplyOutlinedIcon />
-        </IconButton>
-      </TweetIcons>
+        <TweetIcons>
+          <IconButton>
+            <ChatBubbleOutlineOutlinedIcon />
+          </IconButton>
+          <IconButton>
+            <RepeatOutlinedIcon />
+          </IconButton>
+          <IconButton>
+            <FavoriteBorderOutlinedIcon />
+          </IconButton>
+          <IconButton>
+            <ReplyOutlinedIcon />
+          </IconButton>
+        </TweetIcons>
+      </Link>
     </TweetsWrapper>
   );
 };
