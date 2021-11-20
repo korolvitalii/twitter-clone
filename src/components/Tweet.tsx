@@ -6,33 +6,29 @@ import { Avatar, IconButton, Typography } from '@mui/material';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { TweetHeader, TweetIcons, TweetsWrapper } from '../Pages/Home/Home.styled';
+import { TweetInterface } from '../store/ducks/tweet/contracts/state';
 
 export interface TweetProps {
-  _id: string;
-  text: string;
-  user: {
-    userName: string;
-    fullname: string;
-    avatarUrl: string;
-  };
+  tweet?: TweetInterface;
 }
 
-const Tweet: React.FC<TweetProps> = ({ _id, text, user }: TweetProps): React.ReactElement => {
+const Tweet: React.FC<TweetProps> = (props): React.ReactElement => {
+  debugger;
   return (
     <TweetsWrapper variant='outlined'>
-      <Link to={`/home/tweets/${_id}`}>
+      <Link to={`/home/tweets/${props.tweet?._id}`}>
         <TweetHeader>
-          <Avatar alt='User Avatar' src={user.avatarUrl} sx={{ marginRight: 1 }} />
+          <Avatar alt='User Avatar' src={props.tweet?.user.avatarUrl} sx={{ marginRight: 1 }} />
           <Typography component='span' variant='body1' sx={{ marginRight: 1 }}>
-            {user.userName}
+            {props.tweet?.user.userName}
           </Typography>
           <Typography component='span' variant='subtitle2'>
-            {user.fullname}
+            {props.tweet?.user.fullname}
           </Typography>
           <Typography component='span'>· 11 мин</Typography>
         </TweetHeader>
         <Typography variant='body2' sx={{ margin: '10px' }}>
-          {text}
+          {props.tweet?.text}
         </Typography>
         <TweetIcons>
           <IconButton>

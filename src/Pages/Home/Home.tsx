@@ -1,10 +1,9 @@
 import SearchIcon from '@mui/icons-material/Search';
-import { Container, IconButton, InputAdornment, Paper, Typography } from '@mui/material';
+import { Container, IconButton, InputAdornment } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
-import AddTweetForm from '../../components/AddTweetForm';
 import SideMenu from '../../components/SideMenu';
 import Tags from '../../components/Tags';
 import { fetchTags } from '../../store/ducks/tags/actionCreators';

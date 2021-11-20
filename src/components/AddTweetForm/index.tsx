@@ -2,6 +2,8 @@ import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { Avatar, Button, CircularProgress, IconButton, Paper, Typography } from '@mui/material';
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchAddTweet } from '../../store/ducks/tweets/actionCreators';
 import {
   AddForm,
   AddFormBody,
@@ -19,11 +21,15 @@ export interface AddTweetFormProps {
 const AddTweetForm: React.FC<AddTweetFormProps> = ({
   maxRows,
 }: AddTweetFormProps): React.ReactElement => {
+  const dispatch = useDispatch();
   const [text, setText] = React.useState<string>('');
   const handleChangeText = (e: React.FormEvent<HTMLTextAreaElement>) => {
     if (e.currentTarget) {
       setText(e.currentTarget.value);
     }
+  };
+  const handleClickAddButton = () => {
+    dispatch(fetchAddTweet(text));
   };
 
   const MAX_LENGTH = 280;
@@ -79,6 +85,7 @@ const AddTweetForm: React.FC<AddTweetFormProps> = ({
               </>
             )}
             <Button
+              onClick={handleClickAddButton}
               disabled={textLimitPercent >= 100}
               color='primary'
               variant='contained'

@@ -1,10 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
-import AddTweetForm from './components/AddTweetForm';
-import ChosenTweet from './components/ChosenTweet';
+import ChosenTweet from './components/FullTweet';
 import MainSide from './components/MainSide';
 import { TagElement } from './components/TagElement';
-import Tweet from './components/Tweet';
-import Tweets from './components/Tweets';
 import Home from './Pages/Home/Home';
 import SignIn from './Pages/SignIn/SignIn';
 

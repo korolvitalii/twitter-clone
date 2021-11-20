@@ -5,12 +5,18 @@ import { LoadingState, TweetsState } from './contracts/state';
 const initialState: TweetsState = {
   items: [],
   loadingState: LoadingState.NEVER,
+  addTweetState: LoadingState.NEVER,
 };
 
 export const tweetsReducer = produce((draft: Draft<TweetsState>, actions: TweetsActions) => {
   switch (actions.type) {
     case TweetsActionsType.SET_TWEETS: {
       draft.items = actions.payload;
+      draft.loadingState = LoadingState.LOADED;
+      break;
+    }
+    case TweetsActionsType.ADD_TWEET: {
+      draft.items.push(actions.payload);
       draft.loadingState = LoadingState.LOADED;
       break;
     }

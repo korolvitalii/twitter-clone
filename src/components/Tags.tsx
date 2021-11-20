@@ -1,7 +1,6 @@
-import { Link, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { TagsState } from '../store/ducks/tags/contracts/state';
 import { selectIsTagsLoaded, selectTagsItems } from '../store/ducks/tags/selectors';
 import Tag from './Tag';
 import { AccessibleListHeader, AccessibleListWrapper } from './Tags.styled';

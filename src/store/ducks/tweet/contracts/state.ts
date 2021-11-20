@@ -15,8 +15,7 @@ export interface TweetInterface {
   };
 }
 
-export interface TweetsState {
-  items: TweetInterface[];
+export interface TweetState {
+  items: TweetInterface | undefined;
   loadingState: LoadingState;
-  addTweetState: LoadingState;
 }
