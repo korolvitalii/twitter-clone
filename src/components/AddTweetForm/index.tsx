@@ -86,7 +86,7 @@ const AddTweetForm: React.FC<AddTweetFormProps> = ({
             )}
             <Button
               onClick={handleClickAddButton}
-              disabled={textLimitPercent >= 100}
+              disabled={textLimitPercent >= 100 || text.length === 0}
               color='primary'
               variant='contained'
               fullWidth

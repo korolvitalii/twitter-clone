@@ -29,7 +29,6 @@ const Home: React.FC<HomeProps> = (): React.ReactElement => {
               <TwitterIconComponent color='primary' />
             </Link>
           </IconButton>
-
           <SideMenu />
         </Grid>
         <Grid item xs={6}>

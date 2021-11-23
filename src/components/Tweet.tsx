@@ -13,7 +13,6 @@ export interface TweetProps {
 }
 
 const Tweet: React.FC<TweetProps> = (props): React.ReactElement => {
-  debugger;
   return (
     <TweetsWrapper variant='outlined'>
       <Link to={`/home/tweets/${props.tweet?._id}`}>

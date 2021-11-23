@@ -21,12 +21,12 @@ export function* fetchTweetsRequest() {
 export function* fetchAddTweetsRequest({ payload }: FetchAddTweetActionInterface) {
   try {
     const data = {
-      id: 1,
+      id: Math.random().toString().substr(2),
       _id: Math.random().toString().substr(2),
       text: payload,
       user: {
-        fullname: 'alextestovuj',
-        userName: 'alextestovuj',
+        fullname: 'alex testovuj',
+        userName: 'alex testovuj',
         avatarUrl: 'https://source.unsplash.com/random/100x100?3',
       },
     };
