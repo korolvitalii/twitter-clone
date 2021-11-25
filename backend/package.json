@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "@types/express": "^4.17.13",
+    "crypto": "^1.0.1",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.13.0",
     "mongoose": "^6.0.13",

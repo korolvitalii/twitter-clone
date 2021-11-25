@@ -1,10 +1,17 @@
+import dotenv from 'dotenv';
+
 import express from 'express';
+import { UserCtrl } from './controllers/UserController';
+import { registerValidation } from './validators/register';
+
+dotenv.config();
 
 const app = express();
 
-app.get('/hello', (req: express.Request, res: express.Response) => {
-  res.send('Hello world!');
-});
+app.use(express.json());
+
+app.get('/users', UserCtrl.index);
+app.post('/users', registerValidation, UserCtrl.create);
 
 app.listen(8888, () => {
   console.log('SERVER is RUNNING  ');
