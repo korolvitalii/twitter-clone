@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import { UserCtrl } from './controllers/UserController';
 import { registerValidation } from './validators/register';
+import './core/db';
 
 dotenv.config();
 
