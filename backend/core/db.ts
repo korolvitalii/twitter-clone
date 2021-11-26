@@ -1,14 +1,8 @@
-import mongose, { ConnectOptions } from 'mongoose';
+import mongose from 'mongoose';
 
 mongose.Promise = Promise;
 
-mongose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/twitter', {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true,
-  //   useFindAndModify: false,
-  //   useCreateIndex: true,
-  // } as ConnectOptions
-});
+mongose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/twitter', {});
 
 const db = mongose.connection;
 

@@ -5,13 +5,13 @@ export const registerValidation = [
     .isEmail()
     .withMessage('wrong email')
     .isLength({
-      min: 10,
+      min: 5,
       max: 40,
     })
     .withMessage('wrong email length'),
   body('fullname', 'Set fullname')
     .isString()
-    .withMessage('wrong email')
+    .withMessage('wrong fullname')
     .isLength({
       min: 2,
       max: 20,
@@ -19,7 +19,7 @@ export const registerValidation = [
     .withMessage('wrong fullname length'),
   body('username', 'Set login')
     .isString()
-    .withMessage('wrong email')
+    .withMessage('wrong username')
     .isLength({
       min: 2,
       max: 20,
@@ -27,7 +27,7 @@ export const registerValidation = [
     .withMessage('wrong username length'),
   body('password', 'Set password')
     .isString()
-    .withMessage('wrong email')
+    .withMessage('wrong password')
     .isLength({
       min: 6,
     })
