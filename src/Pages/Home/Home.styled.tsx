@@ -42,6 +42,12 @@ export const SideMenuItems = styled('ul')({
   margin: 0,
 });
 
+export const SideMenuI = styled('ul')({
+  listStyleType: 'none',
+  padding: 0,
+  margin: 0,
+});
+
 export const SideMenuItem = styled('li')({
   display: 'inline-flex',
   alignItems: 'center',
