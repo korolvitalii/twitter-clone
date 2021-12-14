@@ -3,7 +3,7 @@ import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { Avatar, Button, CircularProgress, IconButton, Paper, Typography } from '@mui/material';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchAddTweet } from '../../store/ducks/tweets/actionCreators';
+import { addTweet, fetchAddTweet } from '../../store/ducks/tweets/actionCreators';
 import {
   AddForm,
   AddFormBody,
@@ -29,7 +29,7 @@ const AddTweetForm: React.FC<AddTweetFormProps> = ({
     }
   };
   const handleClickAddButton = () => {
-    dispatch(fetchAddTweet(text));
+    dispatch(addTweet(text));
   };
 
   const MAX_LENGTH = 280;

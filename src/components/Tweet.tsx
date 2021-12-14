@@ -17,9 +17,13 @@ const Tweet: React.FC<TweetProps> = (props): React.ReactElement => {
     <TweetsWrapper variant='outlined'>
       <Link to={`/home/tweets/${props.tweet?._id}`}>
         <TweetHeader>
-          <Avatar alt='User Avatar' src={props.tweet?.user.avatarUrl} sx={{ marginRight: 1 }} />
+          <Avatar
+            alt='User Avatar'
+            src='https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.winhelponline.com%2Fblog%2Freplace-default-user-account-picture-avatar-windows-10%2F&psig=AOvVaw2X4NMJ7Pmbljqtfv8-TGSa&ust=1639585587163000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCFpLfa4_QCFQAAAAAdAAAAABAD'
+            sx={{ marginRight: 1 }}
+          />
           <Typography component='span' variant='body1' sx={{ marginRight: 1 }}>
-            {props.tweet?.user.userName}
+            {props.tweet?.user.username}
           </Typography>
           <Typography component='span' variant='subtitle2'>
             {props.tweet?.user.fullname}

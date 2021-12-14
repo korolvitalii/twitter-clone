@@ -10,7 +10,7 @@ export interface TweetInterface {
   text: string;
   user: {
     fullname: string;
-    userName: string;
+    username: string;
     avatarUrl: string;
   };
 }
