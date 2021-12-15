@@ -6,14 +6,14 @@ import Tweet from './Tweet';
 
 const Tweets: React.FC = (): React.ReactElement | null => {
   const tweets = useSelector(selectTweetsItems);
+  console.log(tweets);
   const isLoading = useSelector(selectIsLoading);
-  debugger;
   return (
     <>
       {isLoading ? (
         <CircularProgress />
       ) : (
-        tweets.map((tweet) => <Tweet key={tweet._id} tweet={tweet} />)
+        tweets.map((tweet) => <Tweet key={tweet._id} {...tweet} />)
       )}
     </>
   );

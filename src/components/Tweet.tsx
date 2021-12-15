@@ -7,32 +7,47 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { TweetHeader, TweetIcons, TweetsWrapper } from '../Pages/Home/Home.styled';
 import { TweetInterface } from '../store/ducks/tweet/contracts/state';
+import { formatter } from '../utils/formatDate';
 
 export interface TweetProps {
-  tweet?: TweetInterface;
+  _id?: string;
+  text?: string;
+  createdAt?: string;
+  user?: {
+    fullname: string;
+    username: string;
+    avatarUrl: string;
+  };
 }
 
-const Tweet: React.FC<TweetProps> = (props): React.ReactElement => {
+const Tweet: React.FC<TweetProps> = ({
+  _id,
+  text,
+  createdAt,
+  user,
+}: TweetProps): React.ReactElement => {
+  debugger;
   return (
     <TweetsWrapper variant='outlined'>
-      <Link to={`/home/tweets/${props.tweet?._id}`}>
+      <Link to={`/home/tweets/${_id}`}>
         <TweetHeader>
           <Avatar
             alt='User Avatar'
             src='https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.winhelponline.com%2Fblog%2Freplace-default-user-account-picture-avatar-windows-10%2F&psig=AOvVaw2X4NMJ7Pmbljqtfv8-TGSa&ust=1639585587163000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCFpLfa4_QCFQAAAAAdAAAAABAD'
             sx={{ marginRight: 1 }}
           />
-          <Typography component='span' variant='body1' sx={{ marginRight: 1 }}>
-            {props.tweet?.user.username}
-          </Typography>
-          <Typography component='span' variant='subtitle2'>
-            {props.tweet?.user.fullname}
-          </Typography>
-          <Typography component='span'>· 11 мин</Typography>
+          <div>
+            <Typography>
+              <b>{user?.fullname}</b>
+              <span>@{user?.username}</span>
+              <span>-</span>
+              <span>{formatter(createdAt)}</span>
+            </Typography>
+            <Typography variant='body1' gutterBottom>
+              {text}
+            </Typography>
+          </div>
         </TweetHeader>
-        <Typography variant='body2' sx={{ margin: '10px' }}>
-          {props.tweet?.text}
-        </Typography>
         <TweetIcons>
           <IconButton>
             <ChatBubbleOutlineOutlinedIcon />

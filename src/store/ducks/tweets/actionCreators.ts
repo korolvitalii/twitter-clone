@@ -47,7 +47,7 @@ export const fetchAddTweet = (payload: string): FetchAddTweetActionInterface => 
   payload,
 });
 
-export const addTweet = (payload: TweetInterface): AddTweetActionInterface => ({
+export const addTweet = (payload: any): AddTweetActionInterface => ({
   type: TweetsActionsType.ADD_TWEET,
   payload,
 });

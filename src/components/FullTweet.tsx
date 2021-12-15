@@ -28,7 +28,7 @@ const FullTweet: React.FC = (props): React.ReactElement => {
         <BackComponent />
         <Typography variant='h6'>Tweet</Typography>
       </Paper>
-      <Tweet tweet={tweet} />
+      <Tweet {...tweet} />
     </>
   );
 };

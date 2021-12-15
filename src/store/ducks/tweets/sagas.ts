@@ -19,7 +19,9 @@ export function* fetchTweetsRequest() {
 
 export function* fetchAddTweetsRequest({ payload }: FetchAddTweetActionInterface) {
   try {
-    const items: TweetsState['items'] = yield call(TweetsApi.addTweet, payload);
+    yield call(TweetsApi.addTweet, payload);
+    const items: TweetsState['items'] = yield call(TweetsApi.fetchTweets);
+
     yield put(setTweets(items));
   } catch (error) {
     yield put(setLoadingState(LoadingState.ERROR));

@@ -29,7 +29,8 @@ const AddTweetForm: React.FC<AddTweetFormProps> = ({
     }
   };
   const handleClickAddButton = () => {
-    dispatch(addTweet(text));
+    dispatch(fetchAddTweet(text));
+    setText('');
   };
 
   const MAX_LENGTH = 280;
