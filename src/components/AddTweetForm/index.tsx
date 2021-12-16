@@ -3,7 +3,7 @@ import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { Avatar, Button, CircularProgress, IconButton, Paper, Typography } from '@mui/material';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { addTweet, fetchAddTweet } from '../../store/ducks/tweets/actionCreators';
+import { fetchAddTweet } from '../../store/ducks/tweets/actionCreators';
 import {
   AddForm,
   AddFormBody,

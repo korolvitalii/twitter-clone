@@ -6,7 +6,6 @@ import { Avatar, IconButton, Typography } from '@mui/material';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { TweetHeader, TweetIcons, TweetsWrapper } from '../Pages/Home/Home.styled';
-import { TweetInterface } from '../store/ducks/tweet/contracts/state';
 import { formatter } from '../utils/formatDate';
 
 export interface TweetProps {
@@ -26,7 +25,6 @@ const Tweet: React.FC<TweetProps> = ({
   createdAt,
   user,
 }: TweetProps): React.ReactElement => {
-  debugger;
   return (
     <TweetsWrapper variant='outlined'>
       <Link to={`/home/tweets/${_id}`}>
