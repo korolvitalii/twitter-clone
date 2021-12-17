@@ -1,5 +1,5 @@
 import { TweetInterface, TweetsState } from '../../store/ducks/tweets/contracts/state';
-import { axios } from '../../utils/axios';
+import { axios } from '../../core/axios';
 
 interface Response<T> {
   status: string;

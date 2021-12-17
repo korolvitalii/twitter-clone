@@ -1,12 +1,16 @@
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import RepeatOutlinedIcon from '@mui/icons-material/RepeatOutlined';
 import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
 import { Avatar, IconButton, Typography } from '@mui/material';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { TweetHeader, TweetIcons, TweetsWrapper } from '../Pages/Home/Home.styled';
+import { useNavigate } from 'react-router';
+import UserIcon from '../assets/images/user.png';
 import { formatter } from '../utils/formatDate';
+import { TweetHeader, TweetHeaderContent, TweetIcons, TweetsWrapper } from './Tweet.styled';
 
 export interface TweetProps {
   _id?: string;
@@ -24,28 +28,83 @@ const Tweet: React.FC<TweetProps> = ({
   text,
   createdAt,
   user,
-}: TweetProps): React.ReactElement => {
+}: TweetProps): React.ReactElement | null => {
+  debugger;
+
+  const options = ['Edit', 'Delete'];
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log(event.currentTarget.textContent);
+    setAnchorEl(null);
+  };
+
+  const navigate = useNavigate();
+
+  const handleTweetClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    navigate(`/home/tweets/${_id}`, { replace: false });
+  };
+  if (!_id) {
+    return null;
+  }
   return (
     <TweetsWrapper variant='outlined'>
-      <Link to={`/home/tweets/${_id}`}>
+      <div onClick={handleTweetClick}>
         <TweetHeader>
-          <Avatar
-            alt='User Avatar'
-            src='https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.winhelponline.com%2Fblog%2Freplace-default-user-account-picture-avatar-windows-10%2F&psig=AOvVaw2X4NMJ7Pmbljqtfv8-TGSa&ust=1639585587163000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCFpLfa4_QCFQAAAAAdAAAAABAD'
-            sx={{ marginRight: 1 }}
-          />
-          <div>
+          <TweetHeaderContent>
+            <Avatar alt='User Avatar' src={UserIcon} sx={{ marginRight: 1 }} />
             <Typography>
               <b>{user?.fullname}</b>
               <span>@{user?.username}</span>
               <span>-</span>
               <span>{formatter(createdAt)}</span>
             </Typography>
-            <Typography variant='body1' gutterBottom>
-              {text}
-            </Typography>
+          </TweetHeaderContent>
+          <div>
+            <IconButton
+              aria-label='more'
+              id='long-button'
+              aria-controls='long-menu'
+              aria-expanded={open ? 'true' : undefined}
+              aria-haspopup='true'
+              onClick={handleClick}>
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              id='long-menu'
+              MenuListProps={{
+                'aria-labelledby': 'long-button',
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              PaperProps={{
+                style: {
+                  maxHeight: 20 * 4.5,
+                  width: '20ch',
+                },
+              }}>
+              {options.map((option) => (
+                <MenuItem key={option} onClick={handleClose}>
+                  {option}
+                </MenuItem>
+              ))}
+            </Menu>
           </div>
         </TweetHeader>
+        <div>
+          <Typography sx={{ marginLeft: '25px' }} variant='body1' gutterBottom>
+            {text}
+          </Typography>
+        </div>
         <TweetIcons>
           <IconButton>
             <ChatBubbleOutlineOutlinedIcon />
@@ -60,7 +119,7 @@ const Tweet: React.FC<TweetProps> = ({
             <ReplyOutlinedIcon />
           </IconButton>
         </TweetIcons>
-      </Link>
+      </div>
     </TweetsWrapper>
   );
 };

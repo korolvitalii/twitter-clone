@@ -1,5 +1,5 @@
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { Button, Paper, TextField, Typography } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/styles';
 
 export const SearchTextField = styled(TextField)({
@@ -78,35 +78,10 @@ export const SideMenuItemLabel = styled(Typography)({
   marginLeft: 3,
 });
 
-export const TweetsWrapper = styled(Paper)({
-  borderTop: '0',
-  borderBottom: '0',
-  '&:hover': {
-    backgroundColor: '#bfcfd9',
-  },
-  '& a': {
-    color: 'inherit',
-    textDecoration: 'none',
-  },
-});
-
 export const SearchSideWrapper = styled('div')({
   marginTop: 3,
 });
 
-export const TweetHeader = styled('div')({
-  margin: '15px 15px',
-  display: 'flex',
-  justifyContent: 'column',
-  alignItems: 'flex-start',
-});
-
-export const TweetIcons = styled('div')({
-  display: 'flex',
-  justifyContent: 'space-between',
-  marginLeft: 25,
-  marginRight: 25,
-});
 export const SideMenuButtonTweet = styled(Button)({
   // width: '180px',
 });
