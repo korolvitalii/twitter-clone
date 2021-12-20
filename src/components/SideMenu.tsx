@@ -12,7 +12,7 @@ import {
   SideMenuItem,
   SideMenuItemLabel,
   SideMenuItems,
-} from '../Pages/Home/Home.styled';
+} from '../pages/Home/Home.styled';
 import AddTweetForm from './AddTweetForm';
 import ModalBlock from './ModalBlock';
 
@@ -78,7 +78,7 @@ const SideMenu: React.FC<SideMenuProps> = (props): React.ReactElement => {
             <CreateIcon />
           </Hidden>
         </SideMenuButtonTweet>
-        <ModalBlock visible={visibleModal} handleClose={onClickModalClose} size={550}>
+        <ModalBlock visible={visibleModal} handleClose={onClickModalClose}>
           <AddTweetForm maxRows={15} />
         </ModalBlock>
       </SideMenuItem>

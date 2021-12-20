@@ -2,8 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 import ChosenTweet from './components/FullTweet';
 import MainSide from './components/MainSide';
 import { TagElement } from './components/TagElement';
-import Home from './Pages/Home/Home';
-import SignIn from './Pages/SignIn/SignIn';
+import Home from './pages/Home/Home';
+import SignIn from './pages/SignIn/SignInPage';
 
 function App() {
   return (

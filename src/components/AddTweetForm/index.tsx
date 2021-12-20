@@ -12,7 +12,7 @@ import {
   AddFormFooter,
   AddFormRight,
   AddFormTextarea,
-} from './AddTweetForm.styled';
+} from './styles';
 
 export interface AddTweetFormProps {
   maxRows?: number;

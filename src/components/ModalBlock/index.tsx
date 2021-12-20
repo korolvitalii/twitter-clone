@@ -1,39 +1,32 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
+import { Dialog, DialogContent, IconButton } from '@mui/material';
 import * as React from 'react';
-import { SignInUseStyles } from '../Pages/SignIn/SignIn';
+import { DialogTitleWrapper } from '../../pages/SignIn/components/SignIn/styles';
 
 interface ModalBlockProps {
-  size?: number;
   title?: string;
   children: React.ReactNode;
   visible?: boolean;
   handleClose: () => void;
-  classes?: ReturnType<typeof SignInUseStyles>;
 }
 
 const ModalBlock: React.FC<ModalBlockProps> = ({
-  size,
   title,
   children,
   visible = false,
   handleClose,
-  classes,
 }): React.ReactElement | null => {
   if (!visible) {
     return null;
   }
   return (
     <Dialog open={visible} onClose={handleClose}>
-      <DialogTitle
-        className={classes ? classes.loginSideTitle : 'asdsaasd'}
-        sx={{ paddingLeft: '30px', width: size }}
-        id='form-dialog-title'>
+      <DialogTitleWrapper id='form-dialog-title'>
         {title}
         <IconButton onClick={handleClose}>
-          <CloseIcon sx={{ fontSize: 26 }} color='primary' />
+          <CloseIcon className='close-icon' color='primary' />
         </IconButton>
-      </DialogTitle>
+      </DialogTitleWrapper>
       <DialogContent>{children}</DialogContent>
     </Dialog>
   );
