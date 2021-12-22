@@ -1,10 +1,11 @@
-import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, FormControl, FormGroup, TextField } from '@mui/material';
+import React, { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { Alert, Button, FormControl, FormGroup, Snackbar, TextField } from '@mui/material';
-
 import ModalBlock from '../../../../components/ModalBlock';
+import { AuthApi } from '../../../../services/api/AuthApi';
+import Notification from '../Notification';
 
 interface SignInProps {
   handleClose: () => void;
@@ -12,7 +13,14 @@ interface SignInProps {
   title: string;
 }
 
-interface SignInFormInput {
+interface NoticationStatusInterface {
+  text: string;
+  handleClose: () => void;
+  alertSeverity: 'success' | 'error';
+  open: boolean;
+}
+
+export interface SignInFormInput {
   email: string;
   password: string;
 }
@@ -25,6 +33,7 @@ const schema = yup
   .required();
 
 const SignIn: React.FC<SignInProps> = ({ isVisible, handleClose, title }): React.ReactElement => {
+  // console.log('render!');
   const {
     register,
     handleSubmit,
@@ -34,11 +43,46 @@ const SignIn: React.FC<SignInProps> = ({ isVisible, handleClose, title }): React
     resolver: yupResolver(schema),
   });
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
-  console.log(errors.email?.message);
-  const onSubmit = (data: any) => {
-    setOpen(true);
+  const handleCloseNotification = () => {
+    console.log('handleCloseNotification');
+    setOpen(false);
+  };
+
+  const [notifationStatus, setNotificationStatus] = useState<any>({
+    text: '',
+    handleCloseNotification,
+    setOpen,
+    alertSeverity: 'error',
+  });
+
+  const onSubmit = async (data: any) => {
+    try {
+      const resp = await AuthApi.authMe(data);
+      if (resp.status === 'success') {
+        setNotificationStatus({
+          text: 'Login success!',
+          handleCloseNotification,
+          alertSeverity: 'success',
+        });
+        setOpen(true);
+      } else {
+        setNotificationStatus({
+          text: 'Login failed!',
+          handleCloseNotification,
+          alertSeverity: 'error',
+        });
+        setOpen(true);
+      }
+    } catch {
+      setNotificationStatus({
+        text: 'Login failed!',
+        handleCloseNotification,
+        alertSeverity: 'error',
+      });
+      setOpen(true);
+    }
   };
 
   return (
@@ -90,13 +134,9 @@ const SignIn: React.FC<SignInProps> = ({ isVisible, handleClose, title }): React
               Submit
             </Button>
           </FormGroup>
+          <Notification {...notifationStatus} open={open} />
         </FormControl>
       </form>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity='error'>
-          This is an error message!
-        </Alert>
-      </Snackbar>
     </ModalBlock>
   );
 };
