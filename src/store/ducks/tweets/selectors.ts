@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { AppStateType } from '../../rootReducer';
-import { LoadingState, TweetsState } from './contracts/state';
+import { LoadingState } from '../types';
+import { TweetsState } from './contracts/state';
 
 export const selectTweetsState = (state: AppStateType): TweetsState => state.tweets;
 

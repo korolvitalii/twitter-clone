@@ -7,12 +7,12 @@ import format from 'date-fns/format';
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { TweetHeader, TweetIcons, TweetsWrapper } from './Tweet.styled';
-import { fetchTweet, setTweet } from '../store/ducks/tweet/actionCreators';
-import { selectTweetItem } from '../store/ducks/tweet/selectors';
-import BackComponent from './BackComponent';
-import Tweet from './Tweet';
-import UserIcon from '../assets/images/user.png';
+import { TweetHeader, TweetIcons, TweetsWrapper } from '../Tweet/styles';
+import { fetchTweet, setTweet } from '../../store/ducks/tweet/actionCreators';
+import { selectTweetItem } from '../../store/ducks/tweet/selectors';
+import BackComponent from '../BackComponent';
+import Tweet from '../Tweet';
+import UserIcon from '../../assets/images/user.png';
 
 export interface FullTweetProps {}
 

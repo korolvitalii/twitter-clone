@@ -1,5 +1,6 @@
 import { Action } from 'redux';
-import { LoadingState, TweetInterface, TweetState } from './contracts/state';
+import { LoadingState } from '../types';
+import { TweetInterface, TweetState } from './contracts/state';
 
 export enum TweetActionsType {
   SET_TWEET = 'tweets/SET_TWEET',

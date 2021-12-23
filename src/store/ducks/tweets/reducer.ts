@@ -1,6 +1,7 @@
 import produce, { Draft } from 'immer';
+import { LoadingState } from '../types';
 import { TweetsActions, TweetsActionsType } from './actionCreators';
-import { LoadingState, TweetsState } from './contracts/state';
+import { TweetsState } from './contracts/state';
 
 const initialState: TweetsState = {
   items: [],

@@ -1,5 +1,6 @@
 import { AppStateType } from '../../rootReducer';
-import { LoadingState, TweetInterface, TweetState } from './contracts/state';
+import { LoadingState } from '../types';
+import { TweetInterface, TweetState } from './contracts/state';
 
 export const selectTweet = (state: AppStateType): TweetState => state.tweet;
 

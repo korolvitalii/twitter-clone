@@ -1,25 +1,25 @@
 import produce, { Draft } from 'immer';
 import { LoadingState } from '../types';
-import { TweetActions, TweetActionsType } from './actionCreators';
-import { TweetState } from './contracts/state';
+import { TopicsActionsType, TopicsActions } from './actionCreators';
+import { TopicsState } from './contracts/state';
 
-const initialState: TweetState = {
-  items: undefined,
+const initialState: TopicsState = {
+  items: [],
   loadingState: LoadingState.NEVER,
 };
 
-export const tweetReducer = produce((draft: Draft<TweetState>, actions: TweetActions) => {
+export const topicsReducer = produce((draft: Draft<TopicsState>, actions: TopicsActions) => {
   switch (actions.type) {
-    case TweetActionsType.SET_TWEET: {
+    case TopicsActionsType.SET_Topics: {
       draft.items = actions.payload;
       draft.loadingState = LoadingState.LOADED;
       break;
     }
-    case TweetActionsType.FETCH_TWEET: {
+    case TopicsActionsType.FETCH_Topics: {
       draft.loadingState = LoadingState.LOADING;
       break;
     }
-    case TweetActionsType.SET_LOADING_STATE: {
+    case TopicsActionsType.SET_LOADING_STATE: {
       draft.loadingState = actions.payload;
       break;
     }

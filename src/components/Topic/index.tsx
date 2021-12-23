@@ -1,14 +1,14 @@
 import { Typography } from '@mui/material';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Tag } from '../store/ducks/tags/contracts/state';
-import { AccessibleListItem } from './Tags.styled';
+import { TopicInterface } from '../../store/ducks/topics/contracts/state';
+import { AccessibleListItem } from '../Topics/styles';
 
 export interface TagProps {
-  tag: Tag;
+  topic: TopicInterface;
 }
 
-const Tags: React.FC<TagProps> = ({ tag: { name, count } }: TagProps): React.ReactElement => {
+const Topic: React.FC<TagProps> = ({ topic: { name, count } }: TagProps): React.ReactElement => {
   return (
     <Link to={`/home/search?q=${name}`} style={{ color: 'inherit', textDecoration: 'none' }}>
       <AccessibleListItem>
@@ -19,4 +19,4 @@ const Tags: React.FC<TagProps> = ({ tag: { name, count } }: TagProps): React.Rea
   );
 };
 
-export default Tags;
+export default Topic;

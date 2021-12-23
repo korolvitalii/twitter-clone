@@ -8,9 +8,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
 import { useNavigate } from 'react-router';
-import UserIcon from '../assets/images/user.png';
-import { formatter } from '../utils/formatDate';
-import { TweetHeader, TweetHeaderContent, TweetIcons, TweetsWrapper } from './Tweet.styled';
+import UserIcon from '../../assets/images/user.png';
+import { formatter } from '../../utils/formatDate';
+import { TweetHeader, TweetHeaderContent, TweetIcons, TweetsWrapper } from './styles';
 
 export interface TweetProps {
   _id?: string;
@@ -29,8 +29,6 @@ const Tweet: React.FC<TweetProps> = ({
   createdAt,
   user,
 }: TweetProps): React.ReactElement | null => {
-  debugger;
-
   const options = ['Edit', 'Delete'];
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);

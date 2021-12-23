@@ -1,24 +1,25 @@
 import produce, { Draft } from 'immer';
-import { TagsActionsType, TagsActions } from './actionCreators';
-import { LoadingState, TagsState } from './contracts/state';
+import { LoadingState } from '../types';
+import { UserActionsType, UserActions } from './actionCreators';
+import { UserState } from './contracts/state';
 
-const initialState: TagsState = {
+const initialState: UserState = {
   items: [],
   loadingState: LoadingState.NEVER,
 };
 
-export const tagsReducer = produce((draft: Draft<TagsState>, actions: TagsActions) => {
+export const UserReducer = produce((draft: Draft<UserState>, actions: UserActions) => {
   switch (actions.type) {
-    case TagsActionsType.SET_TAGS: {
+    case UserActionsType.SET_User: {
       draft.items = actions.payload;
       draft.loadingState = LoadingState.LOADED;
       break;
     }
-    case TagsActionsType.FETCH_TAGS: {
+    case UserActionsType.FETCH_User: {
       draft.loadingState = LoadingState.LOADING;
       break;
     }
-    case TagsActionsType.SET_LOADING_STATE: {
+    case UserActionsType.SET_LOADING_STATE: {
       draft.loadingState = actions.payload;
       break;
     }

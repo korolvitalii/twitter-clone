@@ -7,14 +7,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
 import { Hidden } from '@mui/material';
 import * as React from 'react';
-import {
-  SideMenuButtonTweet,
-  SideMenuItem,
-  SideMenuItemLabel,
-  SideMenuItems,
-} from '../pages/Home/Home.styled';
-import AddTweetForm from './AddTweetForm';
-import ModalBlock from './ModalBlock';
+import { SideMenuButtonTweet, SideMenuItem, SideMenuItemLabel, SideMenuItems } from './styles';
+import AddTweetForm from '../AddTweetForm';
+import ModalBlock from '../ModalBlock';
 
 export interface SideMenuProps {}
 
