@@ -1,41 +1,48 @@
 import { Action } from 'redux';
-import { LoadingState } from '../types';
+import { LoginFormData } from '../../../pages/SignIn/components/SignIn';
+import { LoadingStatus } from '../../types';
 import { UserState } from './contracts/state';
 
 export enum UserActionsType {
-  SET_User = 'User/SET_User',
-  FETCH_User = 'User/FETCH_User',
-  SET_LOADING_STATE = 'User/SET_LOADING_STATE',
+  FETCH_SIGN_IN = 'USER/FETCH_SIGN_IN',
+  SET_LOADING_STATE = 'USER/SET_LOADING_STATE',
+  SET_USER_DATA = 'SET_USER_DATA',
 }
 
-interface SetUserActionInterface extends Action<UserActionsType> {
-  type: UserActionsType.SET_User;
-  payload: UserState['items'];
+interface SetUserDataActionInterface extends Action<UserActionsType> {
+  type: UserActionsType.SET_USER_DATA;
+  payload: UserState['data'];
 }
 
-interface FetchUserActionInterface extends Action<UserActionsType> {
-  type: UserActionsType.FETCH_User;
+export interface FetchSignInActionInterface extends Action<UserActionsType> {
+  type: UserActionsType.FETCH_SIGN_IN;
+  payload: {
+    data: LoginFormData;
+  };
 }
-interface SetLoadingStateInterface extends Action<UserActionsType> {
+interface SetLoadingStatusInterface extends Action<UserActionsType> {
   type: UserActionsType.SET_LOADING_STATE;
-  payload: LoadingState;
+  payload: LoadingStatus;
 }
 
-export const fetchUser = (): FetchUserActionInterface => ({
-  type: UserActionsType.FETCH_User,
+export const fetchSignIn = (data: LoginFormData): FetchSignInActionInterface => ({
+  type: UserActionsType.FETCH_SIGN_IN,
+  payload: {
+    data,
+  },
 });
 
-export const setUser = (payload: UserState['items']): SetUserActionInterface => ({
-  type: UserActionsType.SET_User,
+export const setUserData = (payload: UserState['data']): SetUserDataActionInterface => ({
+  type: UserActionsType.SET_USER_DATA,
   payload,
 });
 
-export const setLoadingState = (payload: LoadingState): SetLoadingStateInterface => ({
+export const setLoadingStatus = (payload: UserState['status']): SetLoadingStatusInterface => ({
   type: UserActionsType.SET_LOADING_STATE,
   payload,
 });
 
 export type UserActions =
-  | SetUserActionInterface
-  | FetchUserActionInterface
-  | SetLoadingStateInterface;
+  | SetUserDataActionInterface
+  | FetchSignInActionInterface
+  | SetLoadingStatusInterface;

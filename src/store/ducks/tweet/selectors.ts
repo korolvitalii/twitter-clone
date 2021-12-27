@@ -1,16 +1,17 @@
 import { AppStateType } from '../../rootReducer';
-import { LoadingState } from '../types';
+import { LoadingStatus } from '../../types';
 import { TweetInterface, TweetState } from './contracts/state';
 
 export const selectTweet = (state: AppStateType): TweetState => state.tweet;
 
-export const selectLoadingState = (state: AppStateType): string => selectTweet(state).loadingState;
+export const selectLoadingStatus = (state: AppStateType): string =>
+  selectTweet(state).LoadingStatus;
 
 export const selectIsLoading = (state: AppStateType) =>
-  selectLoadingState(state) === LoadingState.LOADING;
+  selectLoadingStatus(state) === LoadingStatus.LOADING;
 
 export const selectIsLoaded = (state: AppStateType) =>
-  selectLoadingState(state) === LoadingState.LOADED;
+  selectLoadingStatus(state) === LoadingStatus.LOADED;
 
 export const selectTweetItem = (state: AppStateType): TweetInterface | undefined =>
   selectTweet(state).items;

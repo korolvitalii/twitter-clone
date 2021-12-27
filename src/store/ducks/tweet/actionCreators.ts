@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { LoadingState } from '../types';
+import { LoadingStatus } from '../../types';
 import { TweetInterface, TweetState } from './contracts/state';
 
 export enum TweetActionsType {
@@ -18,9 +18,9 @@ export interface FetchTweetActionInterface extends Action<TweetActionsType> {
   payload: string;
 }
 
-interface SetLoadingStateInterface extends Action<TweetActionsType> {
+interface SetLoadingStatusInterface extends Action<TweetActionsType> {
   type: TweetActionsType.SET_LOADING_STATE;
-  payload: LoadingState;
+  payload: LoadingStatus;
 }
 
 export const fetchTweet = (tweetId: string): FetchTweetActionInterface => ({
@@ -33,7 +33,7 @@ export const setTweet = (payload: TweetInterface | undefined): SetTweetActionInt
   payload,
 });
 
-export const SetLoadingState = (payload: LoadingState): SetLoadingStateInterface => ({
+export const SetLoadingStatus = (payload: LoadingStatus): SetLoadingStatusInterface => ({
   type: TweetActionsType.SET_LOADING_STATE,
   payload,
 });
@@ -41,4 +41,4 @@ export const SetLoadingState = (payload: LoadingState): SetLoadingStateInterface
 export type TweetActions =
   | SetTweetActionInterface
   | FetchTweetActionInterface
-  | SetLoadingStateInterface;
+  | SetLoadingStatusInterface;

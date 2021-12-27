@@ -1,5 +1,5 @@
 import { axios } from '../../core/axios';
-import { SignInFormInput } from '../../pages/SignIn/components/SignIn';
+import { LoginFormData } from '../../pages/SignIn/components/SignIn';
 
 interface ResponseApi {
   status: string;
@@ -7,8 +7,8 @@ interface ResponseApi {
 }
 
 export const AuthApi = {
-  authMe: async (userData: SignInFormInput): Promise<ResponseApi> => {
-    const { data } = await axios.post<Promise<ResponseApi>>('/auth/signin', userData);
+  signIn: async (userData: LoginFormData): Promise<ResponseApi> => {
+    const { data } = await axios.post<ResponseApi>('/auth/signin', userData);
     return data;
   },
 };

@@ -1,4 +1,4 @@
-import { LoadingState } from '../../types';
+import { LoadingStatus } from '../../../types';
 
 export interface TopicInterface {
   _id: string;
@@ -8,5 +8,5 @@ export interface TopicInterface {
 
 export interface TopicsState {
   items: TopicInterface[];
-  loadingState: LoadingState;
+  LoadingStatus: LoadingStatus;
 }

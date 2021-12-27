@@ -1,18 +1,26 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { UserApi } from '../../../services/api/UserApi';
-import { LoadingState } from '../types';
-import { setLoadingState, setUser, UserActionsType } from './actionCreators';
+import { AuthApi } from '../../../services/api/AuthApi';
+import { LoadingStatus } from '../../types';
+import {
+  FetchSignInActionInterface,
+  setLoadingStatus,
+  setUserData,
+  UserActionsType,
+} from './actionCreators';
 import { UserState } from './contracts/state';
 
-export function* fetchUserRequest() {
+export function* fetchSignInRequest({ payload }: FetchSignInActionInterface) {
   try {
-    const items: UserState['items'] = yield call(UserApi.fetchUser);
-    yield put(setUser(items));
+    const data: UserState = yield call(AuthApi.signIn, payload.data);
+    yield put(setUserData(data.data));
+    if (data.data) {
+      window.localStorage.setItem('token', data.data.token);
+    }
   } catch (error) {
-    yield put(setLoadingState(LoadingState.ERROR));
+    yield put(setLoadingStatus(LoadingStatus.ERROR));
   }
 }
 
-export function* UserSaga() {
-  yield takeEvery(UserActionsType.FETCH_User, fetchUserRequest);
+export function* userSaga() {
+  yield takeEvery(UserActionsType.FETCH_SIGN_IN, fetchSignInRequest);
 }

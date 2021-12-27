@@ -1,4 +1,4 @@
-import { LoadingState } from '../../types';
+import { LoadingStatus } from '../../../types';
 
 export interface TweetInterface {
   _id?: string;
@@ -13,5 +13,5 @@ export interface TweetInterface {
 
 export interface TweetState {
   items: TweetInterface | undefined;
-  loadingState: LoadingState;
+  LoadingStatus: LoadingStatus;
 }

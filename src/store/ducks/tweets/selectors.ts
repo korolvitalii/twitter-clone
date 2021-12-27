@@ -1,17 +1,17 @@
 import { createSelector } from 'reselect';
 import { AppStateType } from '../../rootReducer';
-import { LoadingState } from '../types';
+import { LoadingStatus } from '../../types';
 import { TweetsState } from './contracts/state';
 
 export const selectTweetsState = (state: AppStateType): TweetsState => state.tweets;
 
-export const selectLoadingState = (state: AppStateType): string =>
-  selectTweetsState(state).loadingState;
+export const selectLoadingStatus = (state: AppStateType): string =>
+  selectTweetsState(state).LoadingStatus;
 
 export const selectIsLoading = (state: AppStateType) =>
-  selectLoadingState(state) === LoadingState.LOADING;
+  selectLoadingStatus(state) === LoadingStatus.LOADING;
 
 export const selectIsLoaded = (state: AppStateType) =>
-  selectLoadingState(state) === LoadingState.LOADED;
+  selectLoadingStatus(state) === LoadingStatus.LOADED;
 
 export const selectTweetsItems = createSelector(selectTweetsState, (tweets) => tweets.items);

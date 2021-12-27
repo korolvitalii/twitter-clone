@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { LoadingState } from '../types';
+import { LoadingStatus } from '../../types';
 import { TopicsState } from './contracts/state';
 
 export enum TopicsActionsType {
@@ -16,9 +16,9 @@ interface SetTopicsActionInterface extends Action<TopicsActionsType> {
 interface FetchTopicsActionInterface extends Action<TopicsActionsType> {
   type: TopicsActionsType.FETCH_Topics;
 }
-interface SetLoadingStateInterface extends Action<TopicsActionsType> {
+interface SetLoadingStatusInterface extends Action<TopicsActionsType> {
   type: TopicsActionsType.SET_LOADING_STATE;
-  payload: LoadingState;
+  payload: LoadingStatus;
 }
 
 export const fetchTopics = (): FetchTopicsActionInterface => ({
@@ -30,7 +30,7 @@ export const setTopics = (payload: TopicsState['items']): SetTopicsActionInterfa
   payload,
 });
 
-export const setLoadingState = (payload: LoadingState): SetLoadingStateInterface => ({
+export const setLoadingStatus = (payload: LoadingStatus): SetLoadingStatusInterface => ({
   type: TopicsActionsType.SET_LOADING_STATE,
   payload,
 });
@@ -38,4 +38,4 @@ export const setLoadingState = (payload: LoadingState): SetLoadingStateInterface
 export type TopicsActions =
   | SetTopicsActionInterface
   | FetchTopicsActionInterface
-  | SetLoadingStateInterface;
+  | SetLoadingStatusInterface;

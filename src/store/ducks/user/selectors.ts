@@ -1,16 +1,10 @@
-import { createSelector } from 'reselect';
 import { AppStateType } from '../../rootReducer';
-import { LoadingState } from '../types';
-import { TopicsState } from './contracts/state';
+import { UserState } from './contracts/state';
 
-export const selectTopics = (state: AppStateType): TopicsState => state.topics;
+export const selectUserState = (state: AppStateType): UserState => state.user;
 
-export const selectLoadingState = (state: AppStateType): string => selectTopics(state).loadingState;
+export const selectUserData = (state: AppStateType): UserState['data'] =>
+  selectUserState(state).data;
 
-export const selectIsTopicsLoading = (state: AppStateType) =>
-  selectLoadingState(state) === LoadingState.LOADING;
-
-export const selectIsTopicsLoaded = (state: AppStateType) =>
-  selectLoadingState(state) === LoadingState.LOADED;
-
-export const selectTopicsItems = createSelector(selectTopics, (Topics) => Topics.items);
+export const selectUserStatus = (state: AppStateType): UserState['status'] =>
+  selectUserState(state).status;

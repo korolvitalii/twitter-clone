@@ -1,4 +1,4 @@
-import { LoadingState } from '../../types';
+import { LoadingStatus } from '../../../types';
 
 export interface UserInterface {
   _id?: string;
@@ -11,9 +11,10 @@ export interface UserInterface {
   location?: string;
   about?: string;
   website?: string;
+  token: string;
 }
 
 export interface UserState {
-  items: UserInterface[];
-  loadingState: LoadingState;
+  data: UserInterface | undefined;
+  status: LoadingStatus;
 }
