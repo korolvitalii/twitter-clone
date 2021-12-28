@@ -40,7 +40,6 @@ const Tweet: React.FC<TweetProps> = ({
   const handleClose = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    console.log(event.currentTarget.textContent);
     setAnchorEl(null);
   };
 

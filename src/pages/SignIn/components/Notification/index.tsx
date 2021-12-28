@@ -16,7 +16,6 @@ const Notification: React.FC<NotificationProps> = ({
   alertSeverity,
   open,
 }): React.ReactElement => {
-  console.log('render notification', open);
   return (
     <Snackbar open={open} autoHideDuration={6000} onClose={handleCloseNotification}>
       <Alert onClose={handleCloseNotification} severity={alertSeverity}>

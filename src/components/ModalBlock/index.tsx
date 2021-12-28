@@ -1,7 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { Dialog, DialogContent, IconButton } from '@mui/material';
 import * as React from 'react';
-import { DialogTitleWrapper } from '../../pages/SignIn/components/SignIn/styles';
+import { DialogTitleWrapper } from '../../pages/SignIn/components/SignInModal/styles';
 
 interface ModalBlockProps {
   title?: string;

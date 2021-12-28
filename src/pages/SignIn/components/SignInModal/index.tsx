@@ -36,7 +36,6 @@ const schema = yup
   .required();
 
 const SignIn: React.FC<SignInProps> = ({ isVisible, handleClose, title }): React.ReactElement => {
-  // console.log('render!');
   const {
     register,
     handleSubmit,

@@ -1,6 +1,6 @@
 import { LoadingStatus, UserInterface } from '../../../types';
 
-export interface UserState {
-  data: UserInterface | undefined;
+export interface UsersState {
+  data: UserInterface[] | undefined;
   status: LoadingStatus;
 }

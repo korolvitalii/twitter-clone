@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, Typography } from '@mui/material';
 import React from 'react';
-import SignIn from '../components/SignIn';
+import SignIn from '../components/SignInModal';
 import { Wrapper } from './styles';
 
 const SignInContainer: React.FC = (): React.ReactElement => {
