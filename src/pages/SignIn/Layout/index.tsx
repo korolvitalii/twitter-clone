@@ -1,21 +1,18 @@
+import React from 'react';
 import MessageIcon from '@mui/icons-material/ModeCommentOutlined';
 import PeopleIcon from '@mui/icons-material/PeopleOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, Typography } from '@mui/material';
-import React from 'react';
-import SignIn from '../components/SignInModal';
+import SignInModal from '../components/SignInModal';
+import SignUpModal from '../components/SignUpModal';
 import { Wrapper } from './styles';
 
-const SignInContainer: React.FC = (): React.ReactElement => {
-  const [visibleModal, setVisibleModal] = React.useState<'SignIn' | 'SignUp'>();
+const Layout: React.FC = (): React.ReactElement => {
+  const [visibleModal, setVisibleModal] = React.useState<string | null>();
 
-  const handleClickOpenSignIn = (): void => {
-    setVisibleModal('SignIn');
-  };
-
-  const handleClickOpenSignUp = (): void => {
-    setVisibleModal('SignUp');
+  const handleOpenModal = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    setVisibleModal(e.currentTarget.textContent);
   };
 
   const handleClose = (): void => {
@@ -61,20 +58,28 @@ const SignInContainer: React.FC = (): React.ReactElement => {
               variant='contained'
               color='primary'
               fullWidth
-              onClick={handleClickOpenSignUp}>
+              onClick={handleOpenModal}>
               Sign up
             </Button>
-            <Button variant='outlined' color='primary' fullWidth onClick={handleClickOpenSignIn}>
-              Log in
+            <Button variant='outlined' color='primary' fullWidth onClick={handleOpenModal}>
+              Sign in
             </Button>
           </div>
         </div>
 
-        <SignIn isVisible={visibleModal === 'SignIn'} handleClose={handleClose} title={'SignIn'} />
-        <SignIn isVisible={visibleModal === 'SignUp'} handleClose={handleClose} title={'SignUp'} />
+        <SignInModal
+          isVisible={visibleModal === 'Sign in'}
+          handleClose={handleClose}
+          title={'Sign In'}
+        />
+        <SignUpModal
+          isVisible={visibleModal === 'Sign up'}
+          handleClose={handleClose}
+          title={'Sign Up'}
+        />
       </section>
     </Wrapper>
   );
 };
 
-export default SignInContainer;
+export default Layout;

@@ -1,5 +1,6 @@
 import { axios } from '../../core/axios';
 import { LoginFormData } from '../../pages/SignIn/components/SignInModal';
+import { RegistrationFormData } from '../../pages/SignIn/components/SignUpModal';
 
 interface ResponseApi {
   status: string;
@@ -9,6 +10,10 @@ interface ResponseApi {
 export const AuthApi = {
   signIn: async (userData: LoginFormData): Promise<ResponseApi> => {
     const { data } = await axios.post<ResponseApi>('/auth/signin', userData);
+    return data;
+  },
+  signUp: async (userData: RegistrationFormData): Promise<ResponseApi> => {
+    const { data } = await axios.post<ResponseApi>('/auth/signup', userData);
     return data;
   },
   authMe: async (): Promise<ResponseApi> => {

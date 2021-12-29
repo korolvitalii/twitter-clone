@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import ModalBlock from '../../../../components/ModalBlock';
 import { fetchSignIn } from '../../../../store/ducks/user/actionCreators';
-import { selectUserStatus } from '../../../../store/ducks/user/selectors';
+import { selectIsAuth, selectUserStatus } from '../../../../store/ducks/user/selectors';
 import { LoadingStatus } from '../../../../store/types';
 import Notification from '../Notification';
 
@@ -35,7 +35,11 @@ const schema = yup
   })
   .required();
 
-const SignIn: React.FC<SignInProps> = ({ isVisible, handleClose, title }): React.ReactElement => {
+const SignInModal: React.FC<SignInProps> = ({
+  isVisible,
+  handleClose,
+  title,
+}): React.ReactElement => {
   const {
     register,
     handleSubmit,
@@ -51,6 +55,7 @@ const SignIn: React.FC<SignInProps> = ({ isVisible, handleClose, title }): React
     setOpen(false);
   };
   const userLoadingStatus = useSelector(selectUserStatus);
+  const isAuth = useSelector(selectIsAuth);
 
   const [notifationStatus, setNotificationStatus] = useState<NoticationStatusInterface>({
     text: '',
@@ -142,4 +147,4 @@ const SignIn: React.FC<SignInProps> = ({ isVisible, handleClose, title }): React
   );
 };
 
-export default SignIn;
+export default SignInModal;

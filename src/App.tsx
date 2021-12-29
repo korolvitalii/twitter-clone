@@ -5,29 +5,41 @@ import ChosenTweet from './components/FullTweet';
 import MainSide from './components/MainSide';
 // import { TagElement } from './components/TagElement';
 import Home from './pages/Home';
-import SignIn from './pages/SignIn/SignInPage';
-import { authMe } from './store/ducks/user/actionCreators';
+import SignIn from './pages/SignIn/Layout';
+import { AuthApi } from './services/api/AuthApi';
+import { setUserData } from './store/ducks/user/actionCreators';
 import { selectIsAuth } from './store/ducks/user/selectors';
-import { fetchUsers } from './store/ducks/users/actionCreators';
 
 //TODO:
 //1. Add registration + form registration
+//2. Check notification after login/registration
+//
 
 function App() {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const checkAuth = async () => {
+    try {
+      const { data } = await AuthApi.authMe();
+      dispatch(setUserData(data));
+      // navigate('/home');
+      debugger;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    dispatch(authMe());
-  }, [dispatch]);
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     if (isAuth) {
       navigate('/home');
     }
-    dispatch(fetchUsers());
-  }, [isAuth, dispatch, navigate]);
+  }, [isAuth]);
 
   return (
     <div className='App'>

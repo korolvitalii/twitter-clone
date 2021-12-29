@@ -6,6 +6,7 @@ import { UserState } from './contracts/state';
 const initialState: UserState = {
   data: undefined,
   status: LoadingStatus.NEVER,
+  registered: false,
 };
 
 export const userReducer = produce((draft: Draft<UserState>, action: UserActions) => {
@@ -20,6 +21,10 @@ export const userReducer = produce((draft: Draft<UserState>, action: UserActions
       break;
     }
     case UserActionsType.FETCH_SIGN_IN: {
+      draft.status = LoadingStatus.LOADING;
+      break;
+    }
+    case UserActionsType.FETCH_SIGN_UP: {
       draft.status = LoadingStatus.LOADING;
       break;
     }
