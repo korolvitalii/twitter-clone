@@ -1,9 +1,9 @@
 import { LoginFormData } from '../../../pages/SignIn/components/SignInModal';
 import { RegistrationFormData } from '../../../pages/SignIn/components/SignUpModal';
 import {
-  AuthMeActionInterface,
   FetchSignInActionInterface,
   FetchSignUpActionInterface,
+  FetchUserDataActionInterface,
   SetLoadingStatusInterface,
   SetUserDataActionInterface,
   UserActionsType,
@@ -24,8 +24,8 @@ export const fetchSignUp = (data: RegistrationFormData): FetchSignUpActionInterf
   },
 });
 
-export const authMe = (): AuthMeActionInterface => ({
-  type: UserActionsType.AUTH_ME,
+export const fetchUserData = (): FetchUserDataActionInterface => ({
+  type: UserActionsType.FETCH_USER_DATA,
 });
 
 export const setUserData = (payload: UserState['data']): SetUserDataActionInterface => ({

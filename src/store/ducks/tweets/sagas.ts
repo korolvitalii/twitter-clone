@@ -9,6 +9,7 @@ export function* fetchTweetsRequest() {
   try {
     const items: TweetsState['items'] = yield call(TweetsApi.fetchTweets);
     yield put(setTweets(items));
+    yield put(setLoadingStatus(LoadingStatus.LOADED));
   } catch (error) {
     yield put(setLoadingStatus(LoadingStatus.ERROR));
   }
@@ -20,6 +21,7 @@ export function* fetchAddTweetsRequest({ payload }: FetchAddTweetActionInterface
     const items: TweetsState['items'] = yield call(TweetsApi.fetchTweets);
 
     yield put(setTweets(items));
+    yield put(setLoadingStatus(LoadingStatus.LOADED));
   } catch (error) {
     yield put(setLoadingStatus(LoadingStatus.ERROR));
   }

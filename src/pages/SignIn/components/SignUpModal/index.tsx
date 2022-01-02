@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, FormControl, FormGroup, TextField } from '@mui/material';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
@@ -8,19 +8,19 @@ import ModalBlock from '../../../../components/ModalBlock';
 import { fetchSignUp } from '../../../../store/ducks/user/actionCreators';
 import { selectUserStatus } from '../../../../store/ducks/user/selectors';
 import { LoadingStatus } from '../../../../store/types';
-import Notification from '../Notification';
+import Notification from '../../../SignIn/components/Notification';
+
+export interface NotificationStatusInterface {
+  text: string;
+  handleCloseNotification: () => void;
+  alertSeverity: 'success' | 'error';
+  setOpen?: Dispatch<SetStateAction<boolean>>;
+}
 
 interface SignUpModalProps {
   handleClose: () => void;
   isVisible: boolean;
   title: string;
-}
-
-interface NoticationStatusInterface {
-  text: string;
-  handleCloseNotification: () => void;
-  alertSeverity: 'success' | 'error';
-  setOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface RegistrationFormData {
@@ -54,45 +54,39 @@ const SignUpModal: React.FC<SignUpModalProps> = ({
   } = useForm<RegistrationFormData>({
     resolver: yupResolver(schema),
   });
-
+  const userLoadingStatus = useSelector(selectUserStatus);
   const [open, setOpen] = useState<boolean>(false);
-  const dispatch = useDispatch();
   const handleCloseNotification = () => {
     setOpen(false);
   };
-  const userLoadingStatus = useSelector(selectUserStatus);
-
-  const [notifationStatus, setNotificationStatus] = useState<NoticationStatusInterface>({
+  const [notificationStatus, setNotificationStatus] = useState<NotificationStatusInterface>({
     text: '',
     handleCloseNotification,
     setOpen,
     alertSeverity: 'error',
   });
 
+  const dispatch = useDispatch();
+
   const onSubmit = async (data: RegistrationFormData) => {
     dispatch(fetchSignUp(data));
     handleClose();
-  };
-
-  useEffect(() => {
     if (userLoadingStatus === LoadingStatus.SUCCESS) {
       setNotificationStatus({
-        text: 'Registration success!',
+        text: 'Success!',
         handleCloseNotification,
         alertSeverity: 'success',
       });
       setOpen(true);
     } else if (userLoadingStatus === LoadingStatus.ERROR) {
       setNotificationStatus({
-        text: 'Registration failed!',
+        text: 'Failed!',
         handleCloseNotification,
         alertSeverity: 'error',
       });
       setOpen(true);
-    } else {
-      return;
     }
-  }, [userLoadingStatus]);
+  };
 
   return (
     <>
@@ -206,8 +200,8 @@ const SignUpModal: React.FC<SignUpModalProps> = ({
             </FormGroup>
           </FormControl>
         </form>
+        <Notification {...notificationStatus} open={open} />
       </ModalBlock>
-      <Notification {...notifationStatus} open={open} />
     </>
   );
 };

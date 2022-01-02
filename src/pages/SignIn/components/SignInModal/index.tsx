@@ -1,26 +1,17 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, FormControl, FormGroup, TextField } from '@mui/material';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import ModalBlock from '../../../../components/ModalBlock';
 import { fetchSignIn } from '../../../../store/ducks/user/actionCreators';
-import { selectIsAuth, selectUserStatus } from '../../../../store/ducks/user/selectors';
-import { LoadingStatus } from '../../../../store/types';
-import Notification from '../Notification';
+// import { TagElement } from './components/TagElement';
 
 interface SignInProps {
   handleClose: () => void;
   isVisible: boolean;
   title: string;
-}
-
-interface NoticationStatusInterface {
-  text: string;
-  handleCloseNotification: () => void;
-  alertSeverity: 'success' | 'error';
-  setOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface LoginFormData {
@@ -49,45 +40,12 @@ const SignInModal: React.FC<SignInProps> = ({
     resolver: yupResolver(schema),
   });
 
-  const [open, setOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const handleCloseNotification = () => {
-    setOpen(false);
-  };
-  const userLoadingStatus = useSelector(selectUserStatus);
-  const isAuth = useSelector(selectIsAuth);
-
-  const [notifationStatus, setNotificationStatus] = useState<NoticationStatusInterface>({
-    text: '',
-    handleCloseNotification,
-    setOpen,
-    alertSeverity: 'error',
-  });
 
   const onSubmit = async (data: LoginFormData) => {
     dispatch(fetchSignIn(data));
     handleClose();
   };
-
-  useEffect(() => {
-    if (userLoadingStatus === LoadingStatus.SUCCESS) {
-      setNotificationStatus({
-        text: 'Login success!',
-        handleCloseNotification,
-        alertSeverity: 'success',
-      });
-      setOpen(true);
-    } else if (userLoadingStatus === LoadingStatus.ERROR) {
-      setNotificationStatus({
-        text: 'Login failed!',
-        handleCloseNotification,
-        alertSeverity: 'error',
-      });
-      setOpen(true);
-    } else {
-      return;
-    }
-  }, [userLoadingStatus]);
 
   return (
     <>
@@ -142,7 +100,6 @@ const SignInModal: React.FC<SignInProps> = ({
           </FormControl>
         </form>
       </ModalBlock>
-      <Notification {...notifationStatus} open={open} />
     </>
   );
 };

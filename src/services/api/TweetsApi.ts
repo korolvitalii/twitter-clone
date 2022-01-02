@@ -19,4 +19,12 @@ export const TweetsApi = {
     const { data } = await axios.post<Response<TweetInterface>>('/tweet', { text: payload });
     return data.data;
   },
+  removeTweet: async (payload: string): Promise<TweetInterface> => {
+    const { data } = await axios.delete<Response<TweetInterface>>(`/tweet/${payload}`);
+    return data.data;
+  },
+  updateTweet: async (payload: string): Promise<TweetInterface> => {
+    const { data } = await axios.patch<Response<TweetInterface>>(`/tweet/${payload}`);
+    return data.data;
+  },
 };

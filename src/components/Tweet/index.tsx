@@ -7,8 +7,11 @@ import { Avatar, IconButton, Typography } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import UserIcon from '../../assets/images/user.png';
+import { removeTweet, updateTweet } from '../../store/ducks/tweet/actionCreators';
+import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
 import { formatter } from '../../utils/formatDate';
 import { TweetHeader, TweetHeaderContent, TweetIcons, TweetsWrapper } from './styles';
 
@@ -32,6 +35,7 @@ const Tweet: React.FC<TweetProps> = ({
   const options = ['Edit', 'Delete'];
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch();
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     event.stopPropagation();
@@ -41,6 +45,14 @@ const Tweet: React.FC<TweetProps> = ({
     event.preventDefault();
     event.stopPropagation();
     setAnchorEl(null);
+    const currentButton = event.currentTarget.textContent;
+    if (currentButton === 'Edit' && _id) {
+      console.log('Edit push', _id);
+      dispatch(updateTweet(_id));
+    } else if (currentButton === 'Delete' && _id) {
+      dispatch(removeTweet(_id));
+      dispatch(fetchTweets());
+    }
   };
 
   const navigate = useNavigate();

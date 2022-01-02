@@ -17,7 +17,7 @@ const Home: React.FC<HomeProps> = (): React.ReactElement => {
 
   React.useEffect(() => {
     dispatch(fetchTweets());
-    dispatch(fetchTopics());
+    // dispatch(fetchTopics());
   }, [dispatch]);
 
   return (

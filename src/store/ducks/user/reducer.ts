@@ -28,12 +28,6 @@ export const userReducer = produce((draft: Draft<UserState>, action: UserActions
       draft.status = LoadingStatus.LOADING;
       break;
     }
-    case UserActionsType.AUTH_ME: {
-      draft.status = LoadingStatus.LOADING;
-
-      break;
-    }
-
     default: {
       return draft;
     }

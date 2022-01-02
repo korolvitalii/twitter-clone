@@ -30,18 +30,19 @@ export function* fetchSignUpRequest({ payload }: FetchSignUpActionInterface) {
   }
 }
 
-export function* authMeRequest({ payload }: FetchSignInActionInterface) {
+export function* fetchUserDataRequest() {
   try {
+    yield put(setLoadingStatus(LoadingStatus.LOADING));
     const { data }: UserState = yield call(AuthApi.authMe);
     yield put(setUserData(data));
-    yield put(setLoadingStatus(LoadingStatus.SUCCESS));
+    // yield put(setLoadingStatus(LoadingStatus.SUCCESS));
   } catch (error) {
-    yield put(setLoadingStatus(LoadingStatus.NEVER));
+    yield put(setLoadingStatus(LoadingStatus.ERROR));
   }
 }
 
 export function* userSaga() {
   yield takeEvery(UserActionsType.FETCH_SIGN_IN, fetchSignInRequest);
   yield takeEvery(UserActionsType.FETCH_SIGN_UP, fetchSignUpRequest);
-  yield takeEvery(UserActionsType.AUTH_ME, authMeRequest);
+  yield takeEvery(UserActionsType.FETCH_USER_DATA, fetchUserDataRequest);
 }
