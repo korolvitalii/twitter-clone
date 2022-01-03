@@ -24,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchUserData());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (isReady && !isAuth) {

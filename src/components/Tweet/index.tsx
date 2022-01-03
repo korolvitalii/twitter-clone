@@ -10,9 +10,10 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import UserIcon from '../../assets/images/user.png';
-import { removeTweet, updateTweet } from '../../store/ducks/tweet/actionCreators';
+import { removeTweet } from '../../store/ducks/tweet/actionCreators';
 import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
 import { formatter } from '../../utils/formatDate';
+import EditTweetModal from '../EditTweetModal';
 import { TweetHeader, TweetHeaderContent, TweetIcons, TweetsWrapper } from './styles';
 
 export interface TweetProps {
@@ -41,14 +42,21 @@ const Tweet: React.FC<TweetProps> = ({
     event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
+
+  const [visibleModal, setVisibleModal] = React.useState<boolean | undefined>();
+  const handleCloseModal = (): void => {
+    setVisibleModal(undefined);
+  };
+
   const handleClose = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     event.stopPropagation();
     setAnchorEl(null);
     const currentButton = event.currentTarget.textContent;
     if (currentButton === 'Edit' && _id) {
-      console.log('Edit push', _id);
-      dispatch(updateTweet(_id));
+      // console.log('Edit push', _id);
+      setVisibleModal(true);
+      // dispatch(updateTweet(_id));
     } else if (currentButton === 'Delete' && _id) {
       dispatch(removeTweet(_id));
       dispatch(fetchTweets());
@@ -129,6 +137,12 @@ const Tweet: React.FC<TweetProps> = ({
           </IconButton>
         </TweetIcons>
       </div>
+      <EditTweetModal
+        tweetText={text}
+        tweetId={_id}
+        visibleModal={visibleModal}
+        handleCloseModal={handleCloseModal}
+      />
     </TweetsWrapper>
   );
 };

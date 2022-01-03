@@ -1,27 +1,20 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import MessageIcon from '@mui/icons-material/ModeCommentOutlined';
 import PeopleIcon from '@mui/icons-material/PeopleOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUserStatus } from '../../../store/ducks/user/selectors';
+import { LoadingStatus } from '../../../store/types';
 import SignInModal from '../components/SignInModal';
 import SignUpModal, { NotificationStatusInterface } from '../components/SignUpModal';
 import { Wrapper } from './styles';
-import { useSelector } from 'react-redux';
-import { selectIsAuth, selectUserStatus } from '../../../store/ducks/user/selectors';
-import { LoadingStatus } from '../../../store/types';
 import Notification from '../../SignIn/components/Notification';
 
-interface NoticationStatusInterface {
-  text: string;
-  handleCloseNotification: () => void;
-  alertSeverity: 'success' | 'error';
-  setOpen?: Dispatch<SetStateAction<boolean>>;
-}
 const Layout: React.FC = (): React.ReactElement => {
   const [visibleModal, setVisibleModal] = React.useState<string | null>();
   const userLoadingStatus = useSelector(selectUserStatus);
-  console.log(userLoadingStatus);
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -32,6 +25,7 @@ const Layout: React.FC = (): React.ReactElement => {
   const handleClose = (): void => {
     setVisibleModal(undefined);
   };
+
   const handleCloseNotification = () => {
     setOpen(false);
   };
@@ -41,37 +35,25 @@ const Layout: React.FC = (): React.ReactElement => {
     setOpen,
     alertSeverity: 'error',
   });
-
-  const loadingStatus = useSelector(selectUserStatus);
-  const isReady = loadingStatus !== LoadingStatus.NEVER && loadingStatus !== LoadingStatus.LOADING;
-
-  const isAuth = useSelector(selectIsAuth);
-
-  const didMountRef = useRef(false);
   //TODO:
   // 1. Check notification after login, and after authMe
   useEffect(() => {
-    if (isReady && !isAuth) {
-      if (didMountRef.current) {
-        console.log('work');
-        setNotificationStatus({
-          text: 'Failed!',
-          handleCloseNotification,
-          alertSeverity: 'error',
-        });
-        setOpen(true);
-      }
+    if (userLoadingStatus === LoadingStatus.SUCCESS) {
+      setNotificationStatus({
+        text: 'Success!',
+        handleCloseNotification,
+        alertSeverity: 'success',
+      });
+      setOpen(true);
+    } else if (userLoadingStatus === LoadingStatus.ERROR) {
+      setNotificationStatus({
+        text: 'Failed!',
+        handleCloseNotification,
+        alertSeverity: 'error',
+      });
+      setOpen(true);
     }
-    didMountRef.current = true;
-    // else {
-    //   setNotificationStatus({
-    //     text: 'Success!',
-    //     handleCloseNotification,
-    //     alertSeverity: 'success',
-    //   });
-    //   setOpen(true);
-    // }
-  }, [isAuth, isReady]);
+  }, [userLoadingStatus]);
   return (
     <Wrapper>
       <section className='blueSide'>
@@ -129,8 +111,8 @@ const Layout: React.FC = (): React.ReactElement => {
           handleClose={handleClose}
           title={'Sign Up'}
         />
-        <Notification {...notificationStatus} open={open} />
       </section>
+      <Notification {...notificationStatus} open={open} />
     </Wrapper>
   );
 };

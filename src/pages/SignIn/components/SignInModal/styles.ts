@@ -7,7 +7,8 @@ export const DialogTitleWrapper = styled(DialogTitle)`
   font-weight: 700;
   font-size: 32;
   padding-left: 30px;
-  width: 450px;
+  width: 550px;
+
   .close-icon {
     font-size: 24px;
   }

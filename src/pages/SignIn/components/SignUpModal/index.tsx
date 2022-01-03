@@ -1,14 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, FormControl, FormGroup, TextField } from '@mui/material';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import ModalBlock from '../../../../components/ModalBlock';
 import { fetchSignUp } from '../../../../store/ducks/user/actionCreators';
-import { selectUserStatus } from '../../../../store/ducks/user/selectors';
-import { LoadingStatus } from '../../../../store/types';
-import Notification from '../../../SignIn/components/Notification';
 
 export interface NotificationStatusInterface {
   text: string;
@@ -54,38 +51,14 @@ const SignUpModal: React.FC<SignUpModalProps> = ({
   } = useForm<RegistrationFormData>({
     resolver: yupResolver(schema),
   });
-  const userLoadingStatus = useSelector(selectUserStatus);
-  const [open, setOpen] = useState<boolean>(false);
-  const handleCloseNotification = () => {
-    setOpen(false);
-  };
-  const [notificationStatus, setNotificationStatus] = useState<NotificationStatusInterface>({
-    text: '',
-    handleCloseNotification,
-    setOpen,
-    alertSeverity: 'error',
-  });
 
   const dispatch = useDispatch();
 
   const onSubmit = async (data: RegistrationFormData) => {
     dispatch(fetchSignUp(data));
-    handleClose();
-    if (userLoadingStatus === LoadingStatus.SUCCESS) {
-      setNotificationStatus({
-        text: 'Success!',
-        handleCloseNotification,
-        alertSeverity: 'success',
-      });
-      setOpen(true);
-    } else if (userLoadingStatus === LoadingStatus.ERROR) {
-      setNotificationStatus({
-        text: 'Failed!',
-        handleCloseNotification,
-        alertSeverity: 'error',
-      });
-      setOpen(true);
-    }
+    return () => {
+      handleClose();
+    };
   };
 
   return (
@@ -200,7 +173,6 @@ const SignUpModal: React.FC<SignUpModalProps> = ({
             </FormGroup>
           </FormControl>
         </form>
-        <Notification {...notificationStatus} open={open} />
       </ModalBlock>
     </>
   );

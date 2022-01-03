@@ -24,9 +24,15 @@ export const removeTweet = (payload: string): RemoveTweetActionInterface => ({
   payload,
 });
 
-export const updateTweet = (payload: string): UpdateTweetActionInterface => ({
+export const updateTweet = (
+  tweetId: string | undefined,
+  text: string,
+): UpdateTweetActionInterface => ({
   type: TweetActionsType.UPDATE_TWEET,
-  payload,
+  payload: {
+    tweetId,
+    text,
+  },
 });
 
 export const setLoadingStatus = (payload: LoadingStatus): SetLoadingStatusInterface => ({

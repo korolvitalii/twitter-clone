@@ -1,9 +1,13 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { TweetsApi } from '../../../services/api/TweetsApi';
 import { LoadingStatus } from '../../types';
-
 import { setLoadingStatus, setTweet } from './actionCreators';
-import { FetchTweetActionInterface, TweetActionsType } from './actionsTypes';
+import {
+  FetchTweetActionInterface,
+  RemoveTweetActionInterface,
+  TweetActionsType,
+  UpdateTweetActionInterface,
+} from './actionsTypes';
 import { TweetState } from './contracts/state';
 
 export function* fetchTweetRequest({ payload: tweetId }: FetchTweetActionInterface) {
@@ -16,7 +20,7 @@ export function* fetchTweetRequest({ payload: tweetId }: FetchTweetActionInterfa
   }
 }
 
-export function* removeTweetRequest({ payload: tweetId }: FetchTweetActionInterface) {
+export function* removeTweetRequest({ payload: tweetId }: RemoveTweetActionInterface) {
   try {
     yield call(TweetsApi.removeTweet, tweetId);
     yield put(setLoadingStatus(LoadingStatus.SUCCESS));
@@ -25,10 +29,9 @@ export function* removeTweetRequest({ payload: tweetId }: FetchTweetActionInterf
   }
 }
 
-export function* updateTweetRequest({ payload: tweetId }: FetchTweetActionInterface) {
+export function* updateTweetRequest({ payload }: UpdateTweetActionInterface) {
   try {
-    const { data } = yield call(TweetsApi.updateTweet, tweetId);
-
+    yield call(TweetsApi.updateTweet, payload);
     yield put(setLoadingStatus(LoadingStatus.SUCCESS));
   } catch (error) {
     yield put(setLoadingStatus(LoadingStatus.ERROR));

@@ -8,6 +8,8 @@ import { TweetsState } from './contracts/state';
 export function* fetchTweetsRequest() {
   try {
     const items: TweetsState['items'] = yield call(TweetsApi.fetchTweets);
+    yield put(setLoadingStatus(LoadingStatus.LOADING));
+
     yield put(setTweets(items));
     yield put(setLoadingStatus(LoadingStatus.LOADED));
   } catch (error) {
@@ -17,9 +19,9 @@ export function* fetchTweetsRequest() {
 
 export function* fetchAddTweetsRequest({ payload }: FetchAddTweetActionInterface) {
   try {
+    yield put(setLoadingStatus(LoadingStatus.LOADING));
     yield call(TweetsApi.addTweet, payload);
     const items: TweetsState['items'] = yield call(TweetsApi.fetchTweets);
-
     yield put(setTweets(items));
     yield put(setLoadingStatus(LoadingStatus.LOADED));
   } catch (error) {

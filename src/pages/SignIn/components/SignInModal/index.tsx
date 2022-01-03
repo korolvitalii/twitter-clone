@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import ModalBlock from '../../../../components/ModalBlock';
 import { fetchSignIn } from '../../../../store/ducks/user/actionCreators';
-// import { TagElement } from './components/TagElement';
 
 interface SignInProps {
   handleClose: () => void;
@@ -44,7 +43,9 @@ const SignInModal: React.FC<SignInProps> = ({
 
   const onSubmit = async (data: LoginFormData) => {
     dispatch(fetchSignIn(data));
-    handleClose();
+    return () => {
+      handleClose();
+    };
   };
 
   return (

@@ -23,6 +23,10 @@ export const tweetReducer = produce((draft: Draft<TweetState>, actions: TweetAct
       draft.LoadingStatus = actions.payload;
       break;
     }
+    case TweetActionsType.UPDATE_TWEET: {
+      draft.LoadingStatus = LoadingStatus.LOADING;
+      break;
+    }
     default: {
       return draft;
     }

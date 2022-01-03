@@ -32,7 +32,7 @@ export interface RemoveTweetActionInterface extends Action<TweetActionsType> {
 
 export interface UpdateTweetActionInterface extends Action<TweetActionsType> {
   type: TweetActionsType.UPDATE_TWEET;
-  payload: string;
+  payload: { tweetId: string | undefined; text: string };
 }
 
 export type TweetActions =

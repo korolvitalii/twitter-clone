@@ -8,18 +8,29 @@ import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
 import { Hidden } from '@mui/material';
 import * as React from 'react';
 import { SideMenuButtonTweet, SideMenuItem, SideMenuItemLabel, SideMenuItems } from './styles';
-import AddTweetForm from '../AddTweetForm';
+import CreateTweetForm from '../CreateTweetForm';
 import ModalBlock from '../ModalBlock';
+import { fetchAddTweet } from '../../store/ducks/tweets/actionCreators';
+import { useDispatch } from 'react-redux';
 
 export interface SideMenuProps {}
 
 const SideMenu: React.FC<SideMenuProps> = (props): React.ReactElement => {
+  const dispatch = useDispatch();
   const [visibleModal, setVisibleModal] = React.useState<boolean>(false);
   const onClickModalClose = (): void => {
     setVisibleModal(false);
   };
   const handleOpenModal = (): void => {
     setVisibleModal(true);
+  };
+
+  const [text, setText] = React.useState<string>('');
+
+  const handleClick = () => {
+    dispatch(fetchAddTweet(text));
+    setText('');
+    setVisibleModal(false);
   };
 
   return (
@@ -74,7 +85,7 @@ const SideMenu: React.FC<SideMenuProps> = (props): React.ReactElement => {
           </Hidden>
         </SideMenuButtonTweet>
         <ModalBlock visible={visibleModal} handleClose={onClickModalClose}>
-          <AddTweetForm maxRows={15} />
+          <CreateTweetForm maxRows={15} text={text} setText={setText} handleClick={handleClick} />
         </ModalBlock>
       </SideMenuItem>
     </>

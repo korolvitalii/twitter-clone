@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 import SideMenu from '../../components/SideMenu';
 import Tags from '../../components/Topics';
-import { fetchTopics } from '../../store/ducks/topics/actionCreators';
 import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
 import { SearchSideWrapper, SearchTextField, TwitterIconComponent } from './styles';
 
