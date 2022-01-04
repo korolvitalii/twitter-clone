@@ -33,17 +33,23 @@ const Tweet: React.FC<TweetProps> = ({
   createdAt,
   user,
 }: TweetProps): React.ReactElement | null => {
-  const options = ['Edit', 'Delete'];
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [visibleModal, setVisibleModal] = React.useState<boolean | undefined>();
+  const open = Boolean(anchorEl);
+  const options = ['Edit', 'Delete'];
+  console.log(open);
+  // React.useEffect(() => {
+
+  // },[_id])
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
 
-  const [visibleModal, setVisibleModal] = React.useState<boolean | undefined>();
   const handleCloseModal = (): void => {
     setVisibleModal(undefined);
   };
@@ -57,19 +63,19 @@ const Tweet: React.FC<TweetProps> = ({
       setVisibleModal(true);
     } else if (currentButton === 'Delete' && _id) {
       dispatch(removeTweet(_id));
-      dispatch(fetchTweets());
+      // dispatch(fetchTweets());
     }
   };
-
-  const navigate = useNavigate();
 
   const handleTweetClick = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     navigate(`/home/tweets/${_id}`, { replace: false });
   };
+
   if (!_id) {
     return null;
   }
+
   return (
     <TweetsWrapper variant='outlined'>
       <div onClick={handleTweetClick}>

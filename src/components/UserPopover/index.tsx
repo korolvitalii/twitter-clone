@@ -8,74 +8,69 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import avatarImage from '../../assets/images/user.png';
-import { useFetchUserData } from '../../hooks/useFetchUserData';
-import { fetchUserData, logOut } from '../../store/ducks/user/actionCreators';
-import { Centered } from '../../styles';
+import { logOut } from '../../store/ducks/user/actionCreators';
+import { selectUserData } from '../../store/ducks/user/selectors';
 import { Wrapper } from './styles';
-import TwitterIcon from '@mui/icons-material/Twitter';
-
-const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 export interface SimpleDialogProps {
+  username: string | undefined;
+  // avatar: string;
   open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
+  onClose: () => void;
 }
 
 const UserPopover: React.FC = (): React.ReactElement => {
+  const userData = useSelector(selectUserData);
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
-
   return (
     <Wrapper>
-      <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
+      <SimpleDialog username={userData?.username} open={open} onClose={handleClose} />
       <Button
         className='popoverButton'
         aria-describedby={id}
         variant='contained'
         onClick={handleClick}>
         <div className='popoverButtonContainer'>
-          <Avatar alt='Remy Sharp' src={avatarImage} sx={{ marginLeft: '-30px' }} />
+          <Avatar alt='Remy Sharp' src={avatarImage} />
           <div className='popoverButtonDescription'>
-            <Typography variant='subtitle2'>@USERNAME</Typography>
-            <Typography variant='subtitle2'>@USERNICK</Typography>
+            <Typography variant='subtitle2'>{userData?.username}</Typography>
+            <Typography variant='subtitle2'>{userData?.fullname}</Typography>
           </div>
         </div>
       </Button>
-
-      <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
     </Wrapper>
   );
 };
 
-function SimpleDialog(props: SimpleDialogProps) {
-  const { onClose, selectedValue, open } = props;
+const SimpleDialog: React.FC<SimpleDialogProps> = ({
+  username,
+  onClose,
+  open,
+}: SimpleDialogProps): React.ReactElement => {
   const dispatch = useDispatch();
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose();
   };
-
+  const navigate = useNavigate();
   const handleListItemClick = (value: string) => {
     if (value === 'Log out') {
       dispatch(logOut());
-      dispatch(fetchUserData());
+      navigate('/signin');
     }
-    onClose(value);
+    onClose();
   };
 
   return (
@@ -94,14 +89,14 @@ function SimpleDialog(props: SimpleDialogProps) {
               <PersonIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary='user name' />
+          <ListItemText primary={username} />
         </ListItem>
         <ListItem autoFocus button onClick={() => handleListItemClick('Log out')}>
-          <ListItemText primary='Log out' />
+          <ListItemText primary='Log out' sx={{ textAlign: 'center' }} />
         </ListItem>
       </List>
     </Dialog>
   );
-}
+};
 
 export default UserPopover;

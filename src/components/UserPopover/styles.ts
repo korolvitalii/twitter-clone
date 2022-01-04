@@ -6,12 +6,15 @@ export const Wrapper = styled('div')`
     background-color: white;
     color: black;
   }
+  & :hover {
+    background-color: #adadad;
+  }
   .popoverButtonContainer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
   }
   .popoverButtonDescription {
-    margin-left: 20px;
+    margin-left: 50px;
   }
 `;
