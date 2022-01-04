@@ -1,5 +1,5 @@
 import SearchIcon from '@mui/icons-material/Search';
-import { Container, IconButton, InputAdornment } from '@mui/material';
+import { Box, Container, IconButton, InputAdornment } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
@@ -16,24 +16,25 @@ const Home: React.FC<HomeProps> = (): React.ReactElement => {
 
   React.useEffect(() => {
     dispatch(fetchTweets());
-    // dispatch(fetchTopics());
   }, [dispatch]);
 
   return (
     <Container maxWidth='lg' sx={{ marginTop: 3 }}>
-      <Grid container spacing={3}>
-        <Grid item xs={3}>
-          <IconButton>
-            <Link to='/home'>
-              <TwitterIconComponent color='primary' />
-            </Link>
-          </IconButton>
-          <SideMenu />
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          <div style={{ position: 'fixed', width: '200px' }}>
+            <IconButton sx={{ marginLeft: '-50px' }}>
+              <Link to='/home'>
+                <TwitterIconComponent color='primary' />
+              </Link>
+            </IconButton>
+            <SideMenu />
+          </div>
         </Grid>
         <Grid item xs={6}>
           <Outlet />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <SearchSideWrapper>
             <SearchTextField
               label='Search'

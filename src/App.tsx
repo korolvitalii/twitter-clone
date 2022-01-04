@@ -10,29 +10,33 @@ import { fetchUserData } from './store/ducks/user/actionCreators';
 import { selectIsAuth, selectUserStatus } from './store/ducks/user/selectors';
 import { LoadingStatus } from './store/types';
 import { Centered } from './styles';
+import { useFetchUserData } from './hooks/useFetchUserData';
 //TODO:
 //1. how edit tweet UI
 //2. Circular or Twitter Icon loader after login
 //
 const App = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
-  const isAuth = useSelector(selectIsAuth);
-  const loadingStatus = useSelector(selectUserStatus);
-  const isReady = loadingStatus !== LoadingStatus.NEVER && loadingStatus !== LoadingStatus.LOADING;
+  // const isAuth = useSelector(selectIsAuth);
+  // const loadingStatus = useSelector(selectUserStatus);
+  // const isReady = loadingStatus !== LoadingStatus.NEVER && loadingStatus !== LoadingStatus.LOADING;
 
-  useEffect(() => {
-    dispatch(fetchUserData());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchUserData());
+  // }, [dispatch]);
 
-  useEffect(() => {
-    if (isReady && !isAuth) {
-      navigate('/signin');
-    } else {
-      navigate('/home');
-    }
-  }, [isAuth, isReady]);
+  // useEffect(() => {
+  //   if (isReady && !isAuth) {
+  //     navigate('/signin');
+  //   } else {
+  //     navigate('/home');
+  //   }
+  // }, [isAuth, isReady]);
+
+  const { isReady, isAuth } = useFetchUserData();
+  console.log(`isAuth ---${isAuth} isReady -- ${isReady}`);
 
   if (!isReady) {
     return (
@@ -42,7 +46,6 @@ const App = () => {
     );
   }
 
-  // console.log(`isReady - ${isReady}`, `isAuth - ${isAuth}`);
   return (
     <Routes>
       <Route path='/' element={<Home />}>

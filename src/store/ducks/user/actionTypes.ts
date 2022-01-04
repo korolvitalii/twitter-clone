@@ -10,6 +10,7 @@ export enum UserActionsType {
   FETCH_USER_DATA = 'FETCH_USER_DATA',
   SET_LOADING_STATE = 'USER/SET_LOADING_STATE',
   SET_USER_DATA = 'USER/SET_USER_DATA',
+  LOG_OUT = 'USER/LOG_OUT',
 }
 
 export interface FetchSignInActionInterface extends Action<UserActionsType> {
@@ -40,9 +41,14 @@ export interface FetchUserDataActionInterface extends Action<UserActionsType> {
   type: UserActionsType.FETCH_USER_DATA;
 }
 
+export interface LogOutActionInterface extends Action<UserActionsType> {
+  type: UserActionsType.LOG_OUT;
+}
+
 export type UserActions =
   | SetUserDataActionInterface
   | FetchSignInActionInterface
   | SetLoadingStatusInterface
   | FetchSignUpActionInterface
-  | FetchUserDataActionInterface;
+  | FetchUserDataActionInterface
+  | LogOutActionInterface;

@@ -19,7 +19,7 @@ const MainSide: React.FC<MainSideProps> = (props: MainSideProps): React.ReactEle
     setText('');
   };
   return (
-    <>
+    <div style={{ marginLeft: '20px' }}>
       <Paper variant='outlined'>
         <Typography variant='h6'>Tweets</Typography>
         <CreateTweetForm text={text} setText={setText} handleClick={handleClick} />
@@ -28,7 +28,7 @@ const MainSide: React.FC<MainSideProps> = (props: MainSideProps): React.ReactEle
         <Alert severity='error'>Cannot send message! Some error!</Alert>
       )}
       <Tweets />
-    </>
+    </div>
   );
 };
 

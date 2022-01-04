@@ -8,7 +8,6 @@ import Tweet from '../Tweet';
 const Tweets: React.FC = (): React.ReactElement | null => {
   const tweets = useSelector(selectTweetsItems);
   const isLoading = useSelector(selectIsLoading);
-  console.log(isLoading);
   return (
     <>
       {isLoading ? (

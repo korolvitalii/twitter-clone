@@ -41,8 +41,18 @@ export function* fetchUserDataRequest() {
   }
 }
 
+export function* logOut() {
+  try {
+    window.localStorage.removeItem('token');
+    yield put(setLoadingStatus(LoadingStatus.SUCCESS));
+  } catch (error) {
+    yield put(setLoadingStatus(LoadingStatus.ERROR));
+  }
+}
+
 export function* userSaga() {
   yield takeEvery(UserActionsType.FETCH_SIGN_IN, fetchSignInRequest);
   yield takeEvery(UserActionsType.FETCH_SIGN_UP, fetchSignUpRequest);
   yield takeEvery(UserActionsType.FETCH_USER_DATA, fetchUserDataRequest);
+  yield takeEvery(UserActionsType.LOG_OUT, logOut);
 }

@@ -4,6 +4,7 @@ import {
   FetchSignInActionInterface,
   FetchSignUpActionInterface,
   FetchUserDataActionInterface,
+  LogOutActionInterface,
   SetLoadingStatusInterface,
   SetUserDataActionInterface,
   UserActionsType,
@@ -36,4 +37,8 @@ export const setUserData = (payload: UserState['data']): SetUserDataActionInterf
 export const setLoadingStatus = (payload: UserState['status']): SetLoadingStatusInterface => ({
   type: UserActionsType.SET_LOADING_STATE,
   payload,
+});
+
+export const logOut = (): LogOutActionInterface => ({
+  type: UserActionsType.LOG_OUT,
 });

@@ -54,9 +54,7 @@ const Tweet: React.FC<TweetProps> = ({
     setAnchorEl(null);
     const currentButton = event.currentTarget.textContent;
     if (currentButton === 'Edit' && _id) {
-      // console.log('Edit push', _id);
       setVisibleModal(true);
-      // dispatch(updateTweet(_id));
     } else if (currentButton === 'Delete' && _id) {
       dispatch(removeTweet(_id));
       dispatch(fetchTweets());
