@@ -1,29 +1,21 @@
 import SearchIcon from '@mui/icons-material/Search';
-import { Box, Container, IconButton, InputAdornment } from '@mui/material';
+import { Container, IconButton, InputAdornment } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 import SideMenu from '../../components/SideMenu';
-import Tags from '../../components/Topics';
-import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
+import Topics from '../../components/Topics';
 import { SearchSideWrapper, SearchTextField, TwitterIconComponent } from './styles';
 
 export interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (): React.ReactElement => {
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(fetchTweets());
-  }, [dispatch]);
-
   return (
     <Container maxWidth='lg' sx={{ marginTop: 3 }}>
       <Grid container spacing={1}>
         <Grid item xs={2}>
           <div style={{ position: 'fixed', width: '200px' }}>
-            <IconButton sx={{ marginLeft: '-50px' }}>
+            <IconButton>
               <Link to='/home'>
                 <TwitterIconComponent color='primary' />
               </Link>
@@ -31,12 +23,14 @@ const Home: React.FC<HomeProps> = (): React.ReactElement => {
             <SideMenu />
           </div>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={7}>
           <Outlet />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <SearchSideWrapper>
             <SearchTextField
+              onChange={(e) => console.log(e.currentTarget.value)}
+              value='asdadasd'
               label='Search'
               InputProps={{
                 startAdornment: (
@@ -47,7 +41,7 @@ const Home: React.FC<HomeProps> = (): React.ReactElement => {
               }}
             />
           </SearchSideWrapper>
-          <Tags />
+          <Topics />
         </Grid>
       </Grid>
     </Container>

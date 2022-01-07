@@ -36,6 +36,9 @@ export const TwitterIconComponent = styled(TwitterIcon)`
 `;
 
 export const SearchSideWrapper = styled('div')`
-  margin-top: 3px;
+  margin-top: -55px;
   position: fixed;
+  background-color: white;
+  padding-top: 60px;
+  padding-bottom: 10px;
 `;

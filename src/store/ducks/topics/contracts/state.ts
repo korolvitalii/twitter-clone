@@ -2,8 +2,8 @@ import { LoadingStatus } from '../../../types';
 
 export interface TopicInterface {
   _id: string;
-  name: string;
-  count: number;
+  topicName: string;
+  content: string;
 }
 
 export interface TopicsState {

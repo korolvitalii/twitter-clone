@@ -1,24 +1,27 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
+
 import CreateIcon from '@mui/icons-material/Create';
+import HomeIcon from '@mui/icons-material/Home';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import PersonOutLineIcon from '@mui/icons-material/PersonOutline';
-import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
-import { Box, Button, Hidden } from '@mui/material';
-import * as React from 'react';
-import { SideMenuItemLabel, Wrapper } from './styles';
+import { Avatar, Box, Button, IconButton } from '@mui/material';
+
+import { fetchAddTweet } from '../../store/ducks/tweet/actionCreators';
+import UserPopover from '../../components/UserPopover';
 import CreateTweetForm from '../CreateTweetForm';
 import ModalBlock from '../ModalBlock';
-import { fetchAddTweet } from '../../store/ducks/tweets/actionCreators';
-import { useDispatch } from 'react-redux';
-import UserPopover from '../../components/UserPopover';
+import { SideMenuItemLabel, Wrapper } from './styles';
 
-export interface SideMenuProps {}
-
-const SideMenu: React.FC<SideMenuProps> = (props): React.ReactElement => {
+const SideMenu: React.FC = (): React.ReactElement => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [visibleModal, setVisibleModal] = React.useState<boolean>(false);
   const onClickModalClose = (): void => {
     setVisibleModal(false);
@@ -36,72 +39,97 @@ const SideMenu: React.FC<SideMenuProps> = (props): React.ReactElement => {
   };
 
   return (
-    <Wrapper>
-      <ul className='sideMenuItems'>
-        <li>
-          <HomeIcon sx={{ fontSize: 32 }} />
-          <Hidden smDown>
-            <SideMenuItemLabel>Home</SideMenuItemLabel>
-          </Hidden>
-        </li>
-        <li>
-          <SearchIcon sx={{ fontSize: 32 }} />
-          <Hidden smDown>
-            <SideMenuItemLabel>Search</SideMenuItemLabel>
-          </Hidden>
-        </li>
-        <li>
-          <NotificationsNoneIcon sx={{ fontSize: 32 }} />
-          <Hidden smDown>
-            <SideMenuItemLabel>Notification</SideMenuItemLabel>
-          </Hidden>
-        </li>
-        <li>
-          <MailOutlineIcon sx={{ fontSize: 32 }} />
-          <Hidden smDown>
-            <SideMenuItemLabel>Messages</SideMenuItemLabel>
-          </Hidden>
-        </li>
-        <li>
-          <TurnedInNotIcon sx={{ fontSize: 32 }} />
-          <Hidden smDown>
-            <SideMenuItemLabel>Bookmarks</SideMenuItemLabel>
-          </Hidden>
-        </li>
-        <li>
-          <ListAltIcon sx={{ fontSize: 32 }} />
-          <Hidden smDown>
-            <SideMenuItemLabel>Lists</SideMenuItemLabel>
-          </Hidden>
-        </li>
-        <li>
-          <PersonOutLineIcon sx={{ fontSize: 32 }} />
-          <Hidden smDown>
-            <SideMenuItemLabel>Profile</SideMenuItemLabel>
-          </Hidden>
-        </li>
-      </ul>
-      <ul className='sideMenuTweetButton'>
-        <li>
-          <Button
-            variant='contained'
-            color='primary'
-            sx={{ width: 200, marginBottom: 10, marginLeft: '-50px' }}
-            onClick={handleOpenModal}>
-            <Hidden smDown>Tweet</Hidden>
-            <Hidden mdUp>
-              <CreateIcon />
-            </Hidden>
-          </Button>
-          <ModalBlock visible={visibleModal} handleClose={onClickModalClose}>
-            <CreateTweetForm maxRows={15} text={text} setText={setText} handleClick={handleClick} />
-          </ModalBlock>
-        </li>
-      </ul>
-      <Box sx={{ marginBottom: 10, marginLeft: '-50px' }}>
-        <UserPopover />
-      </Box>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <ul className='sideMenuItems'>
+          <li>
+            <Link to='/home'>
+              <HomeIcon className='menuIcon' />
+              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <SideMenuItemLabel>Home</SideMenuItemLabel>
+              </Box>
+            </Link>
+          </li>
+          <li>
+            <Link to='/profile'>
+              <SearchIcon className='menuIcon' />
+              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <SideMenuItemLabel>Search</SideMenuItemLabel>
+              </Box>
+            </Link>
+          </li>
+          <li>
+            <Link to='/profile'>
+              <NotificationsNoneIcon className='menuIcon' />
+              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <SideMenuItemLabel>Notification</SideMenuItemLabel>
+              </Box>
+            </Link>
+          </li>
+          <li>
+            <Link to='/profile'>
+              <MailOutlineIcon className='menuIcon' />
+              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <SideMenuItemLabel>Messages</SideMenuItemLabel>
+              </Box>
+            </Link>
+          </li>
+          <li>
+            <Link to='/profile'>
+              <TurnedInNotIcon className='menuIcon' />
+              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <SideMenuItemLabel>Bookmarks</SideMenuItemLabel>
+              </Box>
+            </Link>
+          </li>
+          <li>
+            <Link to='/profile'>
+              <ListAltIcon className='menuIcon' />
+              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <SideMenuItemLabel>Lists</SideMenuItemLabel>
+              </Box>
+            </Link>
+          </li>
+          <li>
+            <Link to='/profile'>
+              <PersonOutLineIcon className='menuIcon' />
+              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <SideMenuItemLabel>Profile </SideMenuItemLabel>
+              </Box>
+            </Link>
+          </li>
+        </ul>
+        <ul className='sideMenuFooter'>
+          <li>
+            <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+              <IconButton onClick={handleOpenModal}>
+                <CreateIcon />
+              </IconButton>
+            </Box>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <Button
+                variant='contained'
+                color='primary'
+                className='tweetButton'
+                onClick={handleOpenModal}>
+                <Box sx={{ display: { xs: 'none', sm: 'block' } }}>Tweet</Box>
+              </Button>
+            </Box>
+          </li>
+          <li>
+            <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+              <Avatar />
+            </Box>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <UserPopover />
+            </Box>
+          </li>
+        </ul>
+      </Wrapper>
+      <ModalBlock visible={visibleModal} handleClose={onClickModalClose}>
+        <CreateTweetForm maxRows={15} text={text} setText={setText} handleClick={handleClick} />
+      </ModalBlock>
+    </>
   );
 };
 

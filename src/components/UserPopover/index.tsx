@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import avatarImage from '../../assets/images/user.png';
 import { logOut } from '../../store/ducks/user/actionCreators';
 import { selectUserData } from '../../store/ducks/user/selectors';
 import { Wrapper } from './styles';
@@ -44,7 +43,9 @@ const UserPopover: React.FC = (): React.ReactElement => {
         variant='contained'
         onClick={handleClick}>
         <div className='popoverButtonContainer'>
-          <Avatar alt='Remy Sharp' src={avatarImage} />
+          <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+            <PersonIcon />
+          </Avatar>
           <div className='popoverButtonDescription'>
             <Typography variant='subtitle2'>{userData?.username}</Typography>
             <Typography variant='subtitle2'>{userData?.fullname}</Typography>

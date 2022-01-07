@@ -10,7 +10,7 @@ const initialState: TopicsState = {
 
 export const topicsReducer = produce((draft: Draft<TopicsState>, actions: TopicsActions) => {
   switch (actions.type) {
-    case TopicsActionsType.SET_Topics: {
+    case TopicsActionsType.SET_TOPICS: {
       draft.items = actions.payload;
       draft.LoadingStatus = LoadingStatus.LOADED;
       break;

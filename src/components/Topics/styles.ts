@@ -1,19 +1,20 @@
 import { Paper } from '@mui/material';
-import { styled } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 
-export const AccessibleListWrapper = styled('div')({
-  marginTop: 20,
-});
+export const AccessibleListWrapper = styled('div')`
+  margin-top: 70px;
+  width: 300px;
+  z-index: 5;
+`;
+export const AccessibleListHeader = styled(Paper)`
+  height: 50px;
+  background-color: #e6ecf0;
+`;
 
-export const AccessibleListHeader = styled(Paper)({
-  height: 50,
-  backgroundColor: '#E6ECF0',
-});
-
-export const AccessibleListItem = styled(Paper)({
-  height: 70,
-  backgroundColor: '#E6ECF0',
-  '&:hover': {
-    backgroundColor: '#bfcfd9',
-  },
-});
+export const AccessibleListItem = styled(Paper)`
+  height: 70px;
+  background-color: #e6ecf0;
+  & hover {
+    background-color: #bfcfd9;
+  }
+`;

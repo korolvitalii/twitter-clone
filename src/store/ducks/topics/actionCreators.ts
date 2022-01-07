@@ -3,13 +3,13 @@ import { LoadingStatus } from '../../types';
 import { TopicsState } from './contracts/state';
 
 export enum TopicsActionsType {
-  SET_Topics = 'Topics/SET_Topics',
-  FETCH_Topics = 'Topics/FETCH_Topics',
-  SET_LOADING_STATE = 'Topics/SET_LOADING_STATE',
+  SET_TOPICS = 'TOPICS/SET_TOPICS',
+  FETCH_Topics = 'TOPICS/FETCH_Topics',
+  SET_LOADING_STATE = 'TOPICS/SET_LOADING_STATE',
 }
 
 interface SetTopicsActionInterface extends Action<TopicsActionsType> {
-  type: TopicsActionsType.SET_Topics;
+  type: TopicsActionsType.SET_TOPICS;
   payload: TopicsState['items'];
 }
 
@@ -26,7 +26,7 @@ export const fetchTopics = (): FetchTopicsActionInterface => ({
 });
 
 export const setTopics = (payload: TopicsState['items']): SetTopicsActionInterface => ({
-  type: TopicsActionsType.SET_Topics,
+  type: TopicsActionsType.SET_TOPICS,
   payload,
 });
 

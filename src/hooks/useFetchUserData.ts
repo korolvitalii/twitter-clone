@@ -19,8 +19,10 @@ export const useFetchUserData = () => {
 
   useEffect(() => {
     if (isReady && !isAuth) {
+      console.log('redirect to sign in');
       navigate('/signin');
     } else {
+      console.log('redirect to home');
       navigate('/home');
     }
   }, [isAuth, isReady]);

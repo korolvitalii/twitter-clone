@@ -73,9 +73,9 @@ const FullTweet: React.FC = (props): React.ReactElement => {
           </TweetIcons>
         </Link>
       </TweetsWrapper>
-      <Tweet {...tweet} />
-      <Tweet {...tweet} />
-      <Tweet {...tweet} />
+      <Tweet tweet={tweet} />
+      <Tweet tweet={tweet} />
+      <Tweet tweet={tweet} />
     </>
   );
 };

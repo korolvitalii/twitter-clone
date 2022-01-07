@@ -3,6 +3,7 @@ import { TweetsApi } from '../../../services/api/TweetsApi';
 import { LoadingStatus } from '../../types';
 import { setLoadingStatus, setTweet } from './actionCreators';
 import {
+  FetchAddTweetActionInterface,
   FetchTweetActionInterface,
   RemoveTweetActionInterface,
   TweetActionsType,
@@ -38,8 +39,18 @@ export function* updateTweetRequest({ payload }: UpdateTweetActionInterface) {
   }
 }
 
+export function* fetchAddTweetRequest({ payload }: FetchAddTweetActionInterface) {
+  try {
+    yield call(TweetsApi.addTweet, payload);
+    yield put(setLoadingStatus(LoadingStatus.LOADED));
+  } catch (error) {
+    yield put(setLoadingStatus(LoadingStatus.ERROR));
+  }
+}
+
 export function* tweetSaga() {
   yield takeEvery(TweetActionsType.FETCH_TWEET, fetchTweetRequest);
+  yield takeEvery(TweetActionsType.FETCH_ADD_TWEET, fetchAddTweetRequest);
   yield takeEvery(TweetActionsType.REMOVE_TWEET, removeTweetRequest);
   yield takeEvery(TweetActionsType.UPDATE_TWEET, updateTweetRequest);
 }

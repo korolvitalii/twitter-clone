@@ -1,14 +1,4 @@
-import { LoadingStatus } from '../../../types';
-
-export interface TweetInterface {
-  _id: string;
-  text: string;
-  user: {
-    fullname: string;
-    username: string;
-    avatarUrl: string;
-  };
-}
+import { LoadingStatus, TweetInterface } from '../../../types';
 
 export interface TweetsState {
   items: TweetInterface[];

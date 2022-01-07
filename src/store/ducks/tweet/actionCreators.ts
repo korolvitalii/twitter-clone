@@ -1,5 +1,6 @@
-import { LoadingStatus } from '../../types';
+import { LoadingStatus, TweetInterface } from '../../types';
 import {
+  FetchAddTweetActionInterface,
   FetchTweetActionInterface,
   RemoveTweetActionInterface,
   SetLoadingStatusInterface,
@@ -7,20 +8,24 @@ import {
   TweetActionsType,
   UpdateTweetActionInterface,
 } from './actionsTypes';
-import { TweetInterface } from './contracts/state';
-
-export const fetchTweet = (tweetId: string): FetchTweetActionInterface => ({
-  type: TweetActionsType.FETCH_TWEET,
-  payload: tweetId,
-});
 
 export const setTweet = (payload: TweetInterface | undefined): SetTweetActionInterface => ({
   type: TweetActionsType.SET_TWEET,
   payload,
 });
 
+export const fetchTweet = (tweetId: string): FetchTweetActionInterface => ({
+  type: TweetActionsType.FETCH_TWEET,
+  payload: tweetId,
+});
+
 export const removeTweet = (payload: string): RemoveTweetActionInterface => ({
   type: TweetActionsType.REMOVE_TWEET,
+  payload,
+});
+
+export const fetchAddTweet = (payload: string): FetchAddTweetActionInterface => ({
+  type: TweetActionsType.FETCH_ADD_TWEET,
   payload,
 });
 

@@ -1,48 +1,34 @@
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import RepeatOutlinedIcon from '@mui/icons-material/RepeatOutlined';
-import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
-import { Avatar, IconButton, Typography } from '@mui/material';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import UserIcon from '../../assets/images/user.png';
+import { Avatar, IconButton, Typography } from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import RepeatOutlinedIcon from '@mui/icons-material/RepeatOutlined';
+import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
 import { removeTweet } from '../../store/ducks/tweet/actionCreators';
 import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
 import { formatter } from '../../utils/formatDate';
 import EditTweetModal from '../EditTweetModal';
+import UserIcon from '../../assets/images/user.png';
 import { TweetHeader, TweetHeaderContent, TweetIcons, TweetsWrapper } from './styles';
+import { TweetInterface } from '../../store/types';
 
 export interface TweetProps {
-  _id?: string;
-  text?: string;
-  createdAt?: string;
-  user?: {
-    fullname: string;
-    username: string;
-    avatarUrl: string;
-  };
+  tweet: TweetInterface | undefined;
 }
 
-const Tweet: React.FC<TweetProps> = ({
-  _id,
-  text,
-  createdAt,
-  user,
-}: TweetProps): React.ReactElement | null => {
+const Tweet: React.FC<TweetProps> = ({ tweet }: TweetProps): React.ReactElement | null => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [visibleModal, setVisibleModal] = React.useState<boolean | undefined>();
   const open = Boolean(anchorEl);
   const options = ['Edit', 'Delete'];
-  console.log(open);
-  // React.useEffect(() => {
-
-  // },[_id])
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -59,20 +45,20 @@ const Tweet: React.FC<TweetProps> = ({
     event.stopPropagation();
     setAnchorEl(null);
     const currentButton = event.currentTarget.textContent;
-    if (currentButton === 'Edit' && _id) {
+    if (currentButton === 'Edit' && tweet?._id) {
       setVisibleModal(true);
-    } else if (currentButton === 'Delete' && _id) {
-      dispatch(removeTweet(_id));
-      // dispatch(fetchTweets());
+    } else if (currentButton === 'Delete' && tweet?._id) {
+      dispatch(removeTweet(tweet?._id));
+      dispatch(fetchTweets());
     }
   };
 
   const handleTweetClick = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    navigate(`/home/tweets/${_id}`, { replace: false });
+    navigate(`/home/tweets/${tweet?._id}`, { replace: false });
   };
 
-  if (!_id) {
+  if (!tweet?._id) {
     return null;
   }
 
@@ -83,10 +69,10 @@ const Tweet: React.FC<TweetProps> = ({
           <TweetHeaderContent>
             <Avatar alt='User Avatar' src={UserIcon} sx={{ marginRight: 1 }} />
             <Typography>
-              <b>{user?.fullname}</b>
-              <span>@{user?.username}</span>
+              <b>{tweet?.user?.fullname}</b>
+              <span>@{tweet?.user?.username}</span>
               <span>-</span>
-              <span>{formatter(createdAt)}</span>
+              <span>{formatter(tweet?.createdAt)}</span>
             </Typography>
           </TweetHeaderContent>
           <div>
@@ -123,7 +109,7 @@ const Tweet: React.FC<TweetProps> = ({
         </TweetHeader>
         <div>
           <Typography sx={{ marginLeft: '25px' }} variant='body1' gutterBottom>
-            {text}
+            {tweet?.text}
           </Typography>
         </div>
         <TweetIcons>
@@ -142,8 +128,8 @@ const Tweet: React.FC<TweetProps> = ({
         </TweetIcons>
       </div>
       <EditTweetModal
-        tweetText={text}
-        tweetId={_id}
+        tweetText={tweet?.text}
+        tweetId={tweet?._id}
         visibleModal={visibleModal}
         handleCloseModal={handleCloseModal}
       />

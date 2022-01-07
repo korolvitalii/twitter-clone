@@ -16,7 +16,7 @@ const Tweets: React.FC = React.memo((): React.ReactElement | null => {
           <CircularProgress />
         </Centered>
       ) : (
-        tweets.map((tweet) => <Tweet key={tweet._id} {...tweet} />)
+        tweets.map((tweet) => <Tweet key={tweet._id} tweet={tweet} />)
       )}
     </>
   );

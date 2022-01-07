@@ -8,7 +8,6 @@ import { AccessibleListHeader, AccessibleListWrapper } from './styles';
 const Topics: React.FC = (): React.ReactElement | null => {
   const topics = useSelector(selectTopicsItems);
   const isLoaded = useSelector(selectIsTopicsLoaded);
-
   if (!isLoaded) {
     return null;
   }

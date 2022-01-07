@@ -1,8 +1,14 @@
 import axios from 'axios';
-import { TopicsState } from '../../store/ducks/topics/contracts/state';
+import { TopicInterface, TopicsState } from '../../store/ducks/topics/contracts/state';
+
+interface Response<T> {
+  status: string;
+  data: T;
+}
 
 export const TopicsApi = {
-  fetchTopics: async () => {
-    return await axios.get<TopicsState['items']>('/tags').then(({ data }) => data);
+  fetchTopics: async (): Promise<TopicInterface[]> => {
+    const { data } = await axios.get<Response<TopicsState['items']>>('/topics');
+    return data.data;
   },
 };

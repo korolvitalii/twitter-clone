@@ -1,7 +1,7 @@
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { Avatar, Button, CircularProgress, IconButton, Paper, Typography } from '@mui/material';
-import * as React from 'react';
+import React from 'react';
 import {
   AddForm,
   AddFormBody,
