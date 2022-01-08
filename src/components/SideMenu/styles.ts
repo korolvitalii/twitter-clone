@@ -13,7 +13,6 @@ export const Wrapper = styled('div')`
     font-size: 32px;
   }
 
-  /* .sideMenuItems li, */
   .sideMenuItems li a {
     display: inline-flex;
     align-items: center;
@@ -52,7 +51,7 @@ export const Wrapper = styled('div')`
     justify-content: space-between;
   }
   .tweetButton {
-    width: 200px;
+    width: 180px;
   }
   .sideMenuFooter {
   }

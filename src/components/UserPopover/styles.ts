@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 
 export const Wrapper = styled('div')`
   .popoverButton {
-    width: 200px;
+    width: 180px;
     background-color: white;
     color: black;
   }

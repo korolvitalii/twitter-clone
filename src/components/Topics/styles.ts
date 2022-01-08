@@ -1,10 +1,9 @@
 import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const AccessibleListWrapper = styled('div')`
+export const Wrapper = styled('div')`
   margin-top: 70px;
   width: 300px;
-  z-index: 5;
 `;
 export const AccessibleListHeader = styled(Paper)`
   height: 50px;

@@ -12,9 +12,9 @@ export interface HomeProps {}
 const Home: React.FC<HomeProps> = (): React.ReactElement => {
   return (
     <Container maxWidth='lg' sx={{ marginTop: 3 }}>
-      <Grid container spacing={1}>
+      <Grid container spacing={4}>
         <Grid item xs={2}>
-          <div style={{ position: 'fixed', width: '200px' }}>
+          <div style={{ position: 'fixed' }}>
             <IconButton>
               <Link to='/home'>
                 <TwitterIconComponent color='primary' />
@@ -23,7 +23,7 @@ const Home: React.FC<HomeProps> = (): React.ReactElement => {
             <SideMenu />
           </div>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={7} spacing={2}>
           <Outlet />
         </Grid>
         <Grid item xs={3}>
