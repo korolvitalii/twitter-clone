@@ -1,3 +1,7 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import PersonIcon from '@mui/icons-material/Person';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -8,9 +12,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+
 import { logOut } from '../../store/ducks/user/actionCreators';
 import { selectUserData } from '../../store/ducks/user/selectors';
 import { Wrapper } from './styles';
@@ -34,6 +36,7 @@ const UserPopover: React.FC = (): React.ReactElement => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
+  console.log('asdasdas');
   return (
     <Wrapper>
       <SimpleDialog username={userData?.username} open={open} onClose={handleClose} />
@@ -46,7 +49,9 @@ const UserPopover: React.FC = (): React.ReactElement => {
           <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
             <PersonIcon />
           </Avatar>
-          <div className='popoverButtonDescription'>
+          <div
+            className='popoverButtonDescription'
+            style={{ border: '1px solid black', width: '100%' }}>
             <Typography variant='subtitle2'>{userData?.username}</Typography>
             <Typography variant='subtitle2'>{userData?.fullname}</Typography>
           </div>
@@ -81,7 +86,7 @@ const SimpleDialog: React.FC<SimpleDialogProps> = ({
       sx={{
         display: 'flex',
         marginBottom: '-350px',
-        marginLeft: '-25px',
+        marginLeft: '25px',
       }}>
       <List sx={{ pt: 0, width: '200px' }}>
         <ListItem button onClick={() => handleListItemClick('User')} key='email'>
