@@ -17,8 +17,9 @@ export const TweetIcons = styled('div')`
 export const TweetsWrapper = styled(Paper)`
   border-top: 0;
   border-bottom: 0;
-  & hover {
+  :hover {
     background-color: #bfcfd9;
+    transition: 0.3s;
   }
   & a {
     color: inherit;

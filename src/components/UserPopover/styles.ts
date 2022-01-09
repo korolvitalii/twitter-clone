@@ -8,10 +8,13 @@ export const Wrapper = styled('div')`
   }
   .popoverButtonContainer {
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
     width: 100%;
   }
   .popoverButtonDescription {
-    margin-left: 50px;
+    margin-left: 5%;
+
+    /* margin-left: 50px; */
+    /* display: flex; */
   }
 `;
