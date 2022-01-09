@@ -36,7 +36,6 @@ const UserPopover: React.FC = (): React.ReactElement => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
-  console.log('asdasdas');
   return (
     <Wrapper>
       <SimpleDialog username={userData?.username} open={open} onClose={handleClose} />
@@ -49,9 +48,7 @@ const UserPopover: React.FC = (): React.ReactElement => {
           <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
             <PersonIcon />
           </Avatar>
-          <div
-            className='popoverButtonDescription'
-            style={{ border: '1px solid black', width: '100%' }}>
+          <div className='popoverButtonDescription'>
             <Typography variant='subtitle2'>{userData?.username}</Typography>
             <Typography variant='subtitle2'>{userData?.fullname}</Typography>
           </div>

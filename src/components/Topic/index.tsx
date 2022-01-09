@@ -14,8 +14,13 @@ const Topic: React.FC<TagProps> = ({
   return (
     <Link to={`/home/search?q=${topicName}`} style={{ color: 'inherit', textDecoration: 'none' }}>
       <AccessibleListItem>
-        <Typography variant='subtitle1'>{topicName}</Typography>
+        <Typography variant='caption' sx={{ color: 'gray' }}>
+          {topicName}
+        </Typography>
         <Typography variant='subtitle1'>{content}</Typography>
+        <Typography variant='caption' sx={{ color: 'gray' }}>
+          1,887 Tweets
+        </Typography>
       </AccessibleListItem>
     </Link>
   );
