@@ -1,14 +1,13 @@
+import { Typography } from '@mui/material';
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Paper, Typography, Box } from '@mui/material';
-
-import { selectLoadingStatus } from '../../store/ducks/tweet/selectors';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchAddTweet } from '../../store/ducks/tweet/actionCreators';
-import CreateTweetForm from '../CreateTweetForm';
-import { Alert } from '../Alert';
-import Tweets from '../Tweets';
+import { selectLoadingStatus } from '../../store/ducks/tweet/selectors';
 import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
 import { LoadingStatus } from '../../store/types';
+import { Alert } from '../Alert';
+import CreateTweetForm from '../CreateTweetForm';
+import Tweets from '../Tweets';
 import { MainSideHeadContainer, Wrapper } from './styles';
 
 const MainSide: React.FC = (): React.ReactElement => {

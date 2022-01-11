@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import CreateIcon from '@mui/icons-material/Create';
 import HomeIcon from '@mui/icons-material/Home';
@@ -20,7 +20,6 @@ import { SideMenuItemLabel, Wrapper } from './styles';
 
 const SideMenu: React.FC = (): React.ReactElement => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [visibleModal, setVisibleModal] = React.useState<boolean>(false);
   const onClickModalClose = (): void => {

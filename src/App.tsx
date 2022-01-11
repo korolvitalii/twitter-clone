@@ -33,7 +33,6 @@ const App = () => {
       </Centered>
     );
   }
-  console.log();
   return (
     <Routes>
       <Route path='/' element={<Home />}>
