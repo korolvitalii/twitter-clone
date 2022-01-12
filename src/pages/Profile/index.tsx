@@ -1,16 +1,18 @@
+import React, { useState } from 'react';
+import cn from 'classnames';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import React, { useState } from 'react';
-import { AvatarBox, Image, Wrapper } from './styles';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import Paper from '@mui/material/Paper';
-import SimpleBackdrop from '../../components/Backdrop';
+import Modal from '@mui/material/Modal';
+
 import bigAvatarImage from '../../assets/images/bigAvatar.jpg';
 import smallAvatar from '../../assets/images/smallAvatar.jpg';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
+
 import Tweets from '../../components/Tweets';
+import { AvatarBox, Image, Wrapper } from './styles';
+import { Outlet, Link } from 'react-router-dom';
 
 const Profile: React.FC = (): React.ReactElement => {
   const [open, setOpen] = useState('');
@@ -21,6 +23,17 @@ const Profile: React.FC = (): React.ReactElement => {
     setOpen('');
   };
 
+  const [chooseButton, setChooseButton] = useState('Tweets');
+
+  const btnClass = cn({
+    button: true,
+    'btn-choose': true,
+  });
+
+  const handleClickButton = (e: any) => {
+    setChooseButton(e.currentTarget.dataset.type);
+  };
+  console.log(chooseButton);
   return (
     <Wrapper>
       <Avatar
@@ -70,12 +83,42 @@ const Profile: React.FC = (): React.ReactElement => {
         <Typography>0 Followers</Typography>
       </div>
       <Paper className='buttonGroup'>
-        <Button className='button'> Tweets</Button>
-        <Button className='button'> Tweets & Replies</Button>
-        <Button className='button'>Media</Button>
-        <Button className='button'>Likes </Button>
+        <Link className='link' to='/profile'>
+          <Button
+            data-type='Tweets'
+            onClick={handleClickButton}
+            className={`button ${'Tweets' === chooseButton ? 'choosenButton' : ''}`}>
+            Tweets
+          </Button>
+        </Link>
+
+        <Link className='link' to='/profile/with_replies'>
+          <Button
+            data-type='Tweets & Replies'
+            onClick={handleClickButton}
+            className={`button ${'Tweets & Replies' === chooseButton ? 'choosenButton' : ''}`}>
+            Tweets & Replies
+          </Button>
+        </Link>
+
+        <Link className='link' to='/profile/media'>
+          <Button
+            data-type='Media'
+            onClick={handleClickButton}
+            className={`button ${'Media' === chooseButton ? 'choosenButton' : ''}`}>
+            Media
+          </Button>
+        </Link>
+        <Link className='link' to='/profile/likes'>
+          <Button
+            data-type='Likes'
+            onClick={handleClickButton}
+            className={`button ${'Likes' === chooseButton ? 'choosenButton' : ''}`}>
+            Likes
+          </Button>
+        </Link>
       </Paper>
-      <Tweets />
+      <Outlet />
     </Wrapper>
   );
 };

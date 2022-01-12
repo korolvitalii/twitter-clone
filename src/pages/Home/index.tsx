@@ -1,8 +1,10 @@
+import React from 'react';
+import { Link, Outlet } from 'react-router-dom';
+
 import SearchIcon from '@mui/icons-material/Search';
 import { Container, IconButton, InputAdornment } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import * as React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+
 import SideMenu from '../../components/SideMenu';
 import Topics from '../../components/Topics';
 import { SearchSideWrapper, SearchTextField, TwitterIconComponent } from './styles';
