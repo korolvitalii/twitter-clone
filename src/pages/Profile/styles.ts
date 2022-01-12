@@ -5,7 +5,7 @@ export const Wrapper = styled('div')`
   height: 100%;
   .bigAvatar {
     width: 100%;
-    height: 5%;
+    height: 200px;
   }
   .smallAvatar {
     width: 150px;
@@ -37,6 +37,10 @@ export const Wrapper = styled('div')`
         background-color: #bfcfd9;
       }
     }
+    .button a {
+      text-decoration: none;
+      color: rgb(29, 161, 242);
+    }
   }
   .smallAvatarModal {
     position: absolute;
@@ -52,6 +56,13 @@ export const Wrapper = styled('div')`
   }
   .smallAvatarImage {
     background-color: red;
+  }
+  .choosenButton {
+    border-bottom: 2px solid rgb(29, 161, 242);
+  }
+  .link {
+    text-decoration: none;
+    width: 100%;
   }
 `;
 
