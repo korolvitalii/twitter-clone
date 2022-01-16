@@ -32,6 +32,10 @@ export const userReducer = produce((draft: Draft<UserState>, action: UserActions
       draft.status = LoadingStatus.LOADING;
       break;
     }
+    case UserActionsType.UPDATE_USER_DATA: {
+      draft.status = LoadingStatus.LOADING;
+      break;
+    }
     default: {
       return draft;
     }

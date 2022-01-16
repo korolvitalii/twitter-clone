@@ -9,6 +9,7 @@ export enum LoadingStatus {
 export interface UserInterface {
   _id?: string;
   email: string;
+  createdAt?: string;
   username: string;
   fullname: string;
   password: any;
