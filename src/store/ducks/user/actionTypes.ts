@@ -1,6 +1,7 @@
 import { Action } from 'redux';
 import { LoginFormData } from '../../../pages/SignIn/components/SignInModal';
 import { RegistrationFormData } from '../../../pages/SignIn/components/SignUpModal';
+import { updateUserDataPayloadInterface } from '../../../services/api/UserApi';
 import { LoadingStatus } from '../../types';
 import { UserState } from './contracts/state';
 
@@ -8,6 +9,7 @@ export enum UserActionsType {
   FETCH_SIGN_IN = 'USER/FETCH_SIGN_IN',
   FETCH_SIGN_UP = 'USER/FETCH_SIGN_UP',
   FETCH_USER_DATA = 'FETCH_USER_DATA',
+  UPDATE_USER_DATA = 'UPDATE_USER_DATA',
   SET_LOADING_STATE = 'USER/SET_LOADING_STATE',
   SET_USER_DATA = 'USER/SET_USER_DATA',
   LOG_OUT = 'USER/LOG_OUT',
@@ -45,10 +47,18 @@ export interface LogOutActionInterface extends Action<UserActionsType> {
   type: UserActionsType.LOG_OUT;
 }
 
+export interface UpdateUserDataInterface extends Action<UserActionsType> {
+  type: UserActionsType.UPDATE_USER_DATA;
+  payload: {
+    data: updateUserDataPayloadInterface;
+  };
+}
+
 export type UserActions =
   | SetUserDataActionInterface
   | FetchSignInActionInterface
   | SetLoadingStatusInterface
   | FetchSignUpActionInterface
   | FetchUserDataActionInterface
-  | LogOutActionInterface;
+  | LogOutActionInterface
+  | UpdateUserDataInterface;

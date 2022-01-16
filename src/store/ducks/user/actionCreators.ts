@@ -1,5 +1,6 @@
 import { LoginFormData } from '../../../pages/SignIn/components/SignInModal';
 import { RegistrationFormData } from '../../../pages/SignIn/components/SignUpModal';
+import { updateUserDataPayloadInterface } from '../../../services/api/UserApi';
 import {
   FetchSignInActionInterface,
   FetchSignUpActionInterface,
@@ -8,6 +9,7 @@ import {
   SetLoadingStatusInterface,
   SetUserDataActionInterface,
   UserActionsType,
+  UpdateUserDataInterface,
 } from './actionTypes';
 import { UserState } from './contracts/state';
 
@@ -37,6 +39,13 @@ export const setUserData = (payload: UserState['data']): SetUserDataActionInterf
 export const setLoadingStatus = (payload: UserState['status']): SetLoadingStatusInterface => ({
   type: UserActionsType.SET_LOADING_STATE,
   payload,
+});
+
+export const updateUserData = (data: updateUserDataPayloadInterface): UpdateUserDataInterface => ({
+  type: UserActionsType.UPDATE_USER_DATA,
+  payload: {
+    data,
+  },
 });
 
 export const logOut = (): LogOutActionInterface => ({
