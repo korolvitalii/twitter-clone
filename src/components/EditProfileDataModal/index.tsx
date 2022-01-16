@@ -1,35 +1,38 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, FormControl, FormGroup, TextField } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 import * as yup from 'yup';
-import ModalBlock from '../../../../components/ModalBlock';
-import { fetchSignIn } from '../../../../store/ducks/user/actionCreators';
+import { fetchUserData, updateUserData } from '../../store/ducks/user/actionCreators';
+import { UserInterface } from '../../store/types';
+import ModalBlock from '../ModalBlock';
 
-interface SignInProps {
+interface EditProfileDataModal {
   handleClose: () => void;
   isVisible: boolean;
   title: string;
+  user: UserInterface | undefined;
 }
-
 export interface LoginFormData {
-  email: string;
-  password: string;
+  username: string;
+  fullname: string;
 }
 
 const schema = yup
   .object({
-    email: yup.string().email().required(),
-    password: yup.string().required(),
+    username: yup.string().required(),
+    fullname: yup.string().required(),
   })
   .required();
 
-const SignInModal: React.FC<SignInProps> = ({
+const EditProfileDataModal: React.FC<EditProfileDataModal> = ({
   isVisible,
   handleClose,
   title,
-}): React.ReactElement => {
+  user,
+}: EditProfileDataModal): React.ReactElement => {
   const {
     register,
     handleSubmit,
@@ -39,68 +42,75 @@ const SignInModal: React.FC<SignInProps> = ({
     resolver: yupResolver(schema),
   });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onSubmit = async (data: LoginFormData) => {
-    dispatch(fetchSignIn(data));
+    dispatch(updateUserData(data));
+    dispatch(fetchUserData());
+
     return () => {
       handleClose();
     };
   };
 
+  useEffect(() => {
+    navigate('/profile');
+  }, [user]);
+
   return (
-    <>
+    <div>
       <ModalBlock visible={isVisible} title={title} handleClose={handleClose}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl component='fieldset' fullWidth>
             <FormGroup aria-label='position'>
               <Controller
-                name='email'
+                name='username'
                 control={control}
                 defaultValue=''
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    {...register('email')}
+                    {...register('username')}
                     autoFocus
                     id='email'
-                    label='Email'
+                    label='Nickname'
                     variant='filled'
-                    type='email'
+                    type='string'
                     InputLabelProps={{ shrink: true }}
                     margin='normal'
-                    error={!!errors.email?.message}
-                    helperText={errors.email?.message}
+                    error={!!errors.username?.message}
+                    helperText={errors.username?.message}
                   />
                 )}
               />
               <Controller
-                name='password'
+                name='fullname'
                 control={control}
                 defaultValue=''
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    {...register('password')}
+                    {...register('fullname')}
                     autoFocus
-                    id='password'
-                    label='Password'
+                    id='fullname'
+                    label='Name'
                     variant='filled'
-                    type='password'
                     InputLabelProps={{ shrink: true }}
                     margin='normal'
-                    error={!!errors.password?.message}
-                    helperText={errors.password?.message}
+                    type='string'
+                    error={!!errors.fullname?.message}
+                    helperText={errors.fullname?.message}
                   />
                 )}
               />
-              <Button type='submit' fullWidth variant='outlined' color='primary'>
-                Submit
+              <Button type='submit' variant='outlined' color='primary'>
+                Save
               </Button>
             </FormGroup>
           </FormControl>
         </form>
       </ModalBlock>
-    </>
+    </div>
   );
 };
 
-export default SignInModal;
+export default EditProfileDataModal;

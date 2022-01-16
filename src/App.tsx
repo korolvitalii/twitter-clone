@@ -1,13 +1,15 @@
-import TwitterIcon from '@mui/icons-material/Twitter';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
+import { useFetchUserData } from './hooks/useFetchUserData';
+
+import TwitterIcon from '@mui/icons-material/Twitter';
+
 import ChosenTweet from './components/FullTweet';
 import MainSide from './components/MainSide';
 import ProfileLikes from './components/ProfileLikes';
 import ProfileMediaSection from './components/ProfileMediaSection';
 import Tweets from './components/Tweets';
-import { useFetchUserData } from './hooks/useFetchUserData';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import SignIn from './pages/SignIn/Layout';
@@ -18,9 +20,9 @@ import { Centered } from './styles';
 //TODO:
 //1. create profile page;
 //2 fix bug after registration redirect to home, but user is not confirmed
-//3.
+//3. Update user data backend/frontend
 
-const App = () => {
+const App: React.FC = (): React.ReactElement => {
   const { isReady } = useFetchUserData();
   const dispatch = useDispatch();
 
