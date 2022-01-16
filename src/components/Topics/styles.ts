@@ -6,18 +6,19 @@ export const Wrapper = styled('div')`
   width: 300px;
 `;
 export const AccessibleListHeader = styled(Paper)`
-  /* height: 50px; */
-  background-color: #e6ecf0;
+  background-color: #f2f2f2;
   padding-left: 10px;
 `;
 
 export const AccessibleListItem = styled('div')`
+  display: flex;
+  justify-content: space-between;
   height: 70px;
   padding-left: 10px;
   padding-top: 15px;
-  background-color: #e6ecf0;
+  background-color: #f2f2f2;
   :hover {
-    background-color: #bfcfd9;
+    background-color: #e6e6e6;
     transition: 0.5s;
   }
 `;

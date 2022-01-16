@@ -23,6 +23,8 @@ export const Wrapper = styled('div')`
   .followBlock {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    width: 190px;
   }
   .buttonGroup {
     display: flex;
