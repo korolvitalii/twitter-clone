@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { AuthApi } from '../../../services/api/AuthApi';
-import { updateUserDataPayloadInterface, UsersApi } from '../../../services/api/UserApi';
+import { UsersApi } from '../../../services/api/UserApi';
 import { LoadingStatus } from '../../types';
 import { setLoadingStatus, setUserData } from './actionCreators';
 import {
