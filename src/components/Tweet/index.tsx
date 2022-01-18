@@ -7,16 +7,17 @@ import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutline
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import RepeatOutlinedIcon from '@mui/icons-material/RepeatOutlined';
 import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import PersonIcon from '@mui/icons-material/Person';
+import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
 
 import { removeTweet } from '../../store/ducks/tweet/actionCreators';
 import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
 import { formatter } from '../../utils/formatDate';
 import EditTweetModal from '../EditTweetModal';
-import UserIcon from '../../assets/images/user.png';
-import { TweetHeader, TweetHeaderContent, TweetIcons, TweetsWrapper } from './styles';
+import { TweetsWrapper } from './styles';
 import { TweetInterface } from '../../store/types';
+import CustomPopover from '../Popover';
 
 export interface TweetProps {
   tweet: TweetInterface | undefined;
@@ -65,67 +66,56 @@ const Tweet: React.FC<TweetProps> = ({ tweet }: TweetProps): React.ReactElement 
   return (
     <TweetsWrapper variant='outlined'>
       <div onClick={handleTweetClick}>
-        <TweetHeader>
-          <TweetHeaderContent>
-            <Avatar alt='User Avatar' src={UserIcon} sx={{ marginRight: 1 }} />
-            <Typography>
-              <b>{tweet?.user?.fullname}</b>
-              <span>@{tweet?.user?.username}</span>
-              <span>-</span>
-              <span>{formatter(tweet?.createdAt)}</span>
-            </Typography>
-          </TweetHeaderContent>
-          <div>
-            <IconButton
-              aria-label='more'
-              id='long-button'
-              aria-controls='long-menu'
-              aria-expanded={open ? 'true' : undefined}
-              aria-haspopup='true'
-              onClick={handleClick}>
-              <MoreVertIcon />
-            </IconButton>
-            <Menu
-              id='long-menu'
-              MenuListProps={{
-                'aria-labelledby': 'long-button',
-              }}
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              PaperProps={{
-                style: {
-                  maxHeight: 20 * 4.5,
-                  width: '20ch',
-                },
-              }}>
-              {options.map((option) => (
-                <MenuItem key={option} onClick={handleClose}>
-                  {option}
-                </MenuItem>
-              ))}
-            </Menu>
-          </div>
-        </TweetHeader>
-        <div>
-          <Typography sx={{ marginLeft: '25px' }} variant='body1' gutterBottom>
-            {tweet?.text}
-          </Typography>
-        </div>
-        <TweetIcons>
-          <IconButton>
-            <ChatBubbleOutlineOutlinedIcon />
-          </IconButton>
-          <IconButton>
-            <RepeatOutlinedIcon />
-          </IconButton>
-          <IconButton>
-            <FavoriteBorderOutlinedIcon />
-          </IconButton>
-          <IconButton>
-            <ReplyOutlinedIcon />
-          </IconButton>
-        </TweetIcons>
+        <Grid container spacing={0.5}>
+          <Grid item xs={1}>
+            <Avatar alt='user-avatar' className='userAvatar'>
+              <PersonIcon />
+            </Avatar>
+          </Grid>
+          <Grid container direction='column' justifyContent='space-between' item xs={11}>
+            <Stack direction='column' justifyContent='flex-start' spacing={0}>
+              <Stack direction='row' justifyContent='space-between'>
+                <div className='tweetHeaderDescription'>
+                  <b>{tweet?.user?.fullname}</b>
+                  <span className='descriptionColor'>@{tweet?.user?.username}</span>
+                  <span className='descriptionColor'> · {formatter(tweet?.createdAt)}</span>
+                </div>
+                <CustomPopover
+                  handleClose={handleClose}
+                  open={open}
+                  anchorEl={anchorEl}
+                  options={options}>
+                  <IconButton
+                    aria-label='more'
+                    id='long-button'
+                    aria-controls='long-menu'
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-haspopup='true'
+                    onClick={handleClick}>
+                    <MoreVertIcon />
+                  </IconButton>
+                </CustomPopover>
+              </Stack>
+              <Typography variant='body1' gutterBottom>
+                {tweet?.text}
+              </Typography>
+            </Stack>
+            <Stack direction='row' justifyContent='space-around' spacing={1}>
+              <IconButton>
+                <ChatBubbleOutlineOutlinedIcon />
+              </IconButton>
+              <IconButton>
+                <RepeatOutlinedIcon />
+              </IconButton>
+              <IconButton>
+                <FavoriteBorderOutlinedIcon />
+              </IconButton>
+              <IconButton>
+                <ReplyOutlinedIcon />
+              </IconButton>
+            </Stack>
+          </Grid>
+        </Grid>
       </div>
       <EditTweetModal
         tweetText={tweet?.text}

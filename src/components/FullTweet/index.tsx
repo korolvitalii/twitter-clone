@@ -7,12 +7,13 @@ import format from 'date-fns/format';
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { TweetHeader, TweetIcons, TweetsWrapper } from '../Tweet/styles';
+import { TweetHeader, TweetsWrapper } from '../Tweet/styles';
 import { fetchTweet, setTweet } from '../../store/ducks/tweet/actionCreators';
 import { selectTweetItem } from '../../store/ducks/tweet/selectors';
 import BackComponent from '../BackComponent';
-import Tweet from '../Tweet';
+import Tweet from '../Tweet/';
 import UserIcon from '../../assets/images/user.png';
+import { Wrapper } from './styles';
 
 export interface FullTweetProps {}
 
@@ -30,7 +31,7 @@ const FullTweet: React.FC = (props): React.ReactElement => {
     };
   }, [tweetId, dispatch]);
   return (
-    <>
+    <Wrapper>
       <Paper variant='outlined' sx={{ display: 'flex', alignItems: 'center' }}>
         <BackComponent />
         <Typography variant='h6'>Tweet</Typography>
@@ -57,7 +58,7 @@ const FullTweet: React.FC = (props): React.ReactElement => {
               <span>{format(new Date(tweet?.createdAt || new Date()), 'dd MMMMMM yyyy ')}</span>
             </Typography>
           </div>
-          <TweetIcons>
+          <div className='tweetIconsContainer'>
             <IconButton>
               <ChatBubbleOutlineOutlinedIcon />
             </IconButton>
@@ -70,13 +71,13 @@ const FullTweet: React.FC = (props): React.ReactElement => {
             <IconButton>
               <ReplyOutlinedIcon />
             </IconButton>
-          </TweetIcons>
+          </div>
         </Link>
       </TweetsWrapper>
       <Tweet tweet={tweet} />
       <Tweet tweet={tweet} />
       <Tweet tweet={tweet} />
-    </>
+    </Wrapper>
   );
 };
 export default FullTweet;

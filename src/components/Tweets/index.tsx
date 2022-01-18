@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import { selectIsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors';
-import Tweet from '../Tweet';
+import Tweet from '../Tweet/';
 import { Centered } from '../../styles';
 
 const Tweets: React.FC = React.memo((): React.ReactElement | null => {

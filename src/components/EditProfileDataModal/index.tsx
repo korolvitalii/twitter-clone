@@ -9,7 +9,7 @@ import { fetchUserData, updateUserData } from '../../store/ducks/user/actionCrea
 import { UserInterface } from '../../store/types';
 import ModalBlock from '../ModalBlock';
 
-interface EditProfileDataModal {
+interface EditProfileDataModalProps {
   handleClose: () => void;
   isVisible: boolean;
   title: string;
@@ -27,12 +27,12 @@ const schema = yup
   })
   .required();
 
-const EditProfileDataModal: React.FC<EditProfileDataModal> = ({
+const EditProfileDataModal: React.FC<EditProfileDataModalProps> = ({
   isVisible,
   handleClose,
   title,
   user,
-}: EditProfileDataModal): React.ReactElement => {
+}): React.ReactElement => {
   const {
     register,
     handleSubmit,

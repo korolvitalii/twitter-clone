@@ -36,7 +36,7 @@ const CreateTweetForm: React.FC<CreateTweetFormProps> = ({
   const textCount = MAX_LENGTH - text.length - 1;
 
   return (
-    <Paper>
+    <Paper variant='outlined'>
       <AddForm>
         <AddFormBody>
           <Avatar

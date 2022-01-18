@@ -25,7 +25,7 @@ const Home: React.FC<HomeProps> = (): React.ReactElement => {
             <SideMenu />
           </div>
         </Grid>
-        <Grid item xs={7} spacing={2}>
+        <Grid container item xs={7} spacing={0}>
           <Outlet />
         </Grid>
         <Grid item xs={3}>

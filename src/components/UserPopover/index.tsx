@@ -11,7 +11,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { IconButton, Typography } from '@mui/material';
 
 import { logOut } from '../../store/ducks/user/actionCreators';
 import { selectUserData } from '../../store/ducks/user/selectors';
@@ -33,6 +34,11 @@ const UserPopover: React.FC = (): React.ReactElement => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleClickMoreButton = (e: any) => {
+    e.stopPropagation();
+    console.log('handleClickMoreButton');
+  };
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
@@ -53,6 +59,9 @@ const UserPopover: React.FC = (): React.ReactElement => {
             <Typography variant='subtitle2'>{userData?.fullname}</Typography>
           </div>
         </div>
+        <IconButton className='iconbutton' onClick={handleClickMoreButton}>
+          <MoreHorizIcon />
+        </IconButton>
       </Button>
     </Wrapper>
   );

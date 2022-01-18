@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import CreateIcon from '@mui/icons-material/Create';
 import HomeIcon from '@mui/icons-material/Home';
@@ -44,7 +44,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
           <li>
             <Link to='/home'>
               <HomeIcon className='menuIcon' />
-              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
                 <SideMenuItemLabel>Home</SideMenuItemLabel>
               </Box>
             </Link>
@@ -52,7 +52,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
           <li>
             <Link to='/profile'>
               <SearchIcon className='menuIcon' />
-              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
                 <SideMenuItemLabel>Search</SideMenuItemLabel>
               </Box>
             </Link>
@@ -60,7 +60,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
           <li>
             <Link to='/profile'>
               <NotificationsNoneIcon className='menuIcon' />
-              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
                 <SideMenuItemLabel>Notification</SideMenuItemLabel>
               </Box>
             </Link>
@@ -68,7 +68,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
           <li>
             <Link to='/profile'>
               <MailOutlineIcon className='menuIcon' />
-              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
                 <SideMenuItemLabel>Messages</SideMenuItemLabel>
               </Box>
             </Link>
@@ -76,7 +76,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
           <li>
             <Link to='/profile'>
               <TurnedInNotIcon className='menuIcon' />
-              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
                 <SideMenuItemLabel>Bookmarks</SideMenuItemLabel>
               </Box>
             </Link>
@@ -84,7 +84,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
           <li>
             <Link to='/profile'>
               <ListAltIcon className='menuIcon' />
-              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
                 <SideMenuItemLabel>Lists</SideMenuItemLabel>
               </Box>
             </Link>
@@ -92,7 +92,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
           <li>
             <Link to='/profile'>
               <PersonOutLineIcon className='menuIcon' />
-              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
                 <SideMenuItemLabel>Profile </SideMenuItemLabel>
               </Box>
             </Link>
@@ -105,13 +105,13 @@ const SideMenu: React.FC = (): React.ReactElement => {
                 <CreateIcon />
               </IconButton>
             </Box>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
               <Button
                 variant='contained'
                 color='primary'
                 className='tweetButton'
                 onClick={handleOpenModal}>
-                <Box sx={{ display: { xs: 'none', sm: 'block' } }}>Tweet</Box>
+                <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>Tweet</Box>
               </Button>
             </Box>
           </li>
@@ -119,7 +119,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
             <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
               <Avatar />
             </Box>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
               <UserPopover />
             </Box>
           </li>

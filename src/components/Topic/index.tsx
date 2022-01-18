@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { IconButton, Typography } from '@mui/material';
 import { TopicInterface } from '../../store/ducks/topics/contracts/state';
-import { AccessibleListItem } from '../Topics/styles';
+import { Wrapper } from './styles';
+import CustomPopover from '../Popover';
 export interface TagProps {
   topic: TopicInterface;
 }
@@ -12,27 +13,40 @@ export interface TagProps {
 const Topic: React.FC<TagProps> = ({
   topic: { topicName, content },
 }: TagProps): React.ReactElement => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const options = ['Interested', 'Not interested'];
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     event.stopPropagation();
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
   return (
-    <Link to={`/home/search?q=${topicName}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-      <AccessibleListItem>
+    <Wrapper>
+      <div className='listItems'>
         <div>
-          <Typography variant='caption' sx={{ color: 'gray' }}>
-            {topicName}
-          </Typography>
-          <Typography variant='subtitle1'>{content}</Typography>
-          <Typography variant='caption' sx={{ color: 'gray' }}>
-            1,887 Tweets
-          </Typography>
+          <Link to={`/home/search?q=${topicName}`} className='link'>
+            <Typography variant='caption' className='item'>
+              {topicName}
+            </Typography>
+            <Typography variant='subtitle1'>{content}</Typography>
+            <Typography variant='caption' className='item'>
+              1,887 Tweets
+            </Typography>
+          </Link>
         </div>
-        <IconButton onClick={handleClick}>
-          <MoreHorizIcon />
-        </IconButton>
-      </AccessibleListItem>
-    </Link>
+        <CustomPopover handleClose={handleClose} open={open} anchorEl={anchorEl} options={options}>
+          <IconButton className='iconbutton' onClick={handleClick}>
+            <MoreHorizIcon />
+          </IconButton>
+        </CustomPopover>
+      </div>
+    </Wrapper>
   );
 };
 
