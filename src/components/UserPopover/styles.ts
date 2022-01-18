@@ -2,6 +2,9 @@ import { styled } from '@mui/material/styles';
 
 export const Wrapper = styled('div')`
   .popoverButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: 180px;
     background-color: white;
     color: black;
@@ -13,8 +16,5 @@ export const Wrapper = styled('div')`
   }
   .popoverButtonDescription {
     margin-left: 5%;
-
-    /* margin-left: 50px; */
-    /* display: flex; */
   }
 `;
