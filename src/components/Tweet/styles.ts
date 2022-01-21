@@ -8,9 +8,9 @@ export const TweetHeader = styled('div')`
 `;
 
 export const TweetsWrapper = styled(Paper)`
-  /* height: 140px; */
+  padding: 10px;
   border-top: 0;
-  border-bottom: 0;
+  /* border-bottom: 0; */
   :hover {
     background-color: #e6e6e6;
     transition: 0.3s;

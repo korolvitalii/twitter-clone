@@ -3,6 +3,8 @@ import { TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const SearchTextField = styled(TextField)`
+  background-color: #f2f2f2;
+  border-radius: 25px;
   & label.Mui-focused {
     color: rgb(29 161 242);
   }
@@ -41,4 +43,5 @@ export const SearchSideWrapper = styled('div')`
   background-color: white;
   padding-top: 60px;
   padding-bottom: 10px;
+  z-index: 20;
 `;

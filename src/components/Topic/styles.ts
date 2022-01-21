@@ -20,6 +20,10 @@ export const Wrapper = styled('div')`
   .item {
     color: gray;
   }
+
+  .iconbutton: {
+    z-index: -10;
+  }
   .iconbutton:hover {
     background-color: transparent;
   }

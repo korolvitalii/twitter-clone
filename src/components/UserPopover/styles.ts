@@ -5,7 +5,7 @@ export const Wrapper = styled('div')`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 180px;
+    width: 200px;
     background-color: white;
     color: black;
   }

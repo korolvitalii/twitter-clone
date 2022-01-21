@@ -1,10 +1,18 @@
 import { styled } from '@mui/material/styles';
 
 export const Wrapper = styled('div')`
-  .tweetIconsContainer {
+  .fullTweetHeader {
     display: flex;
-    justify-content: space-between;
-    margin-left: 25;
-    margin-right: 25;
+    align-items: center;
+  }
+  .userName {
+    color: gray;
+  }
+  .tweetBody {
+    padding: 5px;
+  }
+  .TweetTimestamp {
+    color: gray;
+    padding: 5px;
   }
 `;

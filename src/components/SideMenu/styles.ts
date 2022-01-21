@@ -51,7 +51,7 @@ export const Wrapper = styled('div')`
     justify-content: space-between;
   }
   .tweetButton {
-    width: 180px;
+    width: 200px;
   }
   .sideMenuFooter {
   }
