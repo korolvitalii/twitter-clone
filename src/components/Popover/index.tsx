@@ -29,7 +29,7 @@ const CustomPopover: React.FC<CustomPopoverProps> = ({
         onClose={handleClose}
         PaperProps={{
           style: {
-            maxHeight: 20 * 4.5,
+            maxHeight: 50 * 4.5,
             width: '20ch',
           },
         }}>

@@ -1,9 +1,9 @@
-import { Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectIsTopicsLoaded, selectTopicsItems } from '../../store/ducks/topics/selectors';
 import Topic from '../Topic';
-import { AccessibleListHeader, Wrapper } from './styles';
+import { Wrapper } from './styles';
 
 const Topics: React.FC = (): React.ReactElement | null => {
   const topics = useSelector(selectTopicsItems);
@@ -14,9 +14,9 @@ const Topics: React.FC = (): React.ReactElement | null => {
 
   return (
     <Wrapper>
-      <AccessibleListHeader>
+      <Paper className='aceessibleListHeader'>
         <Typography variant='h6'>Trends for you</Typography>
-      </AccessibleListHeader>
+      </Paper>
       {topics.map((topic) => (
         <Topic key={topic._id} topic={topic} />
       ))}

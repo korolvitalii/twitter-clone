@@ -55,7 +55,6 @@ const UserPopover: React.FC = (): React.ReactElement => {
             <PersonIcon />
           </Avatar>
           <div className='popoverButtonDescription'>
-            <Typography variant='subtitle2'>{userData?.username}</Typography>
             <Typography variant='subtitle2'>{userData?.fullname}</Typography>
           </div>
         </div>
@@ -90,9 +89,16 @@ const SimpleDialog: React.FC<SimpleDialogProps> = ({
       onClose={handleClose}
       open={open}
       sx={{
-        display: 'flex',
-        marginBottom: '-350px',
-        marginLeft: '25px',
+        '& .MuiDialog-container': {
+          justifyContent: 'flex-start',
+          alignItems: 'flex-end',
+          paddingBottom: '50px',
+        },
+      }}
+      PaperProps={{
+        sx: {
+          bottom: 40,
+        },
       }}>
       <List sx={{ pt: 0, width: '200px' }}>
         <ListItem button onClick={() => handleListItemClick('User')} key='email'>
