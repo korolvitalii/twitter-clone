@@ -21,8 +21,6 @@ export const AddFormTextarea = styled(TextareaAutosize)`
   resize: none;
 `;
 
-export const AddFormFooter = styled('div')({});
-
 export const AddFormBottom = styled('div')`
   display: flex;
   justify-content: space-between;
