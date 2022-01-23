@@ -18,9 +18,8 @@ import { fetchTweets } from './store/ducks/tweets/actionCreators';
 import { Centered } from './styles';
 
 //TODO:
-//1. create profile page;
+//1. Responsive pages for phone
 //2 fix bug after registration redirect to home, but user is not confirmed
-//3. Update user data backend/frontend
 
 const App: React.FC = (): React.ReactElement => {
   const { isReady } = useFetchUserData();

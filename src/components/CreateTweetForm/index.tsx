@@ -2,12 +2,12 @@ import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { Avatar, Button, CircularProgress, IconButton, Paper, Typography } from '@mui/material';
 import React from 'react';
+import UploadImages from '../UploadImages';
 import {
   AddForm,
   AddFormBody,
   AddFormBottom,
   AddFormCircleProgress,
-  AddFormFooter,
   AddFormRight,
   AddFormTextarea,
 } from './styles';
@@ -51,14 +51,12 @@ const CreateTweetForm: React.FC<CreateTweetFormProps> = ({
           />
         </AddFormBody>
         <AddFormBottom>
-          <AddFormFooter>
-            <IconButton>
-              <ImageOutlinedIcon />
-            </IconButton>
+          <div>
+            <UploadImages />
             <IconButton>
               <EmojiEmotionsOutlinedIcon />
             </IconButton>
-          </AddFormFooter>
+          </div>
           <AddFormRight>
             {text && (
               <>
