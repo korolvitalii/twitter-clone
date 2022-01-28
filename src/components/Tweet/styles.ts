@@ -14,6 +14,7 @@ export const TweetsWrapper = styled(Paper)`
   :hover {
     background-color: #e6e6e6;
     transition: 0.3s;
+    cursor: pointer;
   }
   & a {
     color: inherit;
@@ -42,6 +43,9 @@ export const TweetsWrapper = styled(Paper)`
     color: #1890db;
     width: 50;
     height: 50;
+  }
+  .hover :hover {
+    cursor: pointer;
   }
 `;
 

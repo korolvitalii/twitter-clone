@@ -1,14 +1,19 @@
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { styled } from '@mui/material/styles';
 
-export const AddForm = styled('div')`
+export const Wrapper = styled('div')`
   padding: 10px;
-`;
-
-export const AddFormBody = styled('div')`
-  display: flex;
-  align-items: center;
-  width: 100%;
+  .formBody {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .formFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
 `;
 
 export const AddFormTextarea = styled(TextareaAutosize)`
@@ -19,18 +24,6 @@ export const AddFormTextarea = styled(TextareaAutosize)`
   outline: none;
   font-family: inherit;
   resize: none;
-`;
-
-export const AddFormBottom = styled('div')`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-`;
-
-export const AddFormRight = styled('div')`
-  display: flex;
-  align-items: center;
 `;
 
 export const AddFormCircleProgress = styled('div')`

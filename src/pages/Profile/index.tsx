@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 
 import Avatar from '@mui/material/Avatar';
@@ -14,10 +14,15 @@ import smallAvatar from '../../assets/images/smallAvatar.jpg';
 import { AvatarBox, Image, Wrapper } from './styles';
 import { Outlet, Link } from 'react-router-dom';
 import EditProfileDataModal from '../../components/EditProfileDataModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUserData } from '../../store/ducks/user/selectors';
+import CircularProgress from '@mui/material/CircularProgress';
+import { Centered } from '../../styles';
+import { selectLoadingStatus } from '../../store/ducks/appication/selectors';
+import { setAppLoadingAction } from '../../store/ducks/appication/actionCreators';
 
-const Profile: React.FC = (): React.ReactElement => {
+const Profile: React.FC = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState('');
   const user = useSelector(selectUserData);
   const handleToggle = (value: string) => () => {
@@ -27,12 +32,23 @@ const Profile: React.FC = (): React.ReactElement => {
     setOpen('');
   };
 
+  const localLoadingStatus = useSelector(selectLoadingStatus);
+  useEffect(() => {
+    dispatch(setAppLoadingAction(true));
+  }, []);
+
   const [chooseButton, setChooseButton] = useState('Tweets');
 
   const handleClickButton = (e: any) => {
     setChooseButton(e.currentTarget.dataset.type);
   };
-
+  if (!localLoadingStatus) {
+    return (
+      <Centered>
+        <CircularProgress />
+      </Centered>
+    );
+  }
   return (
     <Wrapper>
       <Avatar

@@ -9,7 +9,7 @@ const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
 export function* fetchTweetsRequest() {
   try {
     const items: TweetsState['items'] = yield call(TweetsApi.fetchTweets);
-    yield delay(1000);
+    // yield delay(1000);
     yield put(setTweets(items));
     yield put(setLoadingStatus(LoadingStatus.LOADED));
   } catch (error) {

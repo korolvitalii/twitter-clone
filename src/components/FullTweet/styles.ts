@@ -15,4 +15,7 @@ export const Wrapper = styled('div')`
     color: gray;
     padding: 5px;
   }
+  .tweetBody :hover {
+    cursor: pointer;
+  }
 `;

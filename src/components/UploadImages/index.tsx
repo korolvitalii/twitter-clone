@@ -1,24 +1,38 @@
-import React, { useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import IconButton from '@mui/material/IconButton';
 import { updateImages } from '../../utils/updateImages';
+import { Wrapper } from './styles';
+import CloseIcon from '@mui/icons-material/Close';
+import { ImageObj } from '../CreateTweetForm';
+interface UploadImageProps {
+  images: ImageObj[];
+  onChangeImages: (callback: (prev: ImageObj[]) => ImageObj[]) => void;
+}
 
-const UploadImages: React.FC = (): React.ReactElement => {
-  const [images, setImages] = useState<string[]>([]);
+const UploadImages: React.FC<UploadImageProps> = ({
+  images,
+  onChangeImages,
+}): React.ReactElement => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target) {
       const file = (event.target as HTMLInputElement).files?.[0];
       if (file) {
         const fileObj = new Blob([file]);
-        setImages((prev) => [...prev, URL.createObjectURL(fileObj)]);
+        onChangeImages((prev) => [...prev, { blobUrl: URL.createObjectURL(fileObj), file }]);
 
         // updateImages(fileObj);
       }
       return null;
     }
   };
+
+  const handleRemoveImage = (url: string) => {
+    onChangeImages((prev) => prev.filter((imageObj) => imageObj.blobUrl !== url));
+  };
+
   return (
-    <>
+    <Wrapper>
       <input
         onChange={handleInputChange}
         style={{ display: 'none' }}
@@ -31,12 +45,21 @@ const UploadImages: React.FC = (): React.ReactElement => {
           <ImageOutlinedIcon />
         </IconButton>
       </label>
-      <div>
-        {images.map((url) => (
-          <img src={url} alt='Avatar' />
+      <div className='imageList'>
+        {images.map((imageObj) => (
+          <div
+            key={imageObj.blobUrl}
+            className='imageListItem'
+            style={{ backgroundImage: `url(${imageObj.blobUrl})` }}>
+            <IconButton
+              className='removeImageIcon'
+              onClick={(): void => handleRemoveImage(imageObj.blobUrl)}>
+              <CloseIcon sx={{ fontSize: '10px' }} />
+            </IconButton>
+          </div>
         ))}
       </div>
-    </>
+    </Wrapper>
   );
 };
 

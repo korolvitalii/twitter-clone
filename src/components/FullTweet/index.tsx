@@ -19,8 +19,9 @@ import { TweetHeader, TweetsWrapper } from '../Tweet/styles';
 import { Wrapper } from './styles';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import CustomPopover from '../Popover';
+import StandardImageList from '../ImageList';
 
-const FullTweet: React.FC = (): React.ReactElement => {
+const FullTweet: React.FC = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const tweetId = params['*'];
@@ -47,6 +48,11 @@ const FullTweet: React.FC = (): React.ReactElement => {
       dispatch(setTweet(undefined));
     };
   }, [tweetId, dispatch]);
+
+  if (!tweet) {
+    return null;
+  }
+
   return (
     <Wrapper>
       <Paper variant='outlined' className='fullTweetHeader'>
@@ -75,9 +81,12 @@ const FullTweet: React.FC = (): React.ReactElement => {
           </CustomPopover>
         </Stack>
         <div className='tweetBody'>
-          <Typography variant='body1' sx={{ fontSize: '24px' }} gutterBottom>
+          <Typography variant='body1' className='hover' sx={{ fontSize: '24px' }} gutterBottom>
             {tweet?.text}
           </Typography>
+          <div className='images-container'>
+            {tweet?.images.length > 0 ? <StandardImageList images={tweet?.images} /> : null}
+          </div>
         </div>
         <Typography variant='caption' className='TweetTimestamp'>
           <span>{format(new Date(tweet?.createdAt || new Date()), 'H:mm')}</span>

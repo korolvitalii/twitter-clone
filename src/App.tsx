@@ -1,34 +1,29 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { useFetchUserData } from './hooks/useFetchUserData';
 
 import TwitterIcon from '@mui/icons-material/Twitter';
 
 import ChosenTweet from './components/FullTweet';
-import MainSide from './components/MainSide';
 import ProfileLikes from './components/ProfileLikes';
 import ProfileMediaSection from './components/ProfileMediaSection';
+
 import Tweets from './components/Tweets';
-import Home from './pages/Home';
-import Profile from './pages/Profile';
 import SignIn from './pages/SignIn/Layout';
-import { fetchTopics } from './store/ducks/topics/actionCreators';
-import { fetchTweets } from './store/ducks/tweets/actionCreators';
 import { Centered } from './styles';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useSelector } from 'react-redux';
+import { selectLoadingStatus } from './store/ducks/appication/selectors';
 
-//TODO:
-//1. Responsive pages for phone
-//2 fix bug after registration redirect to home, but user is not confirmed
+const ProfilePage = React.lazy(() => import('./pages/Profile'));
+const MainSide = React.lazy(() => import('./components/MainSide'));
+const HomePage = React.lazy(() => import('./pages/Home'));
 
-const App: React.FC = (): React.ReactElement => {
+const App: React.FC = () => {
   const { isReady } = useFetchUserData();
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchTweets());
-    dispatch(fetchTopics());
-  }, [dispatch]);
+  const localLoadingStatus = useSelector(selectLoadingStatus);
+  console.log(localLoadingStatus);
 
   if (!isReady) {
     return (
@@ -37,11 +32,50 @@ const App: React.FC = (): React.ReactElement => {
       </Centered>
     );
   }
+
+  // if (isLoading) {
+  //   return <div>Loading ...</div>;
+  // }
+
   return (
     <Routes>
-      <Route path='/' element={<Home />}>
-        <Route path='/home' element={<MainSide />} />
-        <Route path='/profile' element={<Profile />}>
+      <Route
+        path='/'
+        element={
+          <React.Suspense
+            fallback={
+              <Centered>
+                <CircularProgress />
+              </Centered>
+            }>
+            <HomePage />
+          </React.Suspense>
+        }>
+        <Route
+          path='/home'
+          element={
+            <React.Suspense
+              fallback={
+                <Centered>
+                  <CircularProgress />
+                </Centered>
+              }>
+              <MainSide />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path='/profile'
+          element={
+            <React.Suspense
+              fallback={
+                <Centered>
+                  <CircularProgress />
+                </Centered>
+              }>
+              <ProfilePage />
+            </React.Suspense>
+          }>
           <Route path='/profile/' element={<Tweets />} />
           <Route path='/profile/with_replies' element={<Tweets />} />
           <Route path='/profile/media' element={<ProfileMediaSection />} />

@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Avatar, IconButton, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -18,6 +18,9 @@ import EditTweetModal from '../EditTweetModal';
 import { TweetsWrapper } from './styles';
 import { TweetInterface } from '../../store/types';
 import CustomPopover from '../Popover';
+import StandardImageList from '../ImageList';
+import mediumZoom from 'medium-zoom';
+import { selectIsLoading } from '../../store/ducks/tweet/selectors';
 
 export interface TweetProps {
   tweet: TweetInterface | undefined;
@@ -30,7 +33,7 @@ const Tweet: React.FC<TweetProps> = ({ tweet }: TweetProps): React.ReactElement 
   const [visibleModal, setVisibleModal] = React.useState<boolean | undefined>();
   const open = Boolean(anchorEl);
   const options = ['Edit', 'Delete'];
-
+  const isLoading = useSelector(selectIsLoading);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     event.stopPropagation();
@@ -55,9 +58,17 @@ const Tweet: React.FC<TweetProps> = ({ tweet }: TweetProps): React.ReactElement 
   };
 
   const handleTweetClick = (event: React.MouseEvent<HTMLElement>) => {
-    event.preventDefault();
+    event.stopPropagation();
     navigate(`/home/tweets/${tweet?._id}`, { replace: false });
   };
+  useEffect(() => {
+    if (!isLoading) {
+      mediumZoom('.images-container img', {
+        background: 'transparent',
+        scrollOffset: 40,
+      });
+    }
+  }, [isLoading]);
 
   if (!tweet?._id) {
     return null;
@@ -65,7 +76,7 @@ const Tweet: React.FC<TweetProps> = ({ tweet }: TweetProps): React.ReactElement 
 
   return (
     <TweetsWrapper variant='outlined'>
-      <div onClick={handleTweetClick}>
+      <div>
         <Grid container spacing={0.5}>
           <Grid item xs={1}>
             <Avatar alt='user-avatar' className='userAvatar'>
@@ -73,7 +84,11 @@ const Tweet: React.FC<TweetProps> = ({ tweet }: TweetProps): React.ReactElement 
             </Avatar>
           </Grid>
           <Grid container direction='column' justifyContent='space-between' item xs={11}>
-            <Stack direction='column' justifyContent='flex-start' spacing={0}>
+            <Stack
+              direction='column'
+              justifyContent='flex-start'
+              spacing={0}
+              onClick={handleTweetClick}>
               <Stack direction='row' justifyContent='space-between'>
                 <div className='tweetHeaderDescription'>
                   <b>{tweet?.user?.fullname}</b>
@@ -96,10 +111,13 @@ const Tweet: React.FC<TweetProps> = ({ tweet }: TweetProps): React.ReactElement 
                   </IconButton>
                 </CustomPopover>
               </Stack>
-              <Typography variant='body1' gutterBottom>
+              <Typography className='hover' variant='body1' gutterBottom>
                 {tweet?.text}
               </Typography>
             </Stack>
+            <div className='images-container'>
+              {tweet.images.length > 0 ? <StandardImageList images={tweet.images} /> : null}
+            </div>
             <Stack direction='row' justifyContent='space-around' spacing={1}>
               <IconButton>
                 <ChatBubbleOutlineOutlinedIcon />

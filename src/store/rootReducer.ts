@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { appicationReducer } from './ducks/appication/reducer';
 import { topicsReducer } from './ducks/topics/reducer';
 import { tweetReducer } from './ducks/tweet/reducer';
 import { tweetsReducer } from './ducks/tweets/reducer';
@@ -11,6 +12,7 @@ export const rootReducer = combineReducers({
   topics: topicsReducer,
   user: userReducer,
   users: usersReducer,
+  appication: appicationReducer,
 });
 
 type RootReducerType = typeof rootReducer;

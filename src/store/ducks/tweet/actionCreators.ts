@@ -24,7 +24,10 @@ export const removeTweet = (payload: string): RemoveTweetActionInterface => ({
   payload,
 });
 
-export const fetchAddTweet = (payload: string): FetchAddTweetActionInterface => ({
+export const fetchAddTweet = (payload: {
+  text: string;
+  images: string[];
+}): FetchAddTweetActionInterface => ({
   type: TweetActionsType.FETCH_ADD_TWEET,
   payload,
 });

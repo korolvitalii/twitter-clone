@@ -17,6 +17,7 @@ import UserPopover from '../../components/UserPopover';
 import CreateTweetForm from '../CreateTweetForm';
 import ModalBlock from '../ModalBlock';
 import { SideMenuItemLabel, Wrapper } from './styles';
+import { setAppLoadingAction } from '../../store/ducks/appication/actionCreators';
 
 const SideMenu: React.FC = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -32,9 +33,17 @@ const SideMenu: React.FC = (): React.ReactElement => {
   const [text, setText] = React.useState<string>('');
 
   const handleClick = () => {
-    dispatch(fetchAddTweet(text));
+    dispatch(fetchAddTweet({ text, images: [] }));
     setText('');
     setVisibleModal(false);
+  };
+
+  const handleLinkClick = () => {
+    dispatch(setAppLoadingAction(false));
+
+    setTimeout(() => {
+      dispatch(setAppLoadingAction(true));
+    }, 300);
   };
 
   return (
@@ -42,7 +51,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
       <Wrapper>
         <ul className='sideMenuItems'>
           <li>
-            <Link to='/home'>
+            <Link to='/home' onClick={handleLinkClick}>
               <HomeIcon className='menuIcon' />
               <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
                 <SideMenuItemLabel>Home</SideMenuItemLabel>
@@ -58,7 +67,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
             </Link>
           </li>
           <li>
-            <Link to='/profile'>
+            <Link to='/profile' onClick={handleLinkClick}>
               <NotificationsNoneIcon className='menuIcon' />
               <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
                 <SideMenuItemLabel>Notification</SideMenuItemLabel>
@@ -90,7 +99,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
             </Link>
           </li>
           <li>
-            <Link to='/profile'>
+            <Link to='/profile' onClick={handleLinkClick}>
               <PersonOutLineIcon className='menuIcon' />
               <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
                 <SideMenuItemLabel>Profile </SideMenuItemLabel>

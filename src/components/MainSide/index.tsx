@@ -1,27 +1,36 @@
 import { Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAddTweet } from '../../store/ducks/tweet/actionCreators';
 import { selectLoadingStatus } from '../../store/ducks/tweet/selectors';
-import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
+import { fetchTweets, setLoadingStatus } from '../../store/ducks/tweets/actionCreators';
 import { LoadingStatus } from '../../store/types';
 import { Alert } from '../Alert';
-import CreateTweetForm from '../CreateTweetForm';
+import CreateTweetForm, { ImageObj } from '../CreateTweetForm';
 import Tweets from '../Tweets';
 import { MainSideHeadContainer, Wrapper } from './styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Centered } from '../../styles';
 import { selectIsLoading } from '../../store/ducks/tweets/selectors';
+import { updateImages } from '../../utils/updateImages';
 
 const MainSide: React.FC = (): React.ReactElement => {
   const dispatch = useDispatch();
   const [text, setText] = React.useState<string>('');
   const loadingStatus = useSelector(selectLoadingStatus);
   const isLoading = useSelector(selectIsLoading);
+  const [images, setImages] = useState<ImageObj[]>([]);
 
-  const handleClick = () => {
-    dispatch(fetchAddTweet(text));
-    dispatch(fetchTweets());
+  const handleClick = async (): Promise<void> => {
+    dispatch(setLoadingStatus(LoadingStatus.LOADING));
+    const imagesUrls = await images.reduce(async (acc: Promise<string[]>, image) => {
+      const result = await updateImages(image.file);
+      (await acc).push(result.url);
+      return acc;
+    }, Promise.resolve([]));
+
+    dispatch(fetchAddTweet({ text, images: imagesUrls }));
+    setImages([]);
     setText('');
   };
 
@@ -37,7 +46,13 @@ const MainSide: React.FC = (): React.ReactElement => {
               <CircularProgress />
             </Centered>
           ) : (
-            <CreateTweetForm text={text} setText={setText} handleClick={handleClick} />
+            <CreateTweetForm
+              text={text}
+              setText={setText}
+              handleClick={handleClick}
+              images={images}
+              onChangeImages={setImages}
+            />
           )}
         </div>
 

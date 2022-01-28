@@ -25,6 +25,7 @@ export interface TweetInterface {
   _id: string;
   text: string;
   createdAt?: string;
+  images: string[];
   user: {
     fullname: string;
     username: string;
