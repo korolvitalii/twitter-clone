@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 
 export const MainSideHeadContainer = styled('div')`
-  width: 52%;
+  width: 100%;
   height: 50px;
   margin-top: -25px;
   padding-top: 20px;

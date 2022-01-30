@@ -1,5 +1,5 @@
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { TextField } from '@mui/material';
+import { TextField, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const SearchTextField = styled(TextField)`
@@ -37,7 +37,8 @@ export const TwitterIconComponent = styled(TwitterIcon)`
   margin-left: 15;
 `;
 
-export const SearchSideWrapper = styled('div')`
+export const SearchButtonContainer = styled('div')`
+  width: 30%;
   margin-top: -55px;
   position: fixed;
   background-color: white;

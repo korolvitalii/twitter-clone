@@ -10,7 +10,6 @@ export const TweetHeader = styled('div')`
 export const TweetsWrapper = styled(Paper)`
   padding: 10px;
   border-top: 0;
-  /* border-bottom: 0; */
   :hover {
     background-color: #e6e6e6;
     transition: 0.3s;
@@ -26,11 +25,7 @@ export const TweetsWrapper = styled(Paper)`
   .tweetIconsContainer {
     display: flex;
     justify-content: space-between;
-    width: 65%;
-    border: 1px solid black;
-  }
-  .tweetBodyContainer {
-    border: 1px solid black;
+    width: 100%;
   }
 
   .tweetHeader {

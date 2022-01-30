@@ -1,5 +1,4 @@
 import { Action } from 'redux';
-import { LoadingStatus } from '../../types';
 
 export enum AppActionsType {
   SET_LOADING_STATUS = 'APPLICATION/SET_LOADING_STATUS',
