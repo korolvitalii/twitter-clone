@@ -29,7 +29,8 @@ export const userReducer = produce((draft: Draft<UserState>, action: UserActions
       break;
     }
     case UserActionsType.LOG_OUT: {
-      draft.status = LoadingStatus.LOADING;
+      draft.status = LoadingStatus.LOADED;
+      draft.data = undefined;
       break;
     }
     case UserActionsType.UPDATE_USER_DATA: {

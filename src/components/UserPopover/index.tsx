@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import PersonIcon from '@mui/icons-material/Person';
@@ -25,7 +24,7 @@ export interface SimpleDialogProps {
   onClose: () => void;
 }
 
-const UserPopover: React.FC = (): React.ReactElement => {
+const UserPopover: React.FC = () => {
   const userData = useSelector(selectUserData);
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -37,7 +36,6 @@ const UserPopover: React.FC = (): React.ReactElement => {
 
   const handleClickMoreButton = (e: any) => {
     e.stopPropagation();
-    console.log('handleClickMoreButton');
   };
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -50,17 +48,11 @@ const UserPopover: React.FC = (): React.ReactElement => {
         aria-describedby={id}
         variant='contained'
         onClick={handleClick}>
-        <div className='popoverButtonContainer'>
-          <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-            <PersonIcon />
-          </Avatar>
-          <div className='popoverButtonDescription'>
-            <Typography variant='subtitle2'>{userData?.fullname}</Typography>
-          </div>
-        </div>
-        <IconButton className='iconbutton' onClick={handleClickMoreButton}>
-          <MoreHorizIcon />
-        </IconButton>
+        <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+          <PersonIcon />
+        </Avatar>
+        <Typography variant='subtitle2'>{userData?.fullname}</Typography>
+        <MoreHorizIcon />
       </Button>
     </Wrapper>
   );
@@ -75,11 +67,10 @@ const SimpleDialog: React.FC<SimpleDialogProps> = ({
   const handleClose = () => {
     onClose();
   };
-  const navigate = useNavigate();
+
   const handleListItemClick = (value: string) => {
     if (value === 'Log out') {
       dispatch(logOut());
-      navigate('/signin');
     }
     onClose();
   };

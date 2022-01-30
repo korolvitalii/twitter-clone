@@ -1,47 +1,68 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import DateRangeIcon from '@mui/icons-material/DateRange';
-import Paper from '@mui/material/Paper';
 import Modal from '@mui/material/Modal';
+import CircularProgress from '@mui/material/CircularProgress';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 import bigAvatarImage from '../../assets/images/bigAvatar.jpg';
 import smallAvatar from '../../assets/images/smallAvatar.jpg';
 
-import { AvatarBox, Image, Wrapper } from './styles';
-import { Outlet, Link } from 'react-router-dom';
 import EditProfileDataModal from '../../components/EditProfileDataModal';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectUserData } from '../../store/ducks/user/selectors';
-import CircularProgress from '@mui/material/CircularProgress';
-import { Centered } from '../../styles';
 import { selectLoadingStatus } from '../../store/ducks/appication/selectors';
 import { setAppLoadingAction } from '../../store/ducks/appication/actionCreators';
 
+import { Centered } from '../../styles';
+import { AvatarBox, Image, Wrapper } from './styles';
+
 const Profile: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const links = ['/profile', '/profile/with_replies', '/profile/media', '/profile/likes'];
+  const [value, setValue] = React.useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState('');
+  const localLoadingStatus = useSelector(selectLoadingStatus);
   const user = useSelector(selectUserData);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+    navigate(links[newValue]);
+  };
+
+  const handleResize = () => {
+    if (window.innerWidth < 720) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+
   const handleToggle = (value: string) => () => {
     setOpen(value);
   };
+
   const handleClose = () => {
     setOpen('');
   };
 
-  const localLoadingStatus = useSelector(selectLoadingStatus);
   useEffect(() => {
     dispatch(setAppLoadingAction(true));
   }, []);
 
-  const [chooseButton, setChooseButton] = useState('Tweets');
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+  });
 
-  const handleClickButton = (e: any) => {
-    setChooseButton(e.currentTarget.dataset.type);
-  };
   if (!localLoadingStatus) {
     return (
       <Centered>
@@ -49,6 +70,7 @@ const Profile: React.FC = () => {
       </Centered>
     );
   }
+
   return (
     <Wrapper>
       <Avatar
@@ -97,40 +119,17 @@ const Profile: React.FC = () => {
         <Typography noWrap>23 Following</Typography>
         <Typography>0 Followers</Typography>
       </div>
-      <Paper className='buttonGroup'>
-        <Link className='link' to='/profile'>
-          <Button
-            data-type='Tweets'
-            onClick={handleClickButton}
-            className={`button ${'Tweets' === chooseButton ? 'choosenButton' : ''}`}>
-            Tweets
-          </Button>
-        </Link>
-        <Link className='link' to='/profile/with_replies'>
-          <Button
-            data-type='Tweets & Replies'
-            onClick={handleClickButton}
-            className={`button ${'Tweets & Replies' === chooseButton ? 'choosenButton' : ''}`}>
-            Tweets & Replies
-          </Button>
-        </Link>
-        <Link className='link' to='/profile/media'>
-          <Button
-            data-type='Media'
-            onClick={handleClickButton}
-            className={`button ${'Media' === chooseButton ? 'choosenButton' : ''}`}>
-            Media
-          </Button>
-        </Link>
-        <Link className='link' to='/profile/likes'>
-          <Button
-            data-type='Likes'
-            onClick={handleClickButton}
-            className={`button ${'Likes' === chooseButton ? 'choosenButton' : ''}`}>
-            Likes
-          </Button>
-        </Link>
-      </Paper>
+
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        centered
+        orientation={isMobile ? 'vertical' : 'horizontal'}>
+        <Tab sx={{ width: '25%' }} label='Tweets' wrapped />
+        <Tab sx={{ width: '25%' }} label='Tweets & Replies' wrapped />
+        <Tab sx={{ width: '25%' }} label='Media' wrapped />
+        <Tab sx={{ width: '25%' }} label='Likes' wrapped />
+      </Tabs>
       <EditProfileDataModal
         handleClose={handleClose}
         isVisible={open === 'Edit button'}

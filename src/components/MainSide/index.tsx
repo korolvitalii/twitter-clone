@@ -1,9 +1,9 @@
 import { Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAddTweet } from '../../store/ducks/tweet/actionCreators';
 import { selectLoadingStatus } from '../../store/ducks/tweet/selectors';
-import { fetchTweets, setLoadingStatus } from '../../store/ducks/tweets/actionCreators';
+import { setLoadingStatus } from '../../store/ducks/tweets/actionCreators';
 import { LoadingStatus } from '../../store/types';
 import { Alert } from '../Alert';
 import CreateTweetForm, { ImageObj } from '../CreateTweetForm';

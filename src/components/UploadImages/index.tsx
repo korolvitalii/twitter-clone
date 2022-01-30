@@ -1,10 +1,11 @@
-import React, { MouseEventHandler, useState } from 'react';
+import React from 'react';
+
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import IconButton from '@mui/material/IconButton';
-import { updateImages } from '../../utils/updateImages';
-import { Wrapper } from './styles';
 import CloseIcon from '@mui/icons-material/Close';
+
 import { ImageObj } from '../CreateTweetForm';
+import { Wrapper } from './styles';
 interface UploadImageProps {
   images: ImageObj[];
   onChangeImages: (callback: (prev: ImageObj[]) => ImageObj[]) => void;
@@ -20,8 +21,6 @@ const UploadImages: React.FC<UploadImageProps> = ({
       if (file) {
         const fileObj = new Blob([file]);
         onChangeImages((prev) => [...prev, { blobUrl: URL.createObjectURL(fileObj), file }]);
-
-        // updateImages(fileObj);
       }
       return null;
     }

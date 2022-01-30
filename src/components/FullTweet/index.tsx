@@ -15,7 +15,7 @@ import Tweet from '../Tweet/';
 import BackComponent from '../BackComponent';
 import { fetchTweet, setTweet } from '../../store/ducks/tweet/actionCreators';
 import { selectTweetItem } from '../../store/ducks/tweet/selectors';
-import { TweetHeader, TweetsWrapper } from '../Tweet/styles';
+import { TweetsWrapper } from '../Tweet/styles';
 import { Wrapper } from './styles';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import CustomPopover from '../Popover';

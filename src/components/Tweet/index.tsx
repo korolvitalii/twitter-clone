@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { Avatar, IconButton, Typography } from '@mui/material';
+import { Avatar, Box, IconButton, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -77,11 +77,13 @@ const Tweet: React.FC<TweetProps> = ({ tweet }: TweetProps): React.ReactElement 
   return (
     <TweetsWrapper variant='outlined'>
       <div>
-        <Grid container spacing={0.5}>
+        <Grid container spacing={3}>
           <Grid item xs={1}>
-            <Avatar alt='user-avatar' className='userAvatar'>
-              <PersonIcon />
-            </Avatar>
+            <Box sx={{ display: { xs: 'none', md: 'block', lg: 'block' } }}>
+              <Avatar alt='user-avatar' className='userAvatar'>
+                <PersonIcon />
+              </Avatar>
+            </Box>
           </Grid>
           <Grid container direction='column' justifyContent='space-between' item xs={11}>
             <Stack

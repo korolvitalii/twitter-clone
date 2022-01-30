@@ -1,13 +1,17 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, FormControl, FormGroup, TextField } from '@mui/material';
-import React, { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
+import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Controller, useForm } from 'react-hook-form';
+
+import { Button, FormControl, FormGroup, TextField } from '@mui/material';
+
 import { fetchUserData, updateUserData } from '../../store/ducks/user/actionCreators';
 import { UserInterface } from '../../store/types';
 import ModalBlock from '../ModalBlock';
+import UploadImages from '../UploadImages';
+import { ImageObj } from '../CreateTweetForm';
 
 interface EditProfileDataModalProps {
   handleClose: () => void;
@@ -43,6 +47,7 @@ const EditProfileDataModal: React.FC<EditProfileDataModalProps> = ({
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const onSubmit = async (data: LoginFormData) => {
     dispatch(updateUserData(data));
     dispatch(fetchUserData());
@@ -56,6 +61,8 @@ const EditProfileDataModal: React.FC<EditProfileDataModalProps> = ({
     navigate('/profile');
   }, [user]);
 
+  const [images, setImages] = useState<ImageObj[]>([]);
+  console.log(images);
   return (
     <div>
       <ModalBlock visible={isVisible} title={title} handleClose={handleClose}>
@@ -102,6 +109,13 @@ const EditProfileDataModal: React.FC<EditProfileDataModalProps> = ({
                   />
                 )}
               />
+              <Controller
+                name='fullname'
+                control={control}
+                defaultValue=''
+                render={({ field }) => <UploadImages images={images} onChangeImages={setImages} />}
+              />
+
               <Button type='submit' variant='outlined' color='primary'>
                 Save
               </Button>

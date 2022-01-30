@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 import UploadImages from '../UploadImages';
 import { AddFormCircleProgress, AddFormTextarea, Wrapper } from './styles';
 
@@ -60,9 +60,9 @@ const CreateTweetForm: React.FC<CreateTweetFormProps> = ({
         </div>
         <div className='formFooter'>
           <Stack>
-            <IconButton>
+            {/* <IconButton>
               <EmojiEmotionsOutlinedIcon />
-            </IconButton>
+            </IconButton> */}
             <UploadImages
               images={images ? images : []}
               onChangeImages={onChangeImages ? onChangeImages : () => {}}

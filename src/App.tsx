@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import './App.css';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { useFetchUserData } from './hooks/useFetchUserData';
 
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -23,7 +24,6 @@ const App: React.FC = () => {
   const { isReady } = useFetchUserData();
 
   const localLoadingStatus = useSelector(selectLoadingStatus);
-  console.log(localLoadingStatus);
 
   if (!isReady) {
     return (
@@ -32,10 +32,6 @@ const App: React.FC = () => {
       </Centered>
     );
   }
-
-  // if (isLoading) {
-  //   return <div>Loading ...</div>;
-  // }
 
   return (
     <Routes>
