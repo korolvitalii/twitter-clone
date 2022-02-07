@@ -19,6 +19,8 @@ export interface UserInterface {
   about?: string;
   website?: string;
   token: string;
+  bigAvatar?: string;
+  smallAvatar?: string;
 }
 
 export interface TweetInterface {
@@ -29,6 +31,7 @@ export interface TweetInterface {
   user: {
     fullname: string;
     username: string;
-    avatarUrl: string;
+    bigAvatar?: string;
+    smallAvatar?: string;
   };
 }

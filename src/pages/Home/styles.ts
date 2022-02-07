@@ -1,5 +1,5 @@
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { TextField, Container } from '@mui/material';
+import { TextField, Container, Alert } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const SearchTextField = styled(TextField)`
@@ -45,4 +45,10 @@ export const SearchButtonContainer = styled('div')`
   padding-top: 60px;
   padding-bottom: 10px;
   z-index: 20;
+`;
+
+export const UserConfirmedAlarm = styled(Alert)`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 `;

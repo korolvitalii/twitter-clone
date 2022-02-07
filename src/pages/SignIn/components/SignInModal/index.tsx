@@ -1,9 +1,9 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, FormControl, FormGroup, TextField } from '@mui/material';
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Controller, useForm } from 'react-hook-form';
+import { Button, FormControl, FormGroup, TextField } from '@mui/material';
 import ModalBlock from '../../../../components/ModalBlock';
 import { fetchSignIn } from '../../../../store/ducks/user/actionCreators';
 

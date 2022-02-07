@@ -75,5 +75,34 @@ export const Wrapper = styled('div')`
   }
   .buttonSignUp {
     margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .buttonSignIn {
+    width: 100%;
+  }
+  @media (max-width: 45em) {
+    .loginSideWrapper {
+      max-width: 250px;
+    }
+    .loginSideField {
+      margin-left: 10px;
+
+      max-width: 150px;
+    }
+    .loginSideTitle {
+      margin-left: 10px;
+
+      max-width: 150px;
+    }
+    .buttonSignUp {
+      margin-bottom: 20px;
+      margin-left: 10px;
+      width: 120px;
+    }
+    .buttonSignIn {
+      margin-left: 10px;
+      width: 120px;
+    }
   }
 `;

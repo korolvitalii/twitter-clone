@@ -12,6 +12,8 @@ const Tweets: React.FC = React.memo((): React.ReactElement | null => {
   const isLoading = useSelector(selectIsLoading);
   return (
     <Wrapper>
+      {tweets.length === 0 && <h2>No added tweets yet.</h2>}
+
       {isLoading ? (
         <Centered>
           <CircularProgress />

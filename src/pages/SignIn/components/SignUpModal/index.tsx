@@ -5,7 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import ModalBlock from '../../../../components/ModalBlock';
-import { fetchSignUp } from '../../../../store/ducks/user/actionCreators';
+import { fetchSignIn, fetchSignUp } from '../../../../store/ducks/user/actionCreators';
 
 export interface NotificationStatusInterface {
   text: string;
@@ -56,6 +56,7 @@ const SignUpModal: React.FC<SignUpModalProps> = ({
 
   const onSubmit = async (data: RegistrationFormData) => {
     dispatch(fetchSignUp(data));
+    dispatch(fetchSignIn(data));
     return () => {
       handleClose();
     };

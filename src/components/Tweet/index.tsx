@@ -80,9 +80,7 @@ const Tweet: React.FC<TweetProps> = ({ tweet }: TweetProps): React.ReactElement 
         <Grid container spacing={3}>
           <Grid item xs={1}>
             <Box sx={{ display: { xs: 'none', md: 'block', lg: 'block' } }}>
-              <Avatar alt='user-avatar' className='userAvatar'>
-                <PersonIcon />
-              </Avatar>
+              <Avatar src={tweet.user.smallAvatar} alt='user-avatar' className='userAvatar' />
             </Box>
           </Grid>
           <Grid container direction='column' justifyContent='space-between' item xs={11}>

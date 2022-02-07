@@ -11,6 +11,7 @@ export const Wrapper = styled('div')`
     width: 150px;
     height: 150px;
     margin-top: -55px;
+    border: 4px solid white;
   }
   .mainBlock {
     display: flex;
@@ -54,11 +55,8 @@ export const Wrapper = styled('div')`
     background-color: #4d4d4d;
     border: 2px solid #000;
     box-shadow: 24px;
-    background-color: red;
   }
-  .smallAvatarImage {
-    background-color: red;
-  }
+
   .choosenButton {
     border-bottom: 2px solid rgb(29, 161, 242);
   }
@@ -76,7 +74,7 @@ export const AvatarBox = styled(Box)`
   width: auto;
   height: 90%;
   background-color: #4d4d4d;
-  border: 2px solid #000;
+  border: 2px solid white;
   box-shadow: 24px;
 `;
 export const Image = styled('img')`

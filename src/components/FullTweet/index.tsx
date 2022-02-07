@@ -56,7 +56,7 @@ const FullTweet: React.FC = () => {
   return (
     <Wrapper>
       <Paper variant='outlined' className='fullTweetHeader'>
-        <BackComponent />
+        <BackComponent count={1} />
         <Typography variant='h6'>Tweet</Typography>
       </Paper>
       <TweetsWrapper variant='outlined'>

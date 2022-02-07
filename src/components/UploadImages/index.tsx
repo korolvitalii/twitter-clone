@@ -1,22 +1,29 @@
 import React from 'react';
 
-import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { ImageObj } from '../CreateTweetForm';
 import { Wrapper } from './styles';
+
 interface UploadImageProps {
   images: ImageObj[];
   onChangeImages: (callback: (prev: ImageObj[]) => ImageObj[]) => void;
+  children: React.ReactNode;
+  imagewidth: string;
+  imageheight: string;
 }
 
 const UploadImages: React.FC<UploadImageProps> = ({
   images,
   onChangeImages,
+  children,
+  imagewidth,
+  imageheight,
 }): React.ReactElement => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target) {
+      event.stopPropagation();
       const file = (event.target as HTMLInputElement).files?.[0];
       if (file) {
         const fileObj = new Blob([file]);
@@ -31,7 +38,7 @@ const UploadImages: React.FC<UploadImageProps> = ({
   };
 
   return (
-    <Wrapper>
+    <Wrapper imagewidth={imagewidth} imageheight={imageheight}>
       <input
         onChange={handleInputChange}
         style={{ display: 'none' }}
@@ -39,11 +46,7 @@ const UploadImages: React.FC<UploadImageProps> = ({
         multiple
         type='file'
       />
-      <label htmlFor='raised-button-file'>
-        <IconButton component='span'>
-          <ImageOutlinedIcon />
-        </IconButton>
-      </label>
+      <label htmlFor='raised-button-file'>{children}</label>
       <div className='imageList'>
         {images.map((imageObj) => (
           <div

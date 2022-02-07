@@ -37,7 +37,6 @@ export function* fetchUserDataRequest() {
     yield put(setLoadingStatus(LoadingStatus.LOADING));
     const { data }: UserState = yield call(AuthApi.authMe);
     yield put(setUserData(data));
-    // yield put(setLoadingStatus(LoadingStatus.SUCCESS));
   } catch (error) {
     yield put(setLoadingStatus(LoadingStatus.ERROR));
   }

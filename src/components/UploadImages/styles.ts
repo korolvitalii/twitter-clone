@@ -1,14 +1,20 @@
 import { styled } from '@mui/material/styles';
+// import { styled } from '@mui/system';
+type ExtraProps = {
+  imagewidth: string;
+  imageheight: string;
+};
 
-export const Wrapper = styled('div')`
+export const Wrapper = styled('div')<ExtraProps>`
   .imageList {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
   }
   .imageListItem {
-    width: 60px;
-    height: 60px;
+    width: ${(props) => props.imagewidth};
+    height: ${(props) => props.imageheight};
+    border: 2px solid red;
     overflow: hidden;
     background-size: cover;
     background-position: center;

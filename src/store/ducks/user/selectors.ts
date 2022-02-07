@@ -10,3 +10,6 @@ export const selectUserStatus = (state: AppStateType): UserState['status'] =>
   selectUserState(state).status;
 
 export const selectIsAuth = (state: AppStateType): boolean => !!selectUserData(state);
+
+export const selectUserConfirmed = (state: AppStateType): boolean | undefined =>
+  selectUserData(state)?.confirmed;

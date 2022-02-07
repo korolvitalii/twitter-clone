@@ -3,6 +3,8 @@ import { axios } from '../../core/axios';
 export interface updateUserDataPayloadInterface {
   fullname: string;
   username: string;
+  bigAvatar?: string;
+  smallAvatar?: string;
 }
 
 export const UsersApi = {

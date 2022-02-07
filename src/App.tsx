@@ -17,13 +17,22 @@ import { useSelector } from 'react-redux';
 import { selectLoadingStatus } from './store/ducks/appication/selectors';
 
 const ProfilePage = React.lazy(() => import('./pages/Profile'));
-const MainSide = React.lazy(() => import('./components/MainSide'));
+const MainSide = React.lazy(() => import('./components/Main'));
 const HomePage = React.lazy(() => import('./pages/Home'));
+//TODO
+//1. Попрвити перехід між сторінками зробити скелетон
+//2. Поправити завантаження між сторінками
+//3. Поправити заватаження аватару
+//4.
+//5.
+//6.
+//7.
+//8.
+//9.
+//10.
 
 const App: React.FC = () => {
   const { isReady } = useFetchUserData();
-
-  const localLoadingStatus = useSelector(selectLoadingStatus);
 
   if (!isReady) {
     return (
@@ -61,7 +70,7 @@ const App: React.FC = () => {
           }
         />
         <Route
-          path='/profile'
+          path='/profile/:id'
           element={
             <React.Suspense
               fallback={
@@ -72,10 +81,10 @@ const App: React.FC = () => {
               <ProfilePage />
             </React.Suspense>
           }>
-          <Route path='/profile/' element={<Tweets />} />
-          <Route path='/profile/with_replies' element={<Tweets />} />
-          <Route path='/profile/media' element={<ProfileMediaSection />} />
-          <Route path='/profile/likes' element={<ProfileLikes />} />
+          <Route path='/profile/:id' element={<Tweets />} />
+          <Route path='/profile/:id/with_replies' element={<Tweets />} />
+          <Route path='/profile/:id/media' element={<ProfileMediaSection />} />
+          <Route path='/profile/:id/likes' element={<ProfileLikes />} />
         </Route>
         <Route path='/home/tweets/*' element={<ChosenTweet />} />
       </Route>

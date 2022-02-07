@@ -1,18 +1,18 @@
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import MessageIcon from '@mui/icons-material/ModeCommentOutlined';
 import PeopleIcon from '@mui/icons-material/PeopleOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { selectUserStatus } from '../../../store/ducks/user/selectors';
 import { LoadingStatus } from '../../../store/types';
 import SignInModal from '../components/SignInModal';
 import SignUpModal, { NotificationStatusInterface } from '../components/SignUpModal';
-import { Wrapper } from './styles';
 import Notification from '../../SignIn/components/Notification';
+import { Wrapper } from './styles';
 
-const Layout: React.FC = (): React.ReactElement => {
+const Layout: React.FC = () => {
   const [visibleModal, setVisibleModal] = React.useState<string | null>();
   const userLoadingStatus = useSelector(selectUserStatus);
 
@@ -92,11 +92,15 @@ const Layout: React.FC = (): React.ReactElement => {
               className='buttonSignUp'
               variant='contained'
               color='primary'
-              fullWidth
               onClick={handleOpenModal}>
               Sign up
             </Button>
-            <Button variant='outlined' color='primary' fullWidth onClick={handleOpenModal}>
+            <Button
+              className='buttonSignIn'
+              variant='outlined'
+              color='primary'
+              fullWidth
+              onClick={handleOpenModal}>
               Sign in
             </Button>
           </div>

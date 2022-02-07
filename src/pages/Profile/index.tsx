@@ -7,13 +7,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import DateRangeIcon from '@mui/icons-material/DateRange';
-import Modal from '@mui/material/Modal';
 import CircularProgress from '@mui/material/CircularProgress';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-
-import bigAvatarImage from '../../assets/images/bigAvatar.jpg';
-import smallAvatar from '../../assets/images/smallAvatar.jpg';
 
 import EditProfileDataModal from '../../components/EditProfileDataModal';
 import { selectUserData } from '../../store/ducks/user/selectors';
@@ -21,9 +17,11 @@ import { selectLoadingStatus } from '../../store/ducks/appication/selectors';
 import { setAppLoadingAction } from '../../store/ducks/appication/actionCreators';
 
 import { Centered } from '../../styles';
-import { AvatarBox, Image, Wrapper } from './styles';
+import { Wrapper } from './styles';
+import BackComponent from '../../components/BackComponent';
 
 const Profile: React.FC = () => {
+  console.log('render', 'Profile conponent');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -73,37 +71,17 @@ const Profile: React.FC = () => {
 
   return (
     <Wrapper>
+      <BackComponent count={2} />
       <Avatar
         className='bigAvatar'
+        src={user?.bigAvatar}
         variant='square'
-        src={bigAvatarImage}
         onClick={handleToggle('bigAvatar')}></Avatar>
-
-      <Modal
-        open={open === 'bigAvatar'}
-        onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'>
-        <AvatarBox>
-          <Image src={bigAvatarImage} />
-        </AvatarBox>
-      </Modal>
-
       <div className='mainBlock'>
         <Avatar
+          src={user?.smallAvatar}
           className='smallAvatar'
-          src={smallAvatar}
           onClick={handleToggle('smallAvatar')}></Avatar>
-        <Modal
-          open={open === 'smallAvatar'}
-          onClose={handleClose}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'>
-          <AvatarBox>
-            <Image src={smallAvatar} />
-          </AvatarBox>
-        </Modal>
-
         <Button onClick={handleToggle('Edit button')}>Edit profile</Button>
       </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import HomeIcon from '@mui/icons-material/Home';
@@ -17,10 +17,13 @@ import CreateTweetForm from '../CreateTweetForm';
 import ModalBlock from '../ModalBlock';
 import { SideMenuItemLabel, Wrapper } from './styles';
 import { setAppLoadingAction } from '../../store/ducks/appication/actionCreators';
+import { selectUserData } from '../../store/ducks/user/selectors';
 
-const SideMenu: React.FC = (): React.ReactElement => {
+const SideMenu: React.FC = React.memo(() => {
+  console.log('render', 'SideMenu Component');
   const dispatch = useDispatch();
-
+  const userData = useSelector(selectUserData);
+  console.log(userData?.smallAvatar, 'userData');
   const [visibleModal, setVisibleModal] = React.useState<boolean>(false);
   const onClickModalClose = (): void => {
     setVisibleModal(false);
@@ -38,11 +41,11 @@ const SideMenu: React.FC = (): React.ReactElement => {
   };
 
   const handleLinkClick = () => {
-    dispatch(setAppLoadingAction(false));
+    dispatch(setAppLoadingAction(true));
 
     setTimeout(() => {
       dispatch(setAppLoadingAction(true));
-    }, 200);
+    }, 100);
   };
 
   return (
@@ -98,7 +101,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
             </Link>
           </li>
           <li>
-            <Link to='/profile' onClick={handleLinkClick}>
+            <Link to={`/profile/${userData?._id}`} onClick={handleLinkClick}>
               <PersonOutLineIcon className='menuIcon' />
               <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
                 <SideMenuItemLabel>Profile </SideMenuItemLabel>
@@ -118,7 +121,7 @@ const SideMenu: React.FC = (): React.ReactElement => {
                 </SvgIcon>
               </IconButton>
             </Box>
-            <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
+            <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' }, marginBottom: '6rem' }}>
               <Button
                 variant='contained'
                 color='primary'
@@ -129,10 +132,15 @@ const SideMenu: React.FC = (): React.ReactElement => {
             </Box>
           </li>
           <li>
-            <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
-              <Avatar />
+            <Box sx={{ position: 'absolute', top: '90%', left: '7%' }}>
+              <IconButton>
+                <Avatar src={userData?.smallAvatar} />
+              </IconButton>
             </Box>
-            <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }}>
+            <Box
+              sx={{
+                display: { xs: 'none', lg: 'block', xl: 'none' },
+              }}>
               <UserPopover />
             </Box>
           </li>
@@ -143,6 +151,6 @@ const SideMenu: React.FC = (): React.ReactElement => {
       </ModalBlock>
     </>
   );
-};
+});
 
 export default SideMenu;
