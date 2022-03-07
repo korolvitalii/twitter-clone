@@ -56,7 +56,7 @@ const SignUpModal: React.FC<SignUpModalProps> = ({
 
   const onSubmit = async (data: RegistrationFormData) => {
     dispatch(fetchSignUp(data));
-    dispatch(fetchSignIn(data));
+    dispatch(fetchSignIn({ email: data.email, password: data.password }));
     return () => {
       handleClose();
     };

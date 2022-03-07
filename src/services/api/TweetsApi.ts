@@ -8,8 +8,10 @@ interface Response<T> {
 }
 
 export const TweetsApi = {
-  fetchTweets: async (): Promise<TweetInterface[]> => {
-    const { data } = await axios.get<Response<TweetsState['items']>>('/tweets');
+  fetchTweets: async (userId?: string): Promise<TweetInterface[]> => {
+    const { data } = await axios.get<Response<TweetsState['items']>>(
+      userId ? `/tweets/user/${userId}` : '/tweets',
+    );
     return data.data;
   },
   fetchTweetData: async (id: string): Promise<TweetInterface[]> => {

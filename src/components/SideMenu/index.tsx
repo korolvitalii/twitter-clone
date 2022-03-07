@@ -20,10 +20,8 @@ import { setAppLoadingAction } from '../../store/ducks/appication/actionCreators
 import { selectUserData } from '../../store/ducks/user/selectors';
 
 const SideMenu: React.FC = React.memo(() => {
-  console.log('render', 'SideMenu Component');
   const dispatch = useDispatch();
   const userData = useSelector(selectUserData);
-  console.log(userData?.smallAvatar, 'userData');
   const [visibleModal, setVisibleModal] = React.useState<boolean>(false);
   const onClickModalClose = (): void => {
     setVisibleModal(false);

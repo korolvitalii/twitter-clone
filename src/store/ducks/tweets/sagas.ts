@@ -7,7 +7,11 @@ import { TweetsState } from './contracts/state';
 
 export function* fetchTweetsRequest() {
   try {
-    const items: TweetsState['items'] = yield call(TweetsApi.fetchTweets);
+    const pathname = window.location.pathname;
+    const userId = pathname.includes('/profile') ? pathname.split('/').pop() : undefined;
+
+    console.log(userId);
+    const items: TweetsState['items'] = yield call(TweetsApi.fetchTweets, userId);
     yield put(setTweets(items));
     yield put(setLoadingStatus(LoadingStatus.LOADED));
   } catch (error) {

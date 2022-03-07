@@ -9,7 +9,6 @@ interface BackComponentPropsInterface {
 const BackComponent: React.FC<BackComponentPropsInterface> = ({ count }) => {
   const navigate = useNavigate();
   const handleClick = () => navigate(-count);
-  console.log(navigate);
 
   return (
     <IconButton onClick={handleClick}>

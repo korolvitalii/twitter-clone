@@ -2,20 +2,24 @@ import React, { useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { Alert, Box, CircularProgress, Container, IconButton, InputAdornment } from '@mui/material';
+import { Box, CircularProgress, IconButton, InputAdornment } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
 import SideMenu from '../../components/SideMenu';
 import Topics from '../../components/Topics';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
 import { fetchTopics } from '../../store/ducks/topics/actionCreators';
 import { selectUserConfirmed, selectUserStatus } from '../../store/ducks/user/selectors';
 import { LoadingStatus } from '../../store/types';
 import { selectLoadingStatus } from '../../store/ducks/appication/selectors';
 import { setAppLoadingAction } from '../../store/ducks/appication/actionCreators';
 import { Centered } from '../../styles';
-import { SearchTextField, TwitterIconComponent, SearchButtonContainer } from './styles';
+import {
+  SearchTextField,
+  TwitterIconComponent,
+  SearchButtonContainer,
+  UserConfirmedAlarm,
+} from './styles';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -29,7 +33,7 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchTweets());
+    debugger;
     dispatch(fetchTopics());
   }, [dispatch]);
 
@@ -66,10 +70,10 @@ const Home: React.FC = () => {
         ) : (
           <Outlet />
         )}
-        {isUserConfirmed ? (
-          <Alert className='userConfirmedAlarm' severity='warning'>
+        {!isUserConfirmed ? (
+          <UserConfirmedAlarm className='userConfirmedAlarm' severity='warning'>
             Please check your email and confirm your page
-          </Alert>
+          </UserConfirmedAlarm>
         ) : null}
       </Grid>
       <Grid item xs={3}>

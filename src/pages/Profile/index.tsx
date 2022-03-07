@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 
 import Avatar from '@mui/material/Avatar';
@@ -19,19 +19,27 @@ import { setAppLoadingAction } from '../../store/ducks/appication/actionCreators
 import { Centered } from '../../styles';
 import { Wrapper } from './styles';
 import BackComponent from '../../components/BackComponent';
+import { selectTweetsState } from '../../store/ducks/tweets/selectors';
+import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
 
-const Profile: React.FC = () => {
-  console.log('render', 'Profile conponent');
+const Profile: React.FC = (props: any) => {
+  const match = useLocation();
+  const currentUserId = match.pathname.split('/').pop();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const links = ['/profile', '/profile/with_replies', '/profile/media', '/profile/likes'];
+  const links = [
+    `/profile/${currentUserId}`,
+    '/profile/with_replies',
+    '/profile/media',
+    '/profile/likes',
+  ];
   const [value, setValue] = React.useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState('');
   const localLoadingStatus = useSelector(selectLoadingStatus);
   const user = useSelector(selectUserData);
-
+  const userTweets = useSelector(selectTweetsState);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     navigate(links[newValue]);
@@ -55,6 +63,7 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     dispatch(setAppLoadingAction(true));
+    dispatch(fetchTweets());
   }, []);
 
   useEffect(() => {
