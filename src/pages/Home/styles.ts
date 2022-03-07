@@ -50,5 +50,5 @@ export const SearchButtonContainer = styled('div')`
 export const UserConfirmedAlarm = styled(Alert)`
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 40%;
 `;

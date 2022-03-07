@@ -3,7 +3,6 @@ import { styled } from '@mui/material/styles';
 
 export const Wrapper = styled('div')`
   margin-left: 0.75rem;
-  /* border: 1px solid black; */
   .sideMenuItems {
     display: flex;
     flex-direction: column;
@@ -16,7 +15,7 @@ export const Wrapper = styled('div')`
     font-size: 32px;
   }
   .addTweetSmallIcon {
-    margin-left: -0.5rem;
+    margin-left: 0.5rem;
     width: 50px;
     height: 50px;
     color: white;
@@ -41,7 +40,7 @@ export const Wrapper = styled('div')`
     }
     &:hover {
       background-color: #e6ecf0;
-      width: 90%;
+      width: 180px;
       & svg {
         color: rgb(29, 161, 242);
       }
@@ -56,7 +55,6 @@ export const Wrapper = styled('div')`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     height: 180px;
     padding: 10px 0;
   }
@@ -66,7 +64,7 @@ export const Wrapper = styled('div')`
   }
 
   .tweetButton {
-    width: 200px;
+    width: 180px;
   }
 `;
 
