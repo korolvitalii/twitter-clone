@@ -67,11 +67,6 @@
       }
     ]
   },
-  "jest": {
-    "extensionsToTreatAsEsm": [
-      ".tsx"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
