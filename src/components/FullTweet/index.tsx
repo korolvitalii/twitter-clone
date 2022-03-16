@@ -24,7 +24,7 @@ import StandardImageList from '../ImageList';
 const FullTweet: React.FC = () => {
   const params = useParams();
   const dispatch = useDispatch();
-  const tweetId = params['*'];
+  const tweetId = params.id;
   const tweet = useSelector(selectTweetItem);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);

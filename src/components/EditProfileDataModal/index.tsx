@@ -5,15 +5,7 @@ import { useNavigate } from 'react-router';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 
-import {
-  Avatar,
-  Button,
-  FormControl,
-  FormGroup,
-  IconButton,
-  Stack,
-  TextField,
-} from '@mui/material';
+import { Avatar, Button, FormControl, FormGroup, IconButton, TextField } from '@mui/material';
 
 import {
   fetchUserData,
@@ -85,7 +77,6 @@ const EditProfileDataModal: React.FC<EditProfileDataModalProps> = ({
     if (smallAvatar.file) {
       uploadedSmallAvatar = await updateImages(smallAvatar?.file);
     }
-    debugger;
     dispatch(
       updateUserData({
         ...data,
@@ -118,6 +109,7 @@ const EditProfileDataModal: React.FC<EditProfileDataModalProps> = ({
 
   useEffect(() => {
     navigate(`/profile/${user?._id}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   return (

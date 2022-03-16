@@ -1,5 +1,5 @@
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { TextField, Container, Alert } from '@mui/material';
+import { TextField, Alert } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const SearchTextField = styled(TextField)`

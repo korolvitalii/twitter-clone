@@ -7,7 +7,6 @@ import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutline
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import RepeatOutlinedIcon from '@mui/icons-material/RepeatOutlined';
 import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
-import PersonIcon from '@mui/icons-material/Person';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 

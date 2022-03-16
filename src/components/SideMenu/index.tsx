@@ -40,10 +40,6 @@ const SideMenu: React.FC = React.memo(() => {
 
   const handleLinkClick = () => {
     dispatch(setAppLoadingAction(true));
-
-    setTimeout(() => {
-      dispatch(setAppLoadingAction(true));
-    }, 100);
   };
 
   return (

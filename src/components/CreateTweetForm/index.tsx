@@ -1,4 +1,5 @@
-import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   Avatar,
   Button,
@@ -8,13 +9,11 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import React from 'react';
-import UploadImages from '../UploadImages';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
+import { selectUserData } from '../../store/ducks/user/selectors';
+import UploadImages from '../UploadImages';
 
 import { AddFormCircleProgress, AddFormTextarea, Wrapper } from './styles';
-import { useSelector } from 'react-redux';
-import { selectUserData } from '../../store/ducks/user/selectors';
 
 export interface ImageObj {
   blobUrl: string;

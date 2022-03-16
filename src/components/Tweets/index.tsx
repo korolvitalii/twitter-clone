@@ -1,30 +1,32 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { selectIsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors';
+import { selectIsLoading } from '../../store/ducks/tweets/selectors';
 import Tweet from '../Tweet/';
 import { Centered } from '../../styles';
 import { Wrapper } from './styles';
-import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
 
-const Tweets: React.FC = React.memo((): React.ReactElement | null => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchTweets());
-  }, []);
-  const tweets = useSelector(selectTweetsItems);
+interface TweetsPropsInterface {
+  tweets: any;
+}
+
+const Tweets: React.FC<TweetsPropsInterface> = React.memo((props): React.ReactElement | null => {
   const isLoading = useSelector(selectIsLoading);
+  console.log(isLoading);
+
+  if (props.tweets.length === 0 && !isLoading) {
+    return <h2>No added tweets yet.</h2>;
+  }
+
   return (
     <Wrapper>
-      {tweets.length === 0 && <h2>No added tweets yet.</h2>}
-
       {isLoading ? (
         <Centered>
           <CircularProgress />
         </Centered>
       ) : (
-        tweets.map((tweet) => <Tweet key={tweet._id} tweet={tweet} />)
+        props.tweets.map((tweet: any) => <Tweet key={tweet._id} tweet={tweet} />)
       )}
     </Wrapper>
   );

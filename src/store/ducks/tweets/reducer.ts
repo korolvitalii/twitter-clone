@@ -25,6 +25,12 @@ export const tweetsReducer = produce((draft: Draft<TweetsState>, actions: Tweets
       draft.LoadingStatus = actions.payload;
       break;
     }
+    case TweetsActionsType.REMOVE_TWEETS: {
+      draft.items = [];
+      draft.LoadingStatus = LoadingStatus.LOADING;
+      break;
+    }
+
     default: {
       return draft;
     }

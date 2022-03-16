@@ -5,6 +5,7 @@ import { UserState } from './contracts/state';
 
 const initialState: UserState = {
   data: undefined,
+  userTweets: [],
   status: LoadingStatus.NEVER,
   registered: false,
 };
@@ -14,6 +15,11 @@ export const userReducer = produce((draft: Draft<UserState>, action: UserActions
     case UserActionsType.SET_USER_DATA: {
       draft.data = action.payload;
       draft.status = LoadingStatus.SUCCESS;
+      break;
+    }
+    case UserActionsType.SET_USER_TWEETS: {
+      draft.userTweets = action.payload;
+      draft.status = LoadingStatus.LOADED;
       break;
     }
     case UserActionsType.SET_LOADING_STATE: {

@@ -23,6 +23,7 @@ export const useFetchUserData = () => {
     } else {
       navigate('/home');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuth, isReady]);
   return {
     isReady,

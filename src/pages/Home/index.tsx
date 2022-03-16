@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import Notification from '../SignIn/components/Notification';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, CircularProgress, IconButton, InputAdornment } from '@mui/material';
@@ -9,9 +10,12 @@ import SideMenu from '../../components/SideMenu';
 import Topics from '../../components/Topics';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTopics } from '../../store/ducks/topics/actionCreators';
-import { selectUserConfirmed, selectUserStatus } from '../../store/ducks/user/selectors';
+import {
+  selectIsAuth,
+  selectUserConfirmed,
+  selectUserStatus,
+} from '../../store/ducks/user/selectors';
 import { LoadingStatus } from '../../store/types';
-import { selectLoadingStatus } from '../../store/ducks/appication/selectors';
 import { setAppLoadingAction } from '../../store/ducks/appication/actionCreators';
 import { Centered } from '../../styles';
 import {
@@ -20,20 +24,39 @@ import {
   SearchButtonContainer,
   UserConfirmedAlarm,
 } from './styles';
+import { NotificationStatusInterface } from '../SignIn/components/SignUpModal';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const loadingStatus = useSelector(selectUserStatus);
   const isReady = loadingStatus !== LoadingStatus.NEVER && loadingStatus !== LoadingStatus.LOADING;
-  const localLoadingStatus = useSelector(selectLoadingStatus);
   const isUserConfirmed = useSelector(selectUserConfirmed);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const isAuth = useSelector(selectIsAuth);
+  const handleCloseNotification = () => {
+    setOpen(false);
+  };
+  const [notificationStatus, setNotificationStatus] = useState<NotificationStatusInterface>({
+    text: '',
+    handleCloseNotification,
+    setOpen,
+    alertSeverity: 'error',
+  });
 
   useEffect(() => {
+    if (isAuth) {
+      setNotificationStatus({
+        text: 'Success!',
+        handleCloseNotification,
+        alertSeverity: 'success',
+      });
+      setOpen(true);
+    }
     dispatch(setAppLoadingAction(true));
-  }, []);
+  }, [dispatch, isAuth]);
 
   useEffect(() => {
-    debugger;
     dispatch(fetchTopics());
   }, [dispatch]);
 
@@ -63,7 +86,7 @@ const Home: React.FC = () => {
         </div>
       </Grid>
       <Grid item xs={7}>
-        {!localLoadingStatus ? (
+        {!isReady ? (
           <Centered>
             <CircularProgress />
           </Centered>
@@ -96,6 +119,7 @@ const Home: React.FC = () => {
         <Box sx={{ display: { xs: 'none', md: 'block', lg: 'block' } }}>
           <Topics />
         </Box>
+        <Notification {...notificationStatus} open={open} />
       </Grid>
     </Grid>
   );

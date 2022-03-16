@@ -15,7 +15,6 @@ import { Wrapper } from './styles';
 const Layout: React.FC = () => {
   const [visibleModal, setVisibleModal] = React.useState<string | null>();
   const userLoadingStatus = useSelector(selectUserStatus);
-
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpenModal = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -35,17 +34,9 @@ const Layout: React.FC = () => {
     setOpen,
     alertSeverity: 'error',
   });
-  //TODO:
-  // 1. Check notification after login, and after authMe
+
   useEffect(() => {
-    if (userLoadingStatus === LoadingStatus.SUCCESS) {
-      setNotificationStatus({
-        text: 'Success!',
-        handleCloseNotification,
-        alertSeverity: 'success',
-      });
-      setOpen(true);
-    } else if (userLoadingStatus === LoadingStatus.ERROR) {
+    if (userLoadingStatus === LoadingStatus.ERROR) {
       setNotificationStatus({
         text: 'Failed!',
         handleCloseNotification,

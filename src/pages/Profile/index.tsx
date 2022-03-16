@@ -19,8 +19,7 @@ import { setAppLoadingAction } from '../../store/ducks/appication/actionCreators
 import { Centered } from '../../styles';
 import { Wrapper } from './styles';
 import BackComponent from '../../components/BackComponent';
-import { selectTweetsState } from '../../store/ducks/tweets/selectors';
-import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
+import { fetchUserTweets } from '../../store/ducks/user/actionCreators';
 
 const Profile: React.FC = (props: any) => {
   const match = useLocation();
@@ -39,7 +38,6 @@ const Profile: React.FC = (props: any) => {
   const [open, setOpen] = useState('');
   const localLoadingStatus = useSelector(selectLoadingStatus);
   const user = useSelector(selectUserData);
-  const userTweets = useSelector(selectTweetsState);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     navigate(links[newValue]);
@@ -63,8 +61,8 @@ const Profile: React.FC = (props: any) => {
 
   useEffect(() => {
     dispatch(setAppLoadingAction(true));
-    dispatch(fetchTweets());
-  }, []);
+    dispatch(fetchUserTweets());
+  }, [dispatch]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);

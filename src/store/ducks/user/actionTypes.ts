@@ -3,13 +3,16 @@ import { LoginFormData } from '../../../pages/SignIn/components/SignInModal';
 import { RegistrationFormData } from '../../../pages/SignIn/components/SignUpModal';
 import { updateUserDataPayloadInterface } from '../../../services/api/UserApi';
 import { LoadingStatus } from '../../types';
+import { TweetsState } from '../tweets/contracts/state';
 import { UserState } from './contracts/state';
 
 export enum UserActionsType {
   FETCH_SIGN_IN = 'USER/FETCH_SIGN_IN',
   FETCH_SIGN_UP = 'USER/FETCH_SIGN_UP',
-  FETCH_USER_DATA = 'FETCH_USER_DATA',
-  UPDATE_USER_DATA = 'UPDATE_USER_DATA',
+  FETCH_USER_DATA = 'USER/FETCH_USER_DATA',
+  FETCH_USER_TWEETS = 'USER/FETCH_USER_TWEETS',
+  SET_USER_TWEETS = 'USER/SET_USER_TWEETS',
+  UPDATE_USER_DATA = 'USER/UPDATE_USER_DATA',
   SET_LOADING_STATE = 'USER/SET_LOADING_STATE',
   SET_USER_DATA = 'USER/SET_USER_DATA',
   LOG_OUT = 'USER/LOG_OUT',
@@ -20,6 +23,15 @@ export interface FetchSignInActionInterface extends Action<UserActionsType> {
   payload: {
     data: LoginFormData;
   };
+}
+
+export interface SetUserTweetsActionInterface extends Action<UserActionsType> {
+  type: UserActionsType.SET_USER_TWEETS;
+  payload: TweetsState['items'];
+}
+
+export interface FetchUserTweetsInterface extends Action<UserActionsType> {
+  type: UserActionsType.FETCH_USER_TWEETS;
 }
 
 export interface FetchSignUpActionInterface extends Action<UserActionsType> {
@@ -61,4 +73,6 @@ export type UserActions =
   | FetchSignUpActionInterface
   | FetchUserDataActionInterface
   | LogOutActionInterface
-  | UpdateUserDataInterface;
+  | UpdateUserDataInterface
+  | FetchUserTweetsInterface
+  | SetUserTweetsActionInterface;

@@ -1,11 +1,14 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { AuthApi } from '../../../services/api/AuthApi';
+import { TweetsApi } from '../../../services/api/TweetsApi';
 import { UsersApi } from '../../../services/api/UserApi';
 import { LoadingStatus } from '../../types';
-import { setLoadingStatus, setUserData } from './actionCreators';
+import { TweetsState } from '../tweets/contracts/state';
+import { setLoadingStatus, setUserData, setUserTweets } from './actionCreators';
 import {
   FetchSignInActionInterface,
   FetchSignUpActionInterface,
+  FetchUserTweetsInterface,
   UpdateUserDataInterface,
   UserActionsType,
 } from './actionTypes';
@@ -18,6 +21,18 @@ export function* fetchSignInRequest({ payload }: FetchSignInActionInterface) {
     if (data) {
       window.localStorage.setItem('token', data.token);
     }
+  } catch (error) {
+    yield put(setLoadingStatus(LoadingStatus.ERROR));
+  }
+}
+
+export function* fetchUserTweetsRequest() {
+  try {
+    const pathname = window.location.pathname;
+    const userId = pathname.includes('/profile') ? pathname.split('/').pop() : undefined;
+    const items: TweetsState['items'] = yield call(TweetsApi.fetchUserTweets, userId);
+    yield put(setUserTweets(items));
+    yield put(setLoadingStatus(LoadingStatus.LOADED));
   } catch (error) {
     yield put(setLoadingStatus(LoadingStatus.ERROR));
   }
@@ -38,7 +53,7 @@ export function* fetchUserDataRequest() {
     const { data }: UserState = yield call(AuthApi.authMe);
     yield put(setUserData(data));
   } catch (error) {
-    yield put(setLoadingStatus(LoadingStatus.ERROR));
+    yield put(setLoadingStatus(LoadingStatus.LOADED));
   }
 }
 
@@ -66,4 +81,5 @@ export function* userSaga() {
   yield takeEvery(UserActionsType.FETCH_USER_DATA, fetchUserDataRequest);
   yield takeEvery(UserActionsType.LOG_OUT, logOut);
   yield takeEvery(UserActionsType.UPDATE_USER_DATA, updateUserData);
+  yield takeEvery(UserActionsType.FETCH_USER_TWEETS, fetchUserTweetsRequest);
 }

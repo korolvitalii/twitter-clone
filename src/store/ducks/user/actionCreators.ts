@@ -1,6 +1,7 @@
 import { LoginFormData } from '../../../pages/SignIn/components/SignInModal';
 import { RegistrationFormData } from '../../../pages/SignIn/components/SignUpModal';
 import { updateUserDataPayloadInterface } from '../../../services/api/UserApi';
+import { TweetsState } from '../tweets/contracts/state';
 import {
   FetchSignInActionInterface,
   FetchSignUpActionInterface,
@@ -10,6 +11,8 @@ import {
   SetUserDataActionInterface,
   UserActionsType,
   UpdateUserDataInterface,
+  FetchUserTweetsInterface,
+  SetUserTweetsActionInterface,
 } from './actionTypes';
 import { UserState } from './contracts/state';
 
@@ -18,6 +21,15 @@ export const fetchSignIn = (data: LoginFormData): FetchSignInActionInterface => 
   payload: {
     data,
   },
+});
+
+export const fetchUserTweets = (): FetchUserTweetsInterface => ({
+  type: UserActionsType.FETCH_USER_TWEETS,
+});
+
+export const setUserTweets = (payload: TweetsState['items']): SetUserTweetsActionInterface => ({
+  type: UserActionsType.SET_USER_TWEETS,
+  payload,
 });
 
 export const fetchSignUp = (data: RegistrationFormData): FetchSignUpActionInterface => ({
