@@ -65,7 +65,7 @@ const SignUpModal: React.FC<SignUpModalProps> = ({
   return (
     <>
       <ModalBlock visible={isVisible} title={title} handleClose={handleClose}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} data-testid='signUpModal'>
           <FormControl component='fieldset' fullWidth>
             <FormGroup aria-label='position'>
               <Controller

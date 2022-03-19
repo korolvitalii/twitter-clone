@@ -49,7 +49,7 @@ const SignInModal: React.FC<SignInProps> = ({
   return (
     <>
       <ModalBlock visible={isVisible} title={title} handleClose={handleClose}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} data-testid='signInModal'>
           <FormControl component='fieldset' fullWidth>
             <FormGroup aria-label='position'>
               <Controller

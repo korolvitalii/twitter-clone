@@ -21,7 +21,7 @@ import { Wrapper } from './styles';
 import BackComponent from '../../components/BackComponent';
 import { fetchUserTweets } from '../../store/ducks/user/actionCreators';
 
-const Profile: React.FC = (props: any) => {
+const Profile: React.FC = () => {
   const match = useLocation();
   const currentUserId = match.pathname.split('/').pop();
   const dispatch = useDispatch();

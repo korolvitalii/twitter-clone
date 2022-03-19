@@ -8,7 +8,6 @@ import { setLoadingStatus, setUserData, setUserTweets } from './actionCreators';
 import {
   FetchSignInActionInterface,
   FetchSignUpActionInterface,
-  FetchUserTweetsInterface,
   UpdateUserDataInterface,
   UserActionsType,
 } from './actionTypes';
