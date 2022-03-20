@@ -1,5 +1,6 @@
 import { Action } from 'redux';
 import { LoadingStatus } from '../../types';
+import { UsersType } from './actionCreators';
 import { UsersState } from './contracts/state';
 
 export enum UsersActionsType {
@@ -14,7 +15,7 @@ export interface FetchUsersInterface extends Action<UsersActionsType> {
 
 export interface SetUsersActionInterface extends Action<UsersActionsType> {
   type: UsersActionsType.SET_USERS;
-  payload: UsersState['data'];
+  payload: UsersType[];
 }
 
 export interface SetLoadingStatusInterface extends Action<UsersActionsType> {

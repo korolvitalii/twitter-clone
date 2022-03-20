@@ -1,6 +1,7 @@
 import { LoadingStatus, UserInterface } from '../../../types';
+import { UsersType } from '../actionCreators';
 
 export interface UsersState {
-  data: UserInterface[] | undefined;
+  data: UsersType[] | undefined;
   status: LoadingStatus;
 }
