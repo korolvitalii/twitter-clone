@@ -7,7 +7,6 @@ const initialState: UserState = {
   data: undefined,
   userTweets: [],
   status: LoadingStatus.NEVER,
-  registered: false,
 };
 
 export const userReducer = produce((draft: Draft<UserState>, action: UserActions) => {

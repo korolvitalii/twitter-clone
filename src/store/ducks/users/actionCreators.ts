@@ -7,7 +7,7 @@ import {
 } from './actionTypes';
 import { UsersState } from './contracts/state';
 
-export type UsersType = Omit<UserInterface[], 'password' | 'confirmHash' | 'token'> | undefined;
+export type UsersType = Omit<UserInterface, 'password' | 'confirmHash' | 'token'> | undefined;
 
 export const fetchUsers = (): FetchUsersInterface => ({
   type: UsersActionsType.FETCH_USERS,

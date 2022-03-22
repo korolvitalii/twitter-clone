@@ -5,5 +5,4 @@ export interface UserState {
   data: UserInterface | undefined;
   userTweets: [] | TweetsState['items'];
   status: LoadingStatus;
-  registered: false;
 }

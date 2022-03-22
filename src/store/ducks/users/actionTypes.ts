@@ -1,7 +1,6 @@
 import { Action } from 'redux';
 import { LoadingStatus } from '../../types';
 import { UsersType } from './actionCreators';
-import { UsersState } from './contracts/state';
 
 export enum UsersActionsType {
   FETCH_USERS = 'USERS/FETCH_USERS',

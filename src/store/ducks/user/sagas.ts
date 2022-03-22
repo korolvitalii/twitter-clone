@@ -67,7 +67,7 @@ export function* logOut() {
 
 export function* updateUserData({ payload: data }: UpdateUserDataInterface) {
   try {
-    UsersApi.updateUserData(data.data);
+    const result = UsersApi.updateUserData(data.data);
     yield put(setLoadingStatus(LoadingStatus.SUCCESS));
   } catch (error) {
     yield put(setLoadingStatus(LoadingStatus.ERROR));

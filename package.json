@@ -104,7 +104,8 @@
     "test": "node scripts/test.js  --transformIgnorePatterns \"node_modules/(?!(@mui))/\"",
     "json-server": "json-server --watch public/db.json --port 3001",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "coverage": "npm test -- --coverage --watchAll=false"
   },
   "eslintConfig": {
     "extends": [

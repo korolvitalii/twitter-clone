@@ -10,6 +10,7 @@ export interface UserInterface {
   _id?: string;
   email: string;
   createdAt?: string;
+  updatedAt?: string;
   username: string;
   fullname: string;
   password: any;
