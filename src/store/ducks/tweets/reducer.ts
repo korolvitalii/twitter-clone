@@ -6,7 +6,6 @@ import { TweetsState } from './contracts/state';
 const initialState: TweetsState = {
   items: [],
   LoadingStatus: LoadingStatus.NEVER,
-  addTweetState: LoadingStatus.NEVER,
 };
 
 export const tweetsReducer = produce((draft: Draft<TweetsState>, actions: TweetsActions) => {

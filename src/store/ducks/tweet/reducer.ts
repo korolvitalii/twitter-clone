@@ -4,14 +4,14 @@ import { TweetActions, TweetActionsType } from './actionsTypes';
 import { TweetState } from './contracts/state';
 
 const initialState: TweetState = {
-  items: undefined,
+  item: undefined,
   LoadingStatus: LoadingStatus.NEVER,
 };
 
 export const tweetReducer = produce((draft: Draft<TweetState>, actions: TweetActions) => {
   switch (actions.type) {
     case TweetActionsType.SET_TWEET: {
-      draft.items = actions.payload;
+      draft.item = actions.payload;
       draft.LoadingStatus = LoadingStatus.LOADED;
       break;
     }

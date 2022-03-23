@@ -1,6 +1,6 @@
 import { LoadingStatus, TweetInterface } from '../../../types';
 
 export interface TweetState {
-  items: TweetInterface | undefined;
+  item: TweetInterface | undefined;
   LoadingStatus: LoadingStatus;
 }

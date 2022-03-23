@@ -16,8 +16,8 @@ export const TweetsApi = {
     const { data } = await axios.get<Response<TweetsState['items']>>(`/tweets/user/${userId}`);
     return data.data;
   },
-  fetchTweetData: async (id: string): Promise<TweetInterface[]> => {
-    const { data } = await axios.get<Response<TweetInterface[]>>('/tweet/' + id);
+  fetchTweetData: async (id: string): Promise<TweetInterface> => {
+    const { data } = await axios.get<Response<TweetInterface>>('/tweet/' + id);
     return data.data;
   },
   addTweet: async (payload: { text: string; images: string[] }): Promise<TweetInterface> => {

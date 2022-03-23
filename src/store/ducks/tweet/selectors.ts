@@ -14,4 +14,4 @@ export const selectIsLoaded = (state: AppStateType) =>
   selectLoadingStatus(state) === LoadingStatus.LOADED;
 
 export const selectTweetItem = (state: AppStateType): TweetInterface | undefined =>
-  selectTweet(state).items;
+  selectTweet(state).item;

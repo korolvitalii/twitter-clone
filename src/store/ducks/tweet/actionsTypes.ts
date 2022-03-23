@@ -13,7 +13,7 @@ export enum TweetActionsType {
 
 export interface SetTweetActionInterface extends Action<TweetActionsType> {
   type: TweetActionsType.SET_TWEET;
-  payload: TweetState['items'];
+  payload: TweetState['item'];
 }
 
 export interface FetchTweetActionInterface extends Action<TweetActionsType> {

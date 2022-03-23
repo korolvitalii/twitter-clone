@@ -1,9 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { UsersApi } from '../../../services/api/UserApi';
-import { LoadingStatus } from '../../types';
-import { setLoadingStatus, setUsers, UsersType } from './actionCreators';
+import { LoadingStatus, UsersType } from '../../types';
+import { setLoadingStatus, setUsers } from './actionCreators';
 import { UsersActionsType } from './actionTypes';
-import { UsersState } from './contracts/state';
 
 export function* fetchUsersRequest() {
   try {

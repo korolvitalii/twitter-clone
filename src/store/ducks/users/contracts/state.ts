@@ -1,5 +1,4 @@
-import { LoadingStatus, UserInterface } from '../../../types';
-import { UsersType } from '../actionCreators';
+import { LoadingStatus, UsersType } from '../../../types';
 
 export interface UsersState {
   data: UsersType[] | undefined;

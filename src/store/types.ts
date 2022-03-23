@@ -1,3 +1,5 @@
+import { UserState } from './ducks/user/contracts/state';
+
 export enum LoadingStatus {
   LOADED = 'LOADED',
   LOADING = 'LOADING',
@@ -22,17 +24,18 @@ export interface UserInterface {
   token: string;
   bigAvatar?: string;
   smallAvatar?: string;
+  __v?: number;
 }
 
 export interface TweetInterface {
   _id: string;
+  id: string;
   text: string;
   createdAt?: string;
+  updatedAt?: string;
   images: string[];
-  user: {
-    fullname: string;
-    username: string;
-    bigAvatar?: string;
-    smallAvatar?: string;
-  };
+  user?: UsersType;
+  __v?: number;
 }
+
+export type UsersType = Omit<UserInterface, 'password' | 'confirmHash' | 'token'> | undefined;
