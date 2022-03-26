@@ -10,8 +10,9 @@ import { runSaga } from 'redux-saga';
 import { LoadingStatus, TweetInterface } from '../../types';
 import { TweetActionsType } from './actionsTypes';
 import { TweetsApi } from '../../../services/api/TweetsApi';
-import { setLoadingStatus, setTweet } from './actionCreators';
+import { removeTweet, setLoadingStatus, setTweet } from './actionCreators';
 import { TweetState } from './contracts/state';
+import { setTweets } from '../tweets/actionCreators';
 
 describe('fetchTweetFromApi', () => {
   const genObject = tweetSaga();
@@ -87,19 +88,136 @@ describe('fetchTweetRequest', () => {
     request.mockClear();
   });
 
-  //   it('should call api and dispatch error action', async () => {
-  //     const request = jest.spyOn(TweetsApi, 'fetchTweets').mockImplementation(() => Promise.reject());
-  //     const dispatched: any[] = [];
-  //     const result = await runSaga(
-  //       {
-  //         dispatch: (action) => dispatched.push(action),
-  //       },
-  //       //@ts-ignore
-  //       fetchTweetsRequest,
-  //     );
+  it('should call api and dispatch error action', async () => {
+    const tweetId = '6239e912e061ce592e7c1181';
+    const request = jest
+      .spyOn(TweetsApi, 'fetchTweetData')
+      .mockImplementation(() => Promise.reject());
+    const dispatched: any[] = [];
+    const result = await runSaga(
+      {
+        dispatch: (action) => dispatched.push(action),
+      },
+      fetchTweetRequest,
+      tweetId,
+    );
 
-  //     expect(request).toHaveBeenCalledTimes(1);
-  //     expect(dispatched).toEqual([setLoadingStatus(LoadingStatus.ERROR)]);
-  //     request.mockClear();
-  //   });
+    expect(request).toHaveBeenCalledTimes(1);
+    expect(dispatched).toEqual([setLoadingStatus(LoadingStatus.ERROR)]);
+    request.mockClear();
+  });
+});
+
+describe('removeTweetRequest', () => {
+  it('should call api and dispatch success action', async () => {
+    const tweetId = '623827009a01afb71acfd567';
+    const fetchTweetResponse: TweetInterface = {
+      text: "Hello. It's my test tweet",
+      user: {
+        _id: '623827009a01afb71acfd567',
+        email: 'korolvitalik@gmail.com',
+        username: 'psyhologitech',
+        fullname: 'korolvitalik',
+        confirmed: false,
+        createdAt: '2022-03-21T07:19:28.173Z',
+        updatedAt: '2022-03-21T07:19:28.173Z',
+        __v: 0,
+      },
+      images: [],
+      _id: '623cb3b3c3129df8ccd6eb46',
+      createdAt: '2022-03-24T18:08:51.901Z',
+      updatedAt: '2022-03-24T18:08:51.901Z',
+      __v: 0,
+      id: '623cb3b3c3129df8ccd6eb46',
+    };
+    const request = jest
+      .spyOn(TweetsApi, 'removeTweet')
+      .mockImplementation(() => Promise.resolve(fetchTweetResponse));
+    const dispatched: any[] = [];
+    const result = await runSaga(
+      {
+        dispatch: (action) => dispatched.push(action),
+      },
+      removeTweetRequest,
+      tweetId,
+    );
+    expect(request).toHaveBeenCalledTimes(1);
+    expect(dispatched).toEqual([setLoadingStatus(LoadingStatus.SUCCESS)]);
+
+    request.mockClear();
+  });
+
+  it('should call api and dispatch error action', async () => {
+    const tweetId = '6239e912e061ce592e7c1181';
+    const request = jest.spyOn(TweetsApi, 'removeTweet').mockImplementation(() => Promise.reject());
+    const dispatched: any[] = [];
+    const result = await runSaga(
+      {
+        dispatch: (action) => dispatched.push(action),
+      },
+      removeTweetRequest,
+      tweetId,
+    );
+
+    expect(request).toHaveBeenCalledTimes(1);
+    expect(dispatched).toEqual([setLoadingStatus(LoadingStatus.ERROR)]);
+    request.mockClear();
+  });
+});
+
+describe('updateTweetRequest', () => {
+  const payload = { tweetId: '623827009a01afb71acfd567', text: 'test test' };
+  it('should call api and dispatch success action', async () => {
+    const fetchTweetResponse: TweetInterface = {
+      text: "Hello. It's my test tweet",
+      user: {
+        _id: '623827009a01afb71acfd567',
+        email: 'korolvitalik@gmail.com',
+        username: 'psyhologitech',
+        fullname: 'korolvitalik',
+        confirmed: false,
+        createdAt: '2022-03-21T07:19:28.173Z',
+        updatedAt: '2022-03-21T07:19:28.173Z',
+        __v: 0,
+      },
+      images: [],
+      _id: '623cb3b3c3129df8ccd6eb46',
+      createdAt: '2022-03-24T18:08:51.901Z',
+      updatedAt: '2022-03-24T18:08:51.901Z',
+      __v: 0,
+      id: '623cb3b3c3129df8ccd6eb46',
+    };
+    const request = jest
+      .spyOn(TweetsApi, 'updateTweet')
+      .mockImplementation(() => Promise.resolve(fetchTweetResponse));
+    const dispatched: any[] = [];
+    const result = await runSaga(
+      {
+        dispatch: (action) => dispatched.push(action),
+      },
+      updateTweetRequest,
+      payload,
+    );
+    expect(request).toHaveBeenCalledTimes(1);
+    expect(dispatched).toEqual([setLoadingStatus(LoadingStatus.SUCCESS)]);
+
+    request.mockClear();
+  });
+
+  it('should call api and dispatch error action', async () => {
+    const tweetId = '6239e912e061ce592e7c1181';
+    const request = jest.spyOn(TweetsApi, 'updateTweet').mockImplementation(() => Promise.reject());
+    const dispatched: any[] = [];
+    const result = await runSaga(
+      {
+        dispatch: (action) => dispatched.push(action),
+      },
+      updateTweetRequest,
+      payload,
+    );
+
+    expect(request).toHaveBeenCalledTimes(1);
+    expect(dispatched).toEqual([setLoadingStatus(LoadingStatus.ERROR)]);
+    request.mockClear();
+  });
 });

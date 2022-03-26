@@ -11,7 +11,7 @@ import {
 import { UserState } from './contracts/state';
 import { userReducer } from './reducer';
 
-describe('user reducers', () => {
+describe('user reducer', () => {
   let state: any;
   const userData: UserState['data'] = {
     _id: '6236d5a5b626ed6ecec9d359',

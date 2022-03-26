@@ -1,7 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { TopicsApi } from '../../../services/api/TopicsApi';
 import { LoadingStatus } from '../../types';
-import { setLoadingStatus, setTopics, TopicsActionsType } from './actionCreators';
+import { setLoadingStatus, setTopics } from './actionCreators';
+import { TopicsActionsType } from './actionTypes';
 import { TopicsState } from './contracts/state';
 
 export function* fetchTopicsRequest() {
@@ -14,5 +15,5 @@ export function* fetchTopicsRequest() {
 }
 
 export function* topicsSaga() {
-  yield takeEvery(TopicsActionsType.FETCH_Topics, fetchTopicsRequest);
+  yield takeEvery(TopicsActionsType.FETCH_TOPICS, fetchTopicsRequest);
 }

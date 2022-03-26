@@ -1,6 +1,6 @@
 import React from 'react';
-import { LoadingStatus } from '../../types';
-import { fetchUsers, setLoadingStatus, setUsers, UsersType } from './actionCreators';
+import { LoadingStatus, UsersType } from '../../types';
+import { fetchUsers, setLoadingStatus, setUsers } from './actionCreators';
 import { usersReducer } from './reducer';
 
 describe('users reducers', () => {

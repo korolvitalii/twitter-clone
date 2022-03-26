@@ -1,6 +1,6 @@
 import produce, { Draft } from 'immer';
 import { LoadingStatus } from '../../types';
-import { TopicsActionsType, TopicsActions } from './actionCreators';
+import { TopicsActions, TopicsActionsType } from './actionTypes';
 import { TopicsState } from './contracts/state';
 
 const initialState: TopicsState = {
@@ -15,7 +15,7 @@ export const topicsReducer = produce((draft: Draft<TopicsState>, actions: Topics
       draft.LoadingStatus = LoadingStatus.LOADED;
       break;
     }
-    case TopicsActionsType.FETCH_Topics: {
+    case TopicsActionsType.FETCH_TOPICS: {
       draft.LoadingStatus = LoadingStatus.LOADING;
       break;
     }

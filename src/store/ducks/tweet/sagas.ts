@@ -11,7 +11,6 @@ import {
   TweetActionsType,
   UpdateTweetActionInterface,
 } from './actionsTypes';
-import { TweetState } from './contracts/state';
 
 export function* fetchTweetRequest({ payload: tweetId }: FetchTweetActionInterface) {
   try {

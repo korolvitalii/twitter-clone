@@ -24,12 +24,12 @@ import StandardImageList from '../ImageList';
 const FullTweet: React.FC = () => {
   const params = useParams();
   const dispatch = useDispatch();
-  const tweetId = params.id;
+  const tweetId = params['*'];
   const tweet = useSelector(selectTweetItem);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const options = ['Follow', 'Add', 'Mute', 'Block', 'Report'];
-
+  // console.log(params['*']);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     event.stopPropagation();

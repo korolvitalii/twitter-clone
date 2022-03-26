@@ -22,7 +22,7 @@ export const TweetsApi = {
   },
   addTweet: async (payload: { text: string; images: string[] }): Promise<TweetInterface> => {
     const { data } = await axios.post<Response<TweetInterface>>('/tweet', payload);
-
+    console.log(payload);
     return data.data;
   },
   removeTweet: async (payload: string): Promise<TweetInterface> => {
