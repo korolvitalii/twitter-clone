@@ -60,7 +60,6 @@ describe('SighInForm component', () => {
   });
   it('After submit inputs', async () => {
     const signInForm = component.getByTestId('signInModal');
-    const submitButton = component.getByText('Submit');
     const emailInput = component.getByLabelText('Email') as HTMLInputElement;
     const passwordInput = component.getByLabelText('Password') as HTMLInputElement;
     fireEvent.change(emailInput, { target: { value: 'test@test.com' } });

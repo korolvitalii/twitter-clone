@@ -55,6 +55,7 @@ const SignUpModal: React.FC<SignUpModalProps> = ({
   const dispatch = useDispatch();
 
   const onSubmit = async (data: RegistrationFormData) => {
+    console.log('work!');
     dispatch(fetchSignUp(data));
     dispatch(fetchSignIn({ email: data.email, password: data.password }));
     return () => {

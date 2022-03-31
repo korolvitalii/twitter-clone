@@ -2,10 +2,15 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import SignUpModal from './index';
+import { fetchSignIn } from '../../../../store/ducks/user/actionCreators';
 
 describe('SighInForm component', () => {
   let component: any;
   let props: any;
+  const mock = jest.fn();
+  jest.mock('../../../../store/ducks/user/actionCreators', () => ({
+    fetchSignIn: mock,
+  }));
   beforeEach(() => {
     const mockStore = configureStore();
     let store, wrapper;

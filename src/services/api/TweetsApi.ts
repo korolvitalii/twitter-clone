@@ -1,11 +1,7 @@
 import { TweetsState } from '../../store/ducks/tweets/contracts/state';
 import { axios } from '../../core/axios';
 import { TweetInterface } from '../../store/types';
-
-interface Response<T> {
-  status: string;
-  data: T;
-}
+import { Response } from '../../store/types';
 
 export const TweetsApi = {
   fetchTweets: async (): Promise<TweetInterface[]> => {
@@ -17,12 +13,11 @@ export const TweetsApi = {
     return data.data;
   },
   fetchTweetData: async (id: string): Promise<TweetInterface> => {
-    const { data } = await axios.get<Response<TweetInterface>>('/tweet/' + id);
+    const { data } = await axios.get<Response<TweetInterface>>(`/tweet/${id}`);
     return data.data;
   },
   addTweet: async (payload: { text: string; images: string[] }): Promise<TweetInterface> => {
     const { data } = await axios.post<Response<TweetInterface>>('/tweet', payload);
-    console.log(payload);
     return data.data;
   },
   removeTweet: async (payload: string): Promise<TweetInterface> => {

@@ -46,7 +46,8 @@ describe('SighInForm component', () => {
     },
   };
 
-  it('The form should contain all the necessary input fields and buttons', () => {
-    expect(true).toBe(true);
+  it('onChange  should work correct', () => {
+    console.log(component);
+    expect(true).toBe(false);
   });
 });

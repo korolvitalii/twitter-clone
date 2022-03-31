@@ -3,7 +3,7 @@ import { UsersActionsType } from './actionTypes';
 import { fetchUsersRequest, usersSaga } from './sagas';
 import { UsersApi } from '../../../services/api/UserApi';
 import { runSaga } from 'redux-saga';
-import { setLoadingStatus, setUsers, UsersType } from './actionCreators';
+import { setLoadingStatus, setUsers } from './actionCreators';
 import { LoadingStatus } from '../../types';
 
 describe('fetchAuthorsFromApi', () => {
@@ -38,7 +38,7 @@ describe('makeAuthorsApiRequest', () => {
     };
     const request = jest
       .spyOn(UsersApi, 'fetchUsers')
-      .mockImplementation(() => Promise.resolve(fetchUsersResponse));
+      .mockImplementation(() => Promise.resolve(fetchUsersResponse.data));
     const dispatched: any[] = [];
     const result = await runSaga(
       {
@@ -48,7 +48,7 @@ describe('makeAuthorsApiRequest', () => {
       fetchUsersRequest,
     );
     expect(request).toHaveBeenCalledTimes(1);
-    expect(dispatched).toEqual([setUsers(fetchUsersResponse)]);
+    expect(dispatched).toEqual([setUsers(fetchUsersResponse.data)]);
     request.mockClear();
   });
 

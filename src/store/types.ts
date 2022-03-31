@@ -38,4 +38,9 @@ export interface TweetInterface {
   __v?: number;
 }
 
+export interface Response<T> {
+  status: string;
+  data: T;
+}
+
 export type UsersType = Omit<UserInterface, 'password' | 'confirmHash' | 'token'> | undefined;
